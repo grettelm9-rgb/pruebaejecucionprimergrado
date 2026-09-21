@@ -1,1309 +1,1757 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>La Aventura Educativa con Tito: Desafío de Habilidades Digitales</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Nunito', sans-serif;
-            background: linear-gradient(135deg, #e0f2fe 0%, #f0f9ff 50%, #fef3c7 100%);
-            min-height: 100vh;
-            user-select: none;
-            -webkit-user-select: none;
-        }
-        h1, h2, h3, .font-heading {
-            font-family: 'Fredoka', cursive;
-        }
-        /* Custom animations */
-        @keyframes bounce-gentle {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
-        }
-        @keyframes pulse-glow {
-            0%, 100% { filter: drop-shadow(0 0 6px rgba(245, 158, 11, 0.6)); }
-            50% { filter: drop-shadow(0 0 16px rgba(245, 158, 11, 0.9)); }
-        }
-        @keyframes box-pop {
-            0% { transform: scale(0.9) rotate(-3deg); }
-            50% { transform: scale(1.1) rotate(3deg); }
-            100% { transform: scale(1) rotate(0deg); }
-        }
-        @keyframes confetti-fall {
-            0% { transform: translateY(-10px) rotate(0deg); opacity: 1; }
-            100% { transform: translateY(500px) rotate(720deg); opacity: 0; }
-        }
-        .animate-gentle { animation: bounce-gentle 2.5s infinite ease-in-out; }
-        .animate-glow { animation: pulse-glow 1.8s infinite ease-in-out; }
-        .animate-box { animation: box-pop 0.4s ease-out; }
-        
-        .box-lid-open {
-            transform: translateY(-45px) rotate(-20deg);
-            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        .drag-over {
-            border-color: #3b82f6 !important;
-            background-color: #eff6ff !important;
-            transform: scale(1.02);
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LA AVENTURA DE TITO: MISIÓN MOUSE - Prueba de Ejecución 2026</title>
+  <style>
+    /* ==========================================================================
+       1. ESTILOS DE LA IDENTIDAD VISUAL Y TEMA INFANTIL MODERNO
+       ========================================================================== */
+    :root {
+      --primary: #3B82F6;
+      --primary-dark: #1D4ED8;
+      --secondary: #F59E0B;
+      --accent: #10B981;
+      --purple: #8B5CF6;
+      --pink: #EC4899;
+      --bg-gradient: linear-gradient(135deg, #E0F2FE 0%, #F0FDFA 50%, #FEF3C7 100%);
+      --card-bg: #FFFFFF;
+      --text-main: #1E293B;
+      --text-muted: #64748B;
+      --border-radius: 24px;
+      --shadow-soft: 0 10px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+      --shadow-hover: 0 20px 30px -10px rgba(59, 130, 246, 0.2);
+    }
 
-        /* Print styles for Certificate Report */
-        @media print {
-            body {
-                background: white !important;
-                color: black !important;
-            }
-            .no-print {
-                display: none !important;
-            }
-            .print-only {
-                display: block !important;
-            }
-            .certificate-container {
-                box-shadow: none !important;
-                border: 4px double #2563eb !important;
-                page-break-inside: avoid;
-            }
-        }
-    </style>
+    * {
+      box-sizing: border-box;
+      user-select: none;
+      -webkit-user-drag: none;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Comic Sans MS', 'Chalkboard SE', sans-serif;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      background: var(--bg-gradient);
+      color: var(--text-main);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      overflow-x: hidden;
+    }
+
+    /* CONTENEDOR PRINCIPAL */
+    .app-container {
+      width: 100%;
+      max-width: 1100px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      padding: 16px;
+    }
+
+    /* BANNER INSTITUCIONAL */
+    .inst-header {
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(8px);
+      border-radius: 16px;
+      padding: 12px 20px;
+      border: 2px solid #E2E8F0;
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .inst-info h1 {
+      font-size: 1.1rem;
+      margin: 0;
+      color: var(--primary-dark);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .inst-info p {
+      margin: 2px 0 0 0;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .badge-details {
+      display: flex;
+      gap: 12px;
+      background: #F1F5F9;
+      padding: 6px 12px;
+      border-radius: 12px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #334155;
+    }
+
+    /* TARJETA DE CONTENIDO */
+    .main-card {
+      background: var(--card-bg);
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow-soft);
+      padding: 24px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      border: 3px solid #F1F5F9;
+      margin-bottom: 16px;
+    }
+
+    /* PANTALLA DE BIENVENIDA / REGISTRO */
+    .welcome-screen {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 20px 10px;
+      max-width: 650px;
+      margin: 0 auto;
+    }
+
+    .tito-welcome-box {
+      width: 180px;
+      height: 180px;
+      margin-bottom: 15px;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .welcome-title {
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--primary-dark);
+      margin: 0 0 8px 0;
+    }
+
+    .welcome-subtitle {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+    }
+
+    .form-group {
+      width: 100%;
+      margin-bottom: 16px;
+      text-align: left;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.9rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: #334155;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 14px 18px;
+      font-size: 1.05rem;
+      border: 2px solid #CBD5E1;
+      border-radius: 14px;
+      outline: none;
+      transition: all 0.2s;
+    }
+
+    .form-control:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
+    }
+
+    .btn-adventure {
+      background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+      color: white;
+      font-size: 1.3rem;
+      font-weight: 800;
+      padding: 16px 36px;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      box-shadow: 0 10px 20px -5px rgba(16, 185, 129, 0.4);
+      transition: all 0.2s;
+      width: 100%;
+      margin-top: 10px;
+    }
+
+    .btn-adventure:hover {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 15px 25px -5px rgba(16, 185, 129, 0.5);
+    }
+
+    /* RUTA DE PROGRESO DE AVENTURA */
+    .adventure-path {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      position: relative;
+      padding: 0 10px;
+    }
+
+    .path-line {
+      position: absolute;
+      top: 50%;
+      left: 30px;
+      right: 30px;
+      height: 6px;
+      background: #E2E8F0;
+      z-index: 1;
+      transform: translateY(-50%);
+      border-radius: 3px;
+    }
+
+    .path-line-progress {
+      position: absolute;
+      top: 50%;
+      left: 30px;
+      height: 6px;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      z-index: 1;
+      transform: translateY(-50%);
+      border-radius: 3px;
+      transition: width 0.4s ease;
+      width: 0%;
+    }
+
+    .path-node {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: #FFFFFF;
+      border: 3px solid #CBD5E1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      z-index: 2;
+      transition: all 0.3s;
+    }
+
+    .path-node.active {
+      border-color: var(--primary);
+      background: var(--primary);
+      color: white;
+      transform: scale(1.15);
+      box-shadow: 0 0 0 6px rgba(59, 130, 246, 0.2);
+    }
+
+    .path-node.completed {
+      border-color: var(--accent);
+      background: var(--accent);
+      color: white;
+    }
+
+    /* ENCABEZADO DE MISIÓN */
+    .mission-header-box {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      background: #F8FAFC;
+      border-radius: 16px;
+      padding: 12px 18px;
+      margin-bottom: 20px;
+      border: 2px solid #E2E8F0;
+    }
+
+    .tito-avatar-small {
+      width: 65px;
+      height: 65px;
+      flex-shrink: 0;
+    }
+
+    .mission-title-container h2 {
+      margin: 0;
+      font-size: 1.3rem;
+      color: var(--primary-dark);
+      font-weight: 800;
+    }
+
+    .mission-title-container p {
+      margin: 4px 0 0 0;
+      font-size: 0.95rem;
+      color: #475569;
+      font-weight: 600;
+    }
+
+    /* ESCENARIOS DE INTERACCIÓN */
+    .stage-canvas {
+      flex: 1;
+      background: #F1F5F9;
+      border-radius: 18px;
+      border: 2px inset #CBD5E1;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 380px;
+      overflow: hidden;
+      padding: 16px;
+    }
+
+    /* MISIÓN 1: MOUSE SVG */
+    .mouse-parts-svg {
+      width: 320px;
+      height: 320px;
+    }
+
+    .part-interactive {
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .part-interactive:hover {
+      filter: brightness(1.15) drop-shadow(0 0 6px rgba(59, 130, 246, 0.5));
+    }
+
+    /* MISIÓN 2: DIRECCIONES */
+    .direction-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(3, 1fr);
+      gap: 16px;
+      width: 100%;
+      max-width: 420px;
+      height: 340px;
+    }
+
+    .dir-zone {
+      background: white;
+      border: 3px dashed #CBD5E1;
+      border-radius: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      color: var(--text-muted);
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+
+    .dir-zone.highlight {
+      border-color: var(--primary);
+      background: #E0F2FE;
+      color: var(--primary-dark);
+      transform: scale(1.03);
+    }
+
+    /* MISIÓN 3: MUNDO DE OBJETOS */
+    .objects-world {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      justify-content: center;
+      align-items: center;
+      max-width: 600px;
+    }
+
+    .world-item {
+      width: 110px;
+      height: 110px;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      border: 3px solid #E2E8F0;
+      transition: all 0.2s;
+    }
+
+    .world-item:hover {
+      transform: scale(1.08);
+      border-color: var(--primary);
+    }
+
+    .world-item svg {
+      width: 60px;
+      height: 60px;
+    }
+
+    /* MISIÓN 4 & 5: RETO CLIC Y CAJAS MÁGICAS */
+    .magic-boxes-container {
+      display: flex;
+      gap: 30px;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .magic-box-card {
+      width: 140px;
+      height: 140px;
+      background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+      border-radius: 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 10px 20px rgba(217, 119, 6, 0.3);
+      transition: all 0.3s;
+      position: relative;
+    }
+
+    .magic-box-card:hover {
+      transform: translateY(-4px) scale(1.04);
+    }
+
+    .magic-box-card.opened {
+      background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+      box-shadow: 0 10px 20px rgba(16, 185, 129, 0.3);
+    }
+
+    /* MISIÓN 6: ALMACÉN (DRAG & DROP) */
+    .warehouse-container {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      width: 100%;
+    }
+
+    .drag-items-pool {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      min-height: 90px;
+      background: white;
+      padding: 12px;
+      border-radius: 16px;
+      border: 2px dashed #CBD5E1;
+    }
+
+    .drop-categories {
+      display: flex;
+      gap: 16px;
+      justify-content: space-between;
+    }
+
+    .drop-zone-box {
+      flex: 1;
+      min-height: 160px;
+      background: white;
+      border: 3px dashed #94A3B8;
+      border-radius: 18px;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: all 0.2s;
+    }
+
+    .drop-zone-box.drag-over {
+      background: #FEF3C7;
+      border-color: var(--secondary);
+    }
+
+    .drop-zone-title {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+
+    /* MISIÓN 7: SCROLL VERTICAL */
+    .scroll-view-stage {
+      width: 100%;
+      height: 360px;
+      overflow-y: scroll;
+      background: linear-gradient(to bottom, #E0F2FE 0%, #FEF3C7 50%, #ECFDF5 100%);
+      border-radius: 16px;
+      padding: 20px;
+      position: relative;
+    }
+
+    .scroll-content-long {
+      height: 1300px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 0;
+    }
+
+    .hidden-treasure-item {
+      background: white;
+      padding: 14px 24px;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      color: var(--primary-dark);
+      border: 2px solid var(--primary);
+      cursor: pointer;
+    }
+
+    /* RETROALIMENTACIÓN DE TITO (TOAST) */
+    .tito-toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(120px);
+      background: #1E293B;
+      color: white;
+      padding: 14px 24px;
+      border-radius: 30px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+      z-index: 1000;
+      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      font-weight: 700;
+      font-size: 1.05rem;
+    }
+
+    .tito-toast.show {
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .tito-toast-avatar {
+      width: 40px;
+      height: 40px;
+    }
+
+    /* PANTALLA FINAL Y REPORTE DOCENTE */
+    .celebration-screen {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .summary-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+      font-size: 0.88rem;
+    }
+
+    .summary-table th, .summary-table td {
+      border: 1px solid #CBD5E1;
+      padding: 8px 12px;
+      text-align: left;
+    }
+
+    .summary-table th {
+      background: #F1F5F9;
+      color: var(--primary-dark);
+    }
+
+    .btn-action-group {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 16px;
+    }
+
+    .btn-secondary-action {
+      background: #3B82F6;
+      color: white;
+      padding: 12px 20px;
+      border-radius: 12px;
+      border: none;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-secondary-action:hover {
+      background: var(--primary-dark);
+    }
+
+    /* ESTILOS DE IMPRESIÓN */
+    @media print {
+      body {
+        background: white !important;
+        color: black !important;
+      }
+      .inst-header, .adventure-path, .btn-action-group, .tito-toast {
+        display: none !important;
+      }
+      .main-card {
+        box-shadow: none !important;
+        border: none !important;
+        padding: 0 !important;
+      }
+    }
+  </style>
 </head>
-<body class="text-slate-800 flex flex-col min-h-screen">
+<body>
 
-    <!-- Top Navigation & Progress Trail Bar -->
-    <header id="main-header" class="no-print bg-white/90 backdrop-blur-md border-b-4 border-amber-300 sticky top-0 z-40 shadow-sm px-4 py-2">
-        <div class="max-w-6xl mx-auto flex flex-wrap items-center justify-between gap-2">
-            <!-- Brand & Tito Badge -->
-            <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-full bg-amber-100 border-2 border-amber-400 flex items-center justify-center shadow-inner overflow-hidden" id="header-tito-avatar">
-                    <!-- Dynamic mini Tito head inserted by JS -->
-                </div>
-                <div>
-                    <h1 class="text-lg font-bold text-sky-800 leading-none">La Aventura con Tito</h1>
-                    <span id="student-badge" class="text-xs text-slate-500 font-semibold">Estudiante: <span id="header-student-name" class="text-amber-600">Invitado</span></span>
-                </div>
-            </div>
-
-            <!-- Progress Trail -->
-            <div id="progress-trail" class="hidden sm:flex items-center gap-1 bg-sky-50 px-3 py-1.5 rounded-full border border-sky-200">
-                <div class="step-dot font-heading text-xs font-bold w-7 h-7 rounded-full flex items-center justify-center bg-amber-400 text-white shadow" data-step="1">M1</div>
-                <div class="h-1 w-2 bg-slate-200" id="line-1"></div>
-                <div class="step-dot font-heading text-xs font-bold w-7 h-7 rounded-full flex items-center justify-center bg-slate-200 text-slate-500" data-step="2">M2</div>
-                <div class="h-1 w-2 bg-slate-200" id="line-2"></div>
-                <div class="step-dot font-heading text-xs font-bold w-7 h-7 rounded-full flex items-center justify-center bg-slate-200 text-slate-500" data-step="3">M3</div>
-                <div class="h-1 w-2 bg-slate-200" id="line-3"></div>
-                <div class="step-dot font-heading text-xs font-bold w-7 h-7 rounded-full flex items-center justify-center bg-slate-200 text-slate-500" data-step="4">M4</div>
-                <div class="h-1 w-2 bg-slate-200" id="line-4"></div>
-                <div class="step-dot font-heading text-xs font-bold w-7 h-7 rounded-full flex items-center justify-center bg-slate-200 text-slate-500" data-step="5">M5</div>
-                <div class="h-1 w-2 bg-slate-200" id="line-5"></div>
-                <div class="step-dot font-heading text-xs font-bold w-7 h-7 rounded-full flex items-center justify-center bg-slate-200 text-slate-500" data-step="6">M6</div>
-                <div class="h-1 w-2 bg-slate-200" id="line-6"></div>
-                <div class="step-dot font-heading text-xs font-bold w-7 h-7 rounded-full flex items-center justify-center bg-slate-200 text-slate-500" data-step="7">M7</div>
-                <div class="h-1 w-2 bg-slate-200" id="line-7"></div>
-                <div class="step-dot font-heading text-xs font-bold w-7 h-7 rounded-full flex items-center justify-center bg-emerald-500 text-white" data-step="8">🏆</div>
-            </div>
-
-            <!-- Controls (Sound Toggle & Score) -->
-            <div class="flex items-center gap-3">
-                <div class="bg-amber-100 text-amber-800 text-xs font-bold px-3 py-1 rounded-full border border-amber-300 flex items-center gap-1">
-                    <span>⭐ Stars:</span> <span id="star-count" class="text-sm">0</span>
-                </div>
-                <button id="sound-btn" onclick="appState.toggleSound()" class="bg-sky-100 hover:bg-sky-200 text-sky-700 p-2 rounded-full border border-sky-300 transition" title="Activar/Desactivar Sonido">
-                    🔊
-                </button>
-            </div>
-        </div>
+  <div class="app-container">
+    <!-- ENCABEZADO INSTITUCIONAL -->
+    <header class="inst-header">
+      <div class="inst-info">
+        <h1>Colegio Diocesano Padre Eladio Sancho</h1>
+        <p>Departamento de Informática Educativa | II Semestre, 2026</p>
+      </div>
+      <div class="badge-details">
+        <span>Nivel: Primer Grado</span>
+        <span>Docente: Grettel Monge Rojas</span>
+        <span>Porcentaje: 30%</span>
+      </div>
     </header>
 
-    <!-- Main Dynamic Application Container -->
-    <main class="flex-grow max-w-5xl w-full mx-auto p-4 flex flex-col justify-center">
-
-        <!-- SCREEN 0: WELCOME & REGISTRATION -->
-        <section id="screen-welcome" class="app-screen bg-white rounded-3xl p-6 sm:p-10 shadow-xl border-4 border-amber-200 text-center relative overflow-hidden my-auto">
-            <div class="max-w-2xl mx-auto space-y-6">
-                <!-- Large Welcome Tito Illustration -->
-                <div id="tito-welcome-svg" class="w-48 h-48 mx-auto animate-gentle"></div>
-
-                <div class="space-y-2">
-                    <span class="bg-sky-100 text-sky-700 text-xs sm:text-sm font-bold px-4 py-1.5 rounded-full uppercase tracking-wider">Aventura Infantil de Computación</span>
-                    <h2 class="text-3xl sm:text-4xl font-extrabold text-sky-900 font-heading">¡Hola! Soy Tito, tu amigo ratoncito</h2>
-                    <p class="text-slate-600 text-base sm:text-lg">¿Estás listo para aprender a usar el mouse y explorar el mundo digital juntos?</p>
-                </div>
-
-                <!-- Registration Form Card -->
-                <div class="bg-amber-50/80 p-6 rounded-2xl border-2 border-amber-200 text-left space-y-4 max-w-md mx-auto shadow-inner">
-                    <h3 class="font-heading text-amber-900 font-bold text-center text-lg">Regístrate para empezar la misión</h3>
-                    <div>
-                        <label class="block text-xs font-bold text-slate-600 mb-1">Nombre del Estudiante:</label>
-                        <input type="text" id="student-name" placeholder="Ej. Sofia Ramos" class="w-full px-4 py-2.5 rounded-xl border border-amber-300 focus:ring-2 focus:ring-amber-500 focus:outline-none font-semibold text-slate-700" value="Estudiante de 1er Grado">
-                    </div>
-                    <div class="grid grid-cols-2 gap-3">
-                        <div>
-                            <label class="block text-xs font-bold text-slate-600 mb-1">Sección / Grado:</label>
-                            <input type="text" id="student-section" placeholder="1-A" class="w-full px-4 py-2.5 rounded-xl border border-amber-300 focus:ring-2 focus:ring-amber-500 focus:outline-none font-semibold text-slate-700" value="Sección 1-A">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-bold text-slate-600 mb-1">Fecha:</label>
-                            <input type="date" id="student-date" class="w-full px-4 py-2 rounded-xl border border-amber-300 focus:ring-2 focus:ring-amber-500 focus:outline-none text-xs font-semibold text-slate-700">
-                        </div>
-                    </div>
-                </div>
-
-                <button onclick="startAdventure()" class="w-full max-w-md mx-auto py-4 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white font-heading text-xl font-bold rounded-2xl shadow-lg transform hover:-translate-y-1 transition duration-200 flex items-center justify-center gap-3">
-                    <span>🚀 ¡INICIAR LA AVENTURA!</span>
-                </button>
-            </div>
-        </section>
-
-        <!-- SCREEN 1: MISIÓN 1 - EL MOUSE Y SUS PARTES -->
-        <section id="screen-m1" class="app-screen hidden bg-white rounded-3xl p-6 shadow-xl border-4 border-sky-200 flex flex-col items-center">
-            <div class="w-full flex justify-between items-center mb-4">
-                <span class="bg-sky-100 text-sky-800 font-bold px-3 py-1 rounded-full text-xs font-heading">MISIÓN 1 DE 7</span>
-                <span class="text-slate-400 text-xs">Identificación de hardware</span>
-            </div>
-
-            <!-- Dialogue & Instruction Box -->
-            <div class="w-full bg-amber-50 border-2 border-amber-300 rounded-2xl p-4 flex items-center gap-4 mb-6 shadow-sm">
-                <div id="tito-m1-avatar" class="w-20 h-20 flex-shrink-0"></div>
-                <div>
-                    <h3 id="m1-title" class="font-heading font-bold text-sky-900 text-lg sm:text-xl">Misión 1: Conoce el Mouse</h3>
-                    <p id="m1-instruction" class="text-slate-700 text-sm sm:text-base font-medium">Tito dice: "¡Mira este gran mouse! Haz clic en el <strong class="text-amber-700 font-extrabold underline">BOTÓN IZQUIERDO</strong> que usamos para seleccionar cosas."</p>
-                </div>
-            </div>
-
-            <!-- Interactive Mouse SVG Graphic -->
-            <div class="relative w-full max-w-sm mx-auto my-2 flex justify-center">
-                <svg id="mouse-interactive-svg" viewBox="0 0 300 420" class="w-full h-auto max-h-[380px] filter drop-shadow-md">
-                    <!-- Mouse Base Body -->
-                    <path d="M 60 140 C 60 50, 240 50, 240 140 L 240 280 C 240 370, 60 370, 60 280 Z" fill="#38bdf8" stroke="#0284c7" stroke-width="6"/>
-                    <path d="M 65 140 C 65 60, 235 60, 235 140 L 235 280 C 235 360, 65 360, 65 280 Z" fill="#7dd3fc"/>
-                    
-                    <!-- Top Split Line -->
-                    <line x1="150" y1="55" x2="150" y2="180" stroke="#0284c7" stroke-width="4"/>
-                    
-                    <!-- Left Click Button -->
-                    <path id="part-btn-left" onclick="m1Check('btn-left')" class="cursor-pointer hover:fill-amber-300 transition duration-150" d="M 65 140 C 65 60, 145 55, 145 55 L 145 180 L 65 180 Z" fill="#a5f3fc" opacity="0.8"/>
-                    
-                    <!-- Right Click Button -->
-                    <path id="part-btn-right" onclick="m1Check('btn-right')" class="cursor-pointer hover:fill-amber-300 transition duration-150" d="M 235 140 C 235 60, 155 55, 155 55 L 155 180 L 235 180 Z" fill="#a5f3fc" opacity="0.8"/>
-                    
-                    <!-- Scroll Wheel Area -->
-                    <rect id="part-wheel" onclick="m1Check('wheel')" class="cursor-pointer hover:fill-amber-400 transition" x="136" y="90" width="28" height="55" rx="14" fill="#f59e0b" stroke="#b45309" stroke-width="3"/>
-                    <line x1="136" y1="105" x2="164" y2="105" stroke="#ffffff" stroke-width="2"/>
-                    <line x1="136" y1="117" x2="164" y2="117" stroke="#ffffff" stroke-width="2"/>
-                    <line x1="136" y1="129" x2="164" y2="129" stroke="#ffffff" stroke-width="2"/>
-
-                    <!-- Optical Sensor Indicator Glow -->
-                    <circle id="part-sensor" onclick="m1Check('sensor')" class="cursor-pointer hover:fill-rose-400 transition animate-pulse" cx="150" cy="310" r="22" fill="#ef4444" stroke="#991b1b" stroke-width="3"/>
-                    <circle cx="150" cy="310" r="10" fill="#fecdd3"/>
-
-                    <!-- Labels SVG -->
-                    <text x="35" y="110" font-family="Fredoka" font-size="13" font-weight="bold" fill="#0369a1">Botón Izquierdo</text>
-                    <line x1="100" y1="115" x2="60" y2="110" stroke="#0369a1" stroke-width="2" stroke-dasharray="3,3"/>
-
-                    <text x="175" y="110" font-family="Fredoka" font-size="13" font-weight="bold" fill="#0369a1">Botón Derecho</text>
-                    <line x1="200" y1="115" x2="240" y2="110" stroke="#0369a1" stroke-width="2" stroke-dasharray="3,3"/>
-
-                    <text x="150" y="45" font-family="Fredoka" font-size="13" font-weight="bold" fill="#b45309" text-anchor="middle">Rueda (Scroll)</text>
-
-                    <text x="150" y="360" font-family="Fredoka" font-size="13" font-weight="bold" fill="#991b1b" text-anchor="middle">Sensor Óptico</text>
-                </svg>
-            </div>
-
-            <!-- Task Counter -->
-            <div class="flex gap-2 mt-4">
-                <span id="m1-step-1" class="w-3 h-3 rounded-full bg-amber-400"></span>
-                <span id="m1-step-2" class="w-3 h-3 rounded-full bg-slate-200"></span>
-                <span id="m1-step-3" class="w-3 h-3 rounded-full bg-slate-200"></span>
-                <span id="m1-step-4" class="w-3 h-3 rounded-full bg-slate-200"></span>
-            </div>
-        </section>
-
-        <!-- SCREEN 2: MISIÓN 2 - EL TABLERO DE LAS DIRECCIONES -->
-        <section id="screen-m2" class="app-screen hidden bg-white rounded-3xl p-6 shadow-xl border-4 border-sky-200 flex flex-col items-center">
-            <div class="w-full flex justify-between items-center mb-3">
-                <span class="bg-sky-100 text-sky-800 font-bold px-3 py-1 rounded-full text-xs font-heading">MISIÓN 2 DE 7</span>
-                <span class="text-slate-400 text-xs">Desplazamiento del puntero</span>
-            </div>
-
-            <!-- Instruction Banner -->
-            <div class="w-full bg-amber-50 border-2 border-amber-300 rounded-2xl p-4 flex items-center gap-4 mb-4 shadow-sm">
-                <div id="tito-m2-avatar" class="w-20 h-20 flex-shrink-0"></div>
-                <div>
-                    <h3 id="m2-title" class="font-heading font-bold text-sky-900 text-lg">Misión 2: El Tablero Direccional</h3>
-                    <p id="m2-instruction" class="text-slate-700 text-sm sm:text-base font-medium">Tito dice: "Mueve el puntero del mouse hacia <strong id="m2-target-txt" class="text-amber-700 font-extrabold underline">ARRIBA (Estrella)</strong>."</p>
-                </div>
-            </div>
-
-            <!-- 2x2 Directional Grid -->
-            <div class="grid grid-cols-3 grid-rows-3 gap-3 w-full max-w-md h-80 my-2">
-                <!-- TOP Row -->
-                <div class="col-start-2 row-start-1">
-                    <div id="dir-up" onmouseenter="m2Check('up')" class="h-full bg-amber-100 hover:bg-amber-200 border-4 border-amber-400 rounded-2xl flex flex-col items-center justify-center cursor-pointer transition transform hover:scale-105 p-2 shadow">
-                        <span class="text-3xl">⭐</span>
-                        <span class="font-heading text-xs font-bold text-amber-800 mt-1">ARRIBA</span>
-                    </div>
-                </div>
-
-                <!-- LEFT Row -->
-                <div class="col-start-1 row-start-2">
-                    <div id="dir-left" onmouseenter="m2Check('left')" class="h-full bg-indigo-100 hover:bg-indigo-200 border-4 border-indigo-400 rounded-2xl flex flex-col items-center justify-center cursor-pointer transition transform hover:scale-105 p-2 shadow">
-                        <span class="text-3xl">🤖</span>
-                        <span class="font-heading text-xs font-bold text-indigo-800 mt-1">IZQUIERDA</span>
-                    </div>
-                </div>
-
-                <!-- CENTER: Tito Compass Base -->
-                <div class="col-start-2 row-start-2 flex items-center justify-center bg-sky-50 rounded-2xl border-2 border-dashed border-sky-300 p-1">
-                    <div class="text-center">
-                        <span class="text-2xl animate-bounce inline-block">🖱️</span>
-                        <p class="text-[10px] font-bold text-sky-600 uppercase">Centro</p>
-                    </div>
-                </div>
-
-                <!-- RIGHT Row -->
-                <div class="col-start-3 row-start-2">
-                    <div id="dir-right" onmouseenter="m2Check('right')" class="h-full bg-rose-100 hover:bg-rose-200 border-4 border-rose-400 rounded-2xl flex flex-col items-center justify-center cursor-pointer transition transform hover:scale-105 p-2 shadow">
-                        <span class="text-3xl">🚀</span>
-                        <span class="font-heading text-xs font-bold text-rose-800 mt-1">DERECHA</span>
-                    </div>
-                </div>
-
-                <!-- BOTTOM Row -->
-                <div class="col-start-2 row-start-3">
-                    <div id="dir-down" onmouseenter="m2Check('down')" class="h-full bg-emerald-100 hover:bg-emerald-200 border-4 border-emerald-400 rounded-2xl flex flex-col items-center justify-center cursor-pointer transition transform hover:scale-105 p-2 shadow">
-                        <span class="text-3xl">⚽</span>
-                        <span class="font-heading text-xs font-bold text-emerald-800 mt-1">ABAJO</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Direction Steps -->
-            <div class="flex gap-2 mt-2">
-                <span id="m2-step-1" class="w-3 h-3 rounded-full bg-amber-400"></span>
-                <span id="m2-step-2" class="w-3 h-3 rounded-full bg-slate-200"></span>
-                <span id="m2-step-3" class="w-3 h-3 rounded-full bg-slate-200"></span>
-                <span id="m2-step-4" class="w-3 h-3 rounded-full bg-slate-200"></span>
-            </div>
-        </section>
-
-        <!-- SCREEN 3: MISIÓN 3 - EL MUNDO DE OBJETOS DIGITALES -->
-        <section id="screen-m3" class="app-screen hidden bg-white rounded-3xl p-6 shadow-xl border-4 border-sky-200 flex flex-col items-center">
-            <div class="w-full flex justify-between items-center mb-3">
-                <span class="bg-sky-100 text-sky-800 font-bold px-3 py-1 rounded-full text-xs font-heading">MISIÓN 3 DE 7</span>
-                <span class="text-slate-400 text-xs">Selección precisa</span>
-            </div>
-
-            <div class="w-full bg-amber-50 border-2 border-amber-300 rounded-2xl p-4 flex items-center gap-4 mb-4 shadow-sm">
-                <div id="tito-m3-avatar" class="w-20 h-20 flex-shrink-0"></div>
-                <div>
-                    <h3 id="m3-title" class="font-heading font-bold text-sky-900 text-lg">Misión 3: Encuentra el Objeto</h3>
-                    <p id="m3-instruction" class="text-slate-700 text-sm sm:text-base font-medium">Tito dice: "Encuentra y haz clic en el <strong id="m3-target-txt" class="text-amber-700 font-extrabold underline">CARRO ROJO</strong>."</p>
-                </div>
-            </div>
-
-            <!-- Grid of 6 SVG Objects -->
-            <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 w-full max-w-xl my-2">
-                <div id="obj-robot" onclick="m3Check('robot')" class="bg-slate-50 border-4 border-slate-200 hover:border-sky-400 hover:bg-sky-50 rounded-2xl p-4 flex flex-col items-center cursor-pointer transition transform hover:scale-105 shadow-sm">
-                    <div class="w-16 h-16" id="svg-robot"></div>
-                    <span class="font-heading font-bold text-slate-700 text-xs mt-2">Robot Divertido</span>
-                </div>
-
-                <div id="obj-car" onclick="m3Check('car')" class="bg-slate-50 border-4 border-slate-200 hover:border-sky-400 hover:bg-sky-50 rounded-2xl p-4 flex flex-col items-center cursor-pointer transition transform hover:scale-105 shadow-sm">
-                    <div class="w-16 h-16" id="svg-car"></div>
-                    <span class="font-heading font-bold text-slate-700 text-xs mt-2">Carro Rojo</span>
-                </div>
-
-                <div id="obj-star" onclick="m3Check('star')" class="bg-slate-50 border-4 border-slate-200 hover:border-sky-400 hover:bg-sky-50 rounded-2xl p-4 flex flex-col items-center cursor-pointer transition transform hover:scale-105 shadow-sm">
-                    <div class="w-16 h-16" id="svg-star"></div>
-                    <span class="font-heading font-bold text-slate-700 text-xs mt-2">Estrella Brillante</span>
-                </div>
-
-                <div id="obj-ball" onclick="m3Check('ball')" class="bg-slate-50 border-4 border-slate-200 hover:border-sky-400 hover:bg-sky-50 rounded-2xl p-4 flex flex-col items-center cursor-pointer transition transform hover:scale-105 shadow-sm">
-                    <div class="w-16 h-16" id="svg-ball"></div>
-                    <span class="font-heading font-bold text-slate-700 text-xs mt-2">Pelota Mágica</span>
-                </div>
-
-                <div id="obj-book" onclick="m3Check('book')" class="bg-slate-50 border-4 border-slate-200 hover:border-sky-400 hover:bg-sky-50 rounded-2xl p-4 flex flex-col items-center cursor-pointer transition transform hover:scale-105 shadow-sm">
-                    <div class="w-16 h-16" id="svg-book"></div>
-                    <span class="font-heading font-bold text-slate-700 text-xs mt-2">Libro de Cuentos</span>
-                </div>
-
-                <div id="obj-balloon" onclick="m3Check('balloon')" class="bg-slate-50 border-4 border-slate-200 hover:border-sky-400 hover:bg-sky-50 rounded-2xl p-4 flex flex-col items-center cursor-pointer transition transform hover:scale-105 shadow-sm">
-                    <div class="w-16 h-16" id="svg-balloon"></div>
-                    <span class="font-heading font-bold text-slate-700 text-xs mt-2">Globo Volador</span>
-                </div>
-            </div>
-
-            <div class="flex gap-2 mt-2">
-                <span id="m3-step-1" class="w-3 h-3 rounded-full bg-amber-400"></span>
-                <span id="m3-step-2" class="w-3 h-3 rounded-full bg-slate-200"></span>
-                <span id="m3-step-3" class="w-3 h-3 rounded-full bg-slate-200"></span>
-            </div>
-        </section>
-
-        <!-- SCREEN 4: MISIÓN 4 - EL RETO DEL CLIC Y DOBLE CLIC -->
-        <section id="screen-m4" class="app-screen hidden bg-white rounded-3xl p-6 shadow-xl border-4 border-sky-200 flex flex-col items-center">
-            <div class="w-full flex justify-between items-center mb-3">
-                <span class="bg-sky-100 text-sky-800 font-bold px-3 py-1 rounded-full text-xs font-heading">MISIÓN 4 DE 7</span>
-                <span class="text-slate-400 text-xs">Clic simple y Doble clic</span>
-            </div>
-
-            <div class="w-full bg-amber-50 border-2 border-amber-300 rounded-2xl p-4 flex items-center gap-4 mb-4 shadow-sm">
-                <div id="tito-m4-avatar" class="w-20 h-20 flex-shrink-0"></div>
-                <div>
-                    <h3 id="m4-title" class="font-heading font-bold text-sky-900 text-lg">Misión 4: El Reto del Clic</h3>
-                    <p id="m4-instruction" class="text-slate-700 text-sm sm:text-base font-medium">Tito explica: "¡Un clic hace 1 destello ✨! ¡Un doble clic rápido hace 2 destellos ✨✨!"</p>
-                </div>
-            </div>
-
-            <!-- Demonstration & Practice Targets -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full max-w-lg my-2">
-                <!-- Single Click Challenge -->
-                <div id="m4-card-single" class="bg-sky-50 border-4 border-sky-300 rounded-2xl p-5 flex flex-col items-center text-center shadow">
-                    <span class="bg-sky-200 text-sky-800 text-xs font-bold px-3 py-1 rounded-full mb-2">Paso 1</span>
-                    <h4 class="font-heading font-bold text-sky-900 text-base mb-1">Clic Sencillo (1 Clic)</h4>
-                    <p class="text-xs text-slate-600 mb-3">Haz 1 clic en la campana para hacerla sonar.</p>
-                    <button id="target-single-btn" onclick="m4SingleClick()" class="w-24 h-24 bg-white border-4 border-sky-400 hover:border-amber-400 rounded-full flex flex-col items-center justify-center text-3xl shadow-md transition transform active:scale-95">
-                        🔔
-                        <span id="sparkle-single" class="text-xs opacity-0 transition">✨</span>
-                    </button>
-                    <span id="status-single" class="text-xs font-bold text-amber-600 mt-3">¡Haz 1 clic!</span>
-                </div>
-
-                <!-- Double Click Challenge -->
-                <div id="m4-card-double" class="bg-amber-50 border-4 border-amber-300 opacity-50 rounded-2xl p-5 flex flex-col items-center text-center shadow pointer-events-none">
-                    <span class="bg-amber-200 text-amber-800 text-xs font-bold px-3 py-1 rounded-full mb-2">Paso 2</span>
-                    <h4 class="font-heading font-bold text-amber-900 text-base mb-1">Doble Clic (2 Clics Rápidos)</h4>
-                    <p class="text-xs text-slate-600 mb-3">Haz doble clic rápido en la gema mágica.</p>
-                    <button id="target-double-btn" ondblclick="m4DoubleClick()" class="w-24 h-24 bg-white border-4 border-amber-400 hover:border-indigo-400 rounded-full flex flex-col items-center justify-center text-3xl shadow-md transition transform active:scale-95">
-                        💎
-                        <span id="sparkle-double" class="text-xs opacity-0 transition">✨✨</span>
-                    </button>
-                    <span id="status-double" class="text-xs font-bold text-slate-500 mt-3">Completa el paso 1 primero</span>
-                </div>
-            </div>
-        </section>
-
-        <!-- SCREEN 5: MISIÓN 5 - LAS CAJAS MÁGICAS -->
-        <section id="screen-m5" class="app-screen hidden bg-white rounded-3xl p-6 shadow-xl border-4 border-sky-200 flex flex-col items-center">
-            <div class="w-full flex justify-between items-center mb-3">
-                <span class="bg-sky-100 text-sky-800 font-bold px-3 py-1 rounded-full text-xs font-heading">MISIÓN 5 DE 7</span>
-                <span class="text-slate-400 text-xs">Dominio de Doble Clic</span>
-            </div>
-
-            <div class="w-full bg-amber-50 border-2 border-amber-300 rounded-2xl p-4 flex items-center gap-4 mb-4 shadow-sm">
-                <div id="tito-m5-avatar" class="w-20 h-20 flex-shrink-0"></div>
-                <div>
-                    <h3 id="m5-title" class="font-heading font-bold text-sky-900 text-lg">Misión 5: Las Cajas Mágicas</h3>
-                    <p id="m5-instruction" class="text-slate-700 text-sm sm:text-base font-medium">Tito dice: "¡Haz <strong class="text-amber-700 font-extrabold underline">DOBLE CLIC RÁPIDO</strong> en cada caja de regalo para descubrir qué hay dentro!"</p>
-                </div>
-            </div>
-
-            <!-- Grid of 4 Magic Gift Boxes -->
-            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 w-full max-w-2xl my-4">
-                <!-- Box 1 -->
-                <div id="box-1" ondblclick="m5OpenBox(1)" class="cursor-pointer bg-amber-100 border-4 border-amber-400 rounded-2xl p-4 flex flex-col items-center relative transition transform hover:scale-105 shadow-md min-h-[140px]">
-                    <div id="lid-1" class="absolute top-2 w-16 h-6 bg-amber-500 rounded-t-md shadow transition"></div>
-                    <div id="body-1" class="w-16 h-16 bg-amber-400 rounded-b-md mt-6 flex items-center justify-center text-3xl shadow-inner">🎁</div>
-                    <div id="content-1" class="hidden text-4xl animate-bounce">👑</div>
-                    <span class="text-[11px] font-bold text-amber-900 mt-2">Caja 1</span>
-                </div>
-
-                <!-- Box 2 -->
-                <div id="box-2" ondblclick="m5OpenBox(2)" class="cursor-pointer bg-purple-100 border-4 border-purple-400 rounded-2xl p-4 flex flex-col items-center relative transition transform hover:scale-105 shadow-md min-h-[140px]">
-                    <div id="lid-2" class="absolute top-2 w-16 h-6 bg-purple-500 rounded-t-md shadow transition"></div>
-                    <div id="body-2" class="w-16 h-16 bg-purple-400 rounded-b-md mt-6 flex items-center justify-center text-3xl shadow-inner">🎁</div>
-                    <div id="content-2" class="hidden text-4xl animate-bounce">🧸</div>
-                    <span class="text-[11px] font-bold text-purple-900 mt-2">Caja 2</span>
-                </div>
-
-                <!-- Box 3 -->
-                <div id="box-3" ondblclick="m5OpenBox(3)" class="cursor-pointer bg-emerald-100 border-4 border-emerald-400 rounded-2xl p-4 flex flex-col items-center relative transition transform hover:scale-105 shadow-md min-h-[140px]">
-                    <div id="lid-3" class="absolute top-2 w-16 h-6 bg-emerald-500 rounded-t-md shadow transition"></div>
-                    <div id="body-3" class="w-16 h-16 bg-emerald-400 rounded-b-md mt-6 flex items-center justify-center text-3xl shadow-inner">🎁</div>
-                    <div id="content-3" class="hidden text-4xl animate-bounce">🦕</div>
-                    <span class="text-[11px] font-bold text-emerald-900 mt-2">Caja 3</span>
-                </div>
-
-                <!-- Box 4 -->
-                <div id="box-4" ondblclick="m5OpenBox(4)" class="cursor-pointer bg-rose-100 border-4 border-rose-400 rounded-2xl p-4 flex flex-col items-center relative transition transform hover:scale-105 shadow-md min-h-[140px]">
-                    <div id="lid-4" class="absolute top-2 w-16 h-6 bg-rose-500 rounded-t-md shadow transition"></div>
-                    <div id="body-4" class="w-16 h-16 bg-rose-400 rounded-b-md mt-6 flex items-center justify-center text-3xl shadow-inner">🎁</div>
-                    <div id="content-4" class="hidden text-4xl animate-bounce">🪄</div>
-                    <span class="text-[11px] font-bold text-rose-900 mt-2">Caja 4</span>
-                </div>
-            </div>
-
-            <!-- Opened Box Counter -->
-            <p id="m5-status" class="text-xs font-bold text-sky-700">Cajas abiertas: <span id="m5-count">0</span> / 4</p>
-        </section>
-
-        <!-- SCREEN 6: MISIÓN 6 - EL ALMACÉN DE TITO -->
-        <section id="screen-m6" class="app-screen hidden bg-white rounded-3xl p-6 shadow-xl border-4 border-sky-200 flex flex-col items-center">
-            <div class="w-full flex justify-between items-center mb-2">
-                <span class="bg-sky-100 text-sky-800 font-bold px-3 py-1 rounded-full text-xs font-heading">MISIÓN 6 DE 7</span>
-                <span class="text-slate-400 text-xs">Clasificación Drag & Drop / Clic</span>
-            </div>
-
-            <div class="w-full bg-amber-50 border-2 border-amber-300 rounded-2xl p-3 flex items-center gap-3 mb-3 shadow-sm">
-                <div id="tito-m6-avatar" class="w-16 h-16 flex-shrink-0"></div>
-                <div>
-                    <h3 id="m6-title" class="font-heading font-bold text-sky-900 text-base">Misión 6: El Almacén Organizado</h3>
-                    <p id="m6-instruction" class="text-slate-700 text-xs sm:text-sm font-medium">Tito dice: "Arrastra cada objeto (o haz clic en el objeto y luego en su caja) para ordenarlo en su lugar correcto."</p>
-                </div>
-            </div>
-
-            <!-- Draggable Items Palette -->
-            <div class="w-full bg-sky-50 p-3 rounded-2xl border-2 border-sky-200 mb-4">
-                <span class="text-xs font-bold text-sky-800 uppercase block mb-2 text-center">Objetos por clasificar:</span>
-                <div id="m6-items-container" class="flex flex-wrap justify-center gap-3 min-h-[60px] items-center">
-                    <!-- Items rendered dynamically by JS -->
-                </div>
-            </div>
-
-            <!-- 3 Drop Bins -->
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 w-full max-w-2xl">
-                <!-- Toys Bin -->
-                <div id="bin-juguetes" onclick="m6PlaceInBin('juguetes')" ondragover="m6AllowDrop(event)" ondragleave="m6DragLeave(event)" ondrop="m6Drop(event, 'juguetes')" class="bg-amber-50 border-4 border-dashed border-amber-300 rounded-2xl p-3 flex flex-col items-center min-h-[150px] transition">
-                    <span class="text-2xl mb-1">🧸</span>
-                    <h4 class="font-heading font-bold text-amber-900 text-sm">JUGUETES</h4>
-                    <div id="bin-items-juguetes" class="w-full flex flex-wrap justify-center gap-1 mt-2"></div>
-                </div>
-
-                <!-- School Bin -->
-                <div id="bin-utiles" onclick="m6PlaceInBin('utiles')" ondragover="m6AllowDrop(event)" ondragleave="m6DragLeave(event)" ondrop="m6Drop(event, 'utiles')" class="bg-indigo-50 border-4 border-dashed border-indigo-300 rounded-2xl p-3 flex flex-col items-center min-h-[150px] transition">
-                    <span class="text-2xl mb-1">✏️</span>
-                    <h4 class="font-heading font-bold text-indigo-900 text-sm">ÚTILES ESCOLARES</h4>
-                    <div id="bin-items-utiles" class="w-full flex flex-wrap justify-center gap-1 mt-2"></div>
-                </div>
-
-                <!-- Animals Bin -->
-                <div id="bin-animales" onclick="m6PlaceInBin('animales')" ondragover="m6AllowDrop(event)" ondragleave="m6DragLeave(event)" ondrop="m6Drop(event, 'animales')" class="bg-emerald-50 border-4 border-dashed border-emerald-300 rounded-2xl p-3 flex flex-col items-center min-h-[150px] transition">
-                    <span class="text-2xl mb-1">🐶</span>
-                    <h4 class="font-heading font-bold text-emerald-900 text-sm">ANIMALES</h4>
-                    <div id="bin-items-animales" class="w-full flex flex-wrap justify-center gap-1 mt-2"></div>
-                </div>
-            </div>
-        </section>
-
-        <!-- SCREEN 7: MISIÓN 7 - LA BÚSQUEDA VERTICAL (SCROLL) -->
-        <section id="screen-m7" class="app-screen hidden bg-white rounded-3xl p-6 shadow-xl border-4 border-sky-200 flex flex-col items-center">
-            <div class="w-full flex justify-between items-center mb-2">
-                <span class="bg-sky-100 text-sky-800 font-bold px-3 py-1 rounded-full text-xs font-heading">MISIÓN 7 DE 7</span>
-                <span class="text-slate-400 text-xs">Uso de la Rueda (Scroll)</span>
-            </div>
-
-            <div class="w-full bg-amber-50 border-2 border-amber-300 rounded-2xl p-3 flex items-center gap-3 mb-3 shadow-sm">
-                <div id="tito-m7-avatar" class="w-16 h-16 flex-shrink-0"></div>
-                <div>
-                    <h3 id="m7-title" class="font-heading font-bold text-sky-900 text-base">Misión 7: La Búsqueda Vertical</h3>
-                    <p id="m7-instruction" class="text-slate-700 text-xs sm:text-sm font-medium">Tito dice: "Usa la <strong class="text-amber-700 font-extrabold underline">RUEDA DEL MOUSE (SCROLL)</strong> para girar hacia abajo y encontrar los 5 tesoros."</p>
-                </div>
-            </div>
-
-            <!-- Scroll Progress Indicator -->
-            <div class="w-full max-w-md bg-slate-100 rounded-full h-3 mb-2 border border-slate-300 overflow-hidden">
-                <div id="m7-scroll-bar" class="bg-amber-400 h-full w-0 transition-all duration-200"></div>
-            </div>
-            <span class="text-xs font-bold text-slate-500 mb-2">Tesoros recolectados: <span id="m7-collected-count">0</span> / 5</span>
-
-            <!-- Vertical Scroll Adventure Window -->
-            <div id="m7-scroll-window" onscroll="m7OnScroll()" class="w-full max-w-md h-72 overflow-y-auto border-4 border-sky-300 rounded-2xl bg-gradient-to-b from-sky-100 via-amber-50 to-indigo-100 p-4 relative shadow-inner">
-                <!-- Long Trail Content -->
-                <div class="h-[1000px] relative flex flex-col items-center justify-between py-6">
-                    <p class="text-xs font-bold text-sky-600 bg-white/80 px-3 py-1 rounded-full shadow">⬇️ ¡Gira la rueda hacia abajo! ⬇️</p>
-
-                    <!-- Hidden Treasure 1 -->
-                    <div id="treasure-1" onclick="m7Collect(1)" class="my-10 bg-white p-3 rounded-2xl border-2 border-amber-300 shadow-md flex items-center gap-3 cursor-pointer transform transition hover:scale-110">
-                        <span class="text-3xl">🪙</span>
-                        <div>
-                            <span class="font-heading font-bold text-amber-800 text-xs block">Cofre de Monedas</span>
-                            <span class="text-[10px] text-slate-500">¡Haz clic para recolectar!</span>
-                        </div>
-                    </div>
-
-                    <!-- Hidden Treasure 2 -->
-                    <div id="treasure-2" onclick="m7Collect(2)" class="my-10 bg-white p-3 rounded-2xl border-2 border-amber-300 shadow-md flex items-center gap-3 cursor-pointer transform transition hover:scale-110">
-                        <span class="text-3xl">🗺️</span>
-                        <div>
-                            <span class="font-heading font-bold text-amber-800 text-xs block">Mapa de Estrellas</span>
-                            <span class="text-[10px] text-slate-500">¡Haz clic para recolectar!</span>
-                        </div>
-                    </div>
-
-                    <!-- Hidden Treasure 3 -->
-                    <div id="treasure-3" onclick="m7Collect(3)" class="my-10 bg-white p-3 rounded-2xl border-2 border-amber-300 shadow-md flex items-center gap-3 cursor-pointer transform transition hover:scale-110">
-                        <span class="text-3xl">🤖</span>
-                        <div>
-                            <span class="font-heading font-bold text-amber-800 text-xs block">Robot Galáctico</span>
-                            <span class="text-[10px] text-slate-500">¡Haz clic para recolectar!</span>
-                        </div>
-                    </div>
-
-                    <!-- Hidden Treasure 4 -->
-                    <div id="treasure-4" onclick="m7Collect(4)" class="my-10 bg-white p-3 rounded-2xl border-2 border-amber-300 shadow-md flex items-center gap-3 cursor-pointer transform transition hover:scale-110">
-                        <span class="text-3xl">💎</span>
-                        <div>
-                            <span class="font-heading font-bold text-amber-800 text-xs block">Gema Mágica</span>
-                            <span class="text-[10px] text-slate-500">¡Haz clic para recolectar!</span>
-                        </div>
-                    </div>
-
-                    <!-- Hidden Treasure 5 -->
-                    <div id="treasure-5" onclick="m7Collect(5)" class="my-10 bg-white p-3 rounded-2xl border-2 border-amber-300 shadow-md flex items-center gap-3 cursor-pointer transform transition hover:scale-110">
-                        <span class="text-3xl">🎖️</span>
-                        <div>
-                            <span class="font-heading font-bold text-amber-800 text-xs block">Medalla de Honor</span>
-                            <span class="text-[10px] text-slate-500">¡Haz clic para recolectar!</span>
-                        </div>
-                    </div>
-
-                    <p class="text-xs font-bold text-indigo-600 bg-white/80 px-3 py-1 rounded-full shadow">🏁 ¡Llegaste al final del camino!</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- SCREEN 8: FINAL CELEBRATION & FAMILY CERTIFICATE REPORT -->
-        <section id="screen-final" class="app-screen hidden bg-white rounded-3xl p-6 sm:p-10 shadow-xl border-4 border-amber-300 flex flex-col items-center">
-            
-            <!-- Certificate Border Container -->
-            <div class="certificate-container w-full max-w-3xl bg-amber-50/50 p-6 sm:p-8 rounded-2xl border-4 border-amber-400 relative">
-                
-                <!-- Certificate Header -->
-                <div class="text-center space-y-2 mb-6">
-                    <div class="flex justify-center items-center gap-3 mb-2">
-                        <div id="tito-final-avatar" class="w-20 h-20 no-print"></div>
-                        <div>
-                            <span class="bg-amber-200 text-amber-900 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Reporte Educativo de Informática</span>
-                            <h2 class="text-3xl sm:text-4xl font-extrabold text-sky-900 font-heading">¡AVENTURA COMPLETADA!</h2>
-                        </div>
-                    </div>
-                    <p class="text-slate-600 text-sm sm:text-base font-semibold">Certificado Oficial de Logros en Habilidades Digitales Básicas</p>
-                </div>
-
-                <!-- Student Summary Details Box -->
-                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 bg-white p-4 rounded-xl border border-amber-200 mb-6 text-center text-xs shadow-sm">
-                    <div>
-                        <span class="text-slate-400 block font-bold">ESTUDIANTE</span>
-                        <span id="final-student-name" class="font-heading text-sm font-bold text-sky-900">Sofia Ramos</span>
-                    </div>
-                    <div>
-                        <span class="text-slate-400 block font-bold">SECCIÓN</span>
-                        <span id="final-student-section" class="font-heading text-sm font-bold text-sky-900">1-A</span>
-                    </div>
-                    <div>
-                        <span class="text-slate-400 block font-bold">FECHA</span>
-                        <span id="final-student-date" class="font-heading text-sm font-bold text-sky-900">2026-09-21</span>
-                    </div>
-                    <div>
-                        <span class="text-slate-400 block font-bold">PUNTAJE TOTAL</span>
-                        <span id="final-student-score" class="font-heading text-sm font-bold text-emerald-600">100% (7/7)</span>
-                    </div>
-                </div>
-
-                <!-- Table: "Lo que hice hoy" -->
-                <div class="mb-6 overflow-x-auto">
-                    <h3 class="font-heading font-bold text-sky-900 text-sm mb-2 uppercase tracking-wide">📋 Resumen de Misiones Realizadas</h3>
-                    <table class="w-full text-left text-xs border-collapse">
-                        <thead>
-                            <tr class="bg-sky-100 text-sky-900 border-b-2 border-sky-200">
-                                <th class="p-2">Misión</th>
-                                <th class="p-2">Habilidad Evaluada</th>
-                                <th class="p-2">Estado</th>
-                                <th class="p-2">Desempeño Observado</th>
-                            </tr>
-                        </thead>
-                        <tbody id="final-report-table-body" class="divide-y divide-slate-200 bg-white">
-                            <!-- Populated dynamically by JS -->
-                        </tbody>
-                    </table>
-                </div>
-
-                <!-- Pedagogical Rubric Indicators -->
-                <div class="bg-white p-4 rounded-xl border border-amber-200 mb-6">
-                    <h3 class="font-heading font-bold text-sky-900 text-sm mb-2 uppercase tracking-wide">📊 Indicadores de la Rúbrica Pedagógica (Primer Grado)</h3>
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
-                        <div class="p-2.5 bg-emerald-50 rounded-lg border border-emerald-200">
-                            <span class="font-bold text-emerald-800 block mb-1">⭐ Coordinación Visomotora</span>
-                            <p class="text-slate-600">Demuestra un manejo fluido y preciso del puntero sobre objetivos digitales.</p>
-                        </div>
-                        <div class="p-2.5 bg-emerald-50 rounded-lg border border-emerald-200">
-                            <span class="font-bold text-emerald-800 block mb-1">⭐ Clic y Doble Clic</span>
-                            <p class="text-slate-600">Diferencia la cadencia de activación entre el clic único y el doble clic.</p>
-                        </div>
-                        <div class="p-2.5 bg-emerald-50 rounded-lg border border-emerald-200">
-                            <span class="font-bold text-emerald-800 block mb-1">⭐ Navegación & Scroll</span>
-                            <p class="text-slate-600">Utiliza la rueda del mouse para desplazarse verticalmente en la pantalla.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Teacher / Parent Signature Lines -->
-                <div class="pt-6 border-t border-amber-300 grid grid-cols-2 gap-8 text-center text-xs">
-                    <div>
-                        <div class="h-10 border-b border-slate-400 w-3/4 mx-auto mb-1"></div>
-                        <span class="text-slate-500 font-bold block">Firma del Docente de Informática</span>
-                    </div>
-                    <div>
-                        <div class="h-10 border-b border-slate-400 w-3/4 mx-auto mb-1"></div>
-                        <span class="text-slate-500 font-bold block">Firma del Padre/Madre o Encargado</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Action Buttons -->
-            <div class="no-print mt-6 flex flex-wrap gap-4 justify-center">
-                <button onclick="window.print()" class="px-6 py-3 bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-600 hover:to-blue-700 text-white font-heading font-bold rounded-xl shadow-md transition flex items-center gap-2">
-                    <span>🖨️ Imprimir / Guardar Certificado PDF</span>
-                </button>
-                <button onclick="location.reload()" class="px-6 py-3 bg-slate-200 hover:bg-slate-300 text-slate-700 font-heading font-bold rounded-xl shadow transition">
-                    <span>🔄 Reiniciar Aventura</span>
-                </button>
-            </div>
-        </section>
-
+    <!-- TARJETA PRINCIPAL DE LA AVENTURA -->
+    <main class="main-card" id="mainContainer">
+      <!-- Se renderiza dinámicamente -->
     </main>
+  </div>
 
-    <script>
-        // Sound System using Web Audio API (Zero external mp3 files required)
-        class SoundEngine {
-            constructor() {
-                this.ctx = null;
-                this.enabled = true;
-            }
+  <!-- TOAST DE RETROALIMENTACIÓN DE TITO -->
+  <div class="tito-toast" id="titoToast">
+    <div class="tito-toast-avatar" id="toastTitoAvatar"></div>
+    <span id="toastMessage">¡Hola! Soy Tito.</span>
+  </div>
 
-            init() {
-                if (!this.ctx) {
-                    const AudioContext = window.AudioContext || window.webkitAudioContext;
-                    this.ctx = new AudioContext();
-                }
-            }
+  <script>
+    /* ==========================================================================
+       2. SINTETIZADOR DE AUDIO WEB (100% OFFLINE, SIN ARCHIVOS MP3)
+       ========================================================================== */
+    const AudioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
-            playClick() {
-                if (!this.enabled) return;
-                this.init();
-                const osc = this.ctx.createOscillator();
-                const gain = this.ctx.createGain();
-                osc.type = 'sine';
-                osc.frequency.setValueAtTime(600, this.ctx.currentTime);
-                osc.frequency.exponentialRampToValueAtTime(120, this.ctx.currentTime + 0.05);
-                gain.gain.setValueAtTime(0.3, this.ctx.currentTime);
-                gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + 0.05);
-                osc.connect(gain);
-                gain.connect(this.ctx.destination);
-                osc.start();
-                osc.stop(this.ctx.currentTime + 0.05);
-            }
+    function playSound(type) {
+      if (AudioCtx.state === 'suspended') AudioCtx.resume();
+      const osc = AudioCtx.createOscillator();
+      const gain = AudioCtx.createGain();
+      osc.connect(gain);
+      gain.connect(AudioCtx.destination);
 
-            playSuccess() {
-                if (!this.enabled) return;
-                this.init();
-                const notes = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6
-                notes.forEach((freq, idx) => {
-                    const osc = this.ctx.createOscillator();
-                    const gain = this.ctx.createGain();
-                    osc.type = 'triangle';
-                    osc.frequency.setValueAtTime(freq, this.ctx.currentTime + idx * 0.08);
-                    gain.gain.setValueAtTime(0.2, this.ctx.currentTime + idx * 0.08);
-                    gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + idx * 0.08 + 0.2);
-                    osc.connect(gain);
-                    gain.connect(this.ctx.destination);
-                    osc.start(this.ctx.currentTime + idx * 0.08);
-                    osc.stop(this.ctx.currentTime + idx * 0.08 + 0.2);
-                });
-            }
+      const now = AudioCtx.currentTime;
 
-            playMagic() {
-                if (!this.enabled) return;
-                this.init();
-                for (let i = 0; i < 6; i++) {
-                    const osc = this.ctx.createOscillator();
-                    const gain = this.ctx.createGain();
-                    osc.type = 'sine';
-                    osc.frequency.setValueAtTime(800 + i * 200, this.ctx.currentTime + i * 0.05);
-                    gain.gain.setValueAtTime(0.15, this.ctx.currentTime + i * 0.05);
-                    gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + i * 0.05 + 0.15);
-                    osc.connect(gain);
-                    gain.connect(this.ctx.destination);
-                    osc.start(this.ctx.currentTime + i * 0.05);
-                    osc.stop(this.ctx.currentTime + i * 0.05 + 0.15);
-                }
-            }
+      if (type === 'click') {
+        osc.frequency.setValueAtTime(600, now);
+        gain.gain.setValueAtTime(0.1, now);
+        gain.gain.exponentialRampToValueAtTime(0.01, now + 0.05);
+        osc.start(now);
+        osc.stop(now + 0.05);
+      } else if (type === 'success') {
+        osc.frequency.setValueAtTime(523.25, now);
+        osc.frequency.exponentialRampToValueAtTime(880, now + 0.2);
+        gain.gain.setValueAtTime(0.15, now);
+        gain.gain.exponentialRampToValueAtTime(0.01, now + 0.2);
+        osc.start(now);
+        osc.stop(now + 0.2);
+      } else if (type === 'pop') {
+        osc.frequency.setValueAtTime(300, now);
+        osc.frequency.exponentialRampToValueAtTime(600, now + 0.1);
+        gain.gain.setValueAtTime(0.2, now);
+        gain.gain.exponentialRampToValueAtTime(0.01, now + 0.1);
+        osc.start(now);
+        osc.stop(now + 0.1);
+      } else if (type === 'fanfare') {
+        const notes = [523.25, 659.25, 783.99, 1046.50];
+        notes.forEach((freq, idx) => {
+          const noteOsc = AudioCtx.createOscillator();
+          const noteGain = AudioCtx.createGain();
+          noteOsc.connect(noteGain);
+          noteGain.connect(AudioCtx.destination);
+          noteOsc.frequency.value = freq;
+          noteGain.gain.setValueAtTime(0.12, now + idx * 0.1);
+          noteGain.gain.exponentialRampToValueAtTime(0.01, now + idx * 0.1 + 0.25);
+          noteOsc.start(now + idx * 0.1);
+          noteOsc.stop(now + idx * 0.1 + 0.25);
+        });
+      }
+    }
 
-            playErrorSoft() {
-                if (!this.enabled) return;
-                this.init();
-                const osc = this.ctx.createOscillator();
-                const gain = this.ctx.createGain();
-                osc.type = 'sine';
-                osc.frequency.setValueAtTime(220, this.ctx.currentTime);
-                osc.frequency.setValueAtTime(180, this.ctx.currentTime + 0.1);
-                gain.gain.setValueAtTime(0.2, this.ctx.currentTime);
-                gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + 0.25);
-                osc.connect(gain);
-                gain.connect(this.ctx.destination);
-                osc.start();
-                osc.stop(this.ctx.currentTime + 0.25);
+    /* ==========================================================================
+       3. ILUSTRADOR SVG DE TITO (PERSONAJE CONSISTENTE CON POSES)
+       ========================================================================== */
+    function getTitoSVG(pose = 'happy') {
+      let eyes = `<circle cx="38" cy="42" r="5" fill="#1E293B"/><circle cx="62" cy="42" r="5" fill="#1E293B"/><circle cx="40" cy="40" r="2" fill="white"/><circle cx="64" cy="40" r="2" fill="white"/>`;
+      let mouth = `<path d="M 40 58 Q 50 68 60 58" stroke="#1E293B" stroke-width="3.5" fill="none" stroke-linecap="round"/>`;
+
+      if (pose === 'surprised') {
+        mouth = `<circle cx="50" cy="60" r="7" fill="#1E293B"/>`;
+      } else if (pose === 'thinking') {
+        eyes = `<circle cx="38" cy="39" r="5" fill="#1E293B"/><circle cx="62" cy="39" r="5" fill="#1E293B"/>`;
+        mouth = `<path d="M 42 60 L 58 60" stroke="#1E293B" stroke-width="3.5" fill="none"/>`;
+      } else if (pose === 'celebrating') {
+        mouth = `<path d="M 38 54 Q 50 72 62 54 Z" fill="#EF4444"/>`;
+      }
+
+      return `
+        <svg viewBox="0 0 100 100" width="100%" height="100%">
+          <!-- Orejas -->
+          <circle cx="22" cy="22" r="18" fill="#94A3B8"/>
+          <circle cx="22" cy="22" r="11" fill="#F472B6"/>
+          <circle cx="78" cy="22" r="18" fill="#94A3B8"/>
+          <circle cx="78" cy="22" r="11" fill="#F472B6"/>
+          <!-- Cabeza -->
+          <circle cx="50" cy="50" r="32" fill="#CBD5E1"/>
+          <!-- Hocico -->
+          <ellipse cx="50" cy="55" rx="16" ry="12" fill="#F8FAFC"/>
+          <ellipse cx="50" cy="48" rx="5" ry="3.5" fill="#1E293B"/>
+          <!-- Ojos y Boca -->
+          ${eyes}
+          ${mouth}
+          <!-- Camisa/Acceso -->
+          <path d="M 30 80 Q 50 70 70 80 L 75 100 L 25 100 Z" fill="#3B82F6"/>
+        </svg>
+      `;
+    }
+
+    /* ==========================================================================
+       4. ESTADO DE LA SESIÓN Y TELEMETRÍA DE LA PRUEBA
+       ========================================================================== */
+    const defaultState = {
+      studentName: '',
+      section: '',
+      officialDate: '',
+      sessionId: '',
+      startTime: null,
+      endTime: null,
+      currentMission: 0,
+      completed: false,
+      logs: [],
+      indicatorScores: {}
+    };
+
+    let session = { ...defaultState };
+
+    // Verificar LocalStorage
+    function checkLocalStorage() {
+      try {
+        localStorage.setItem('test_ls', '1');
+        localStorage.removeItem('test_ls');
+        return true;
+      } catch (e) {
+        alert("⚠️ ATENCIÓN DOCENTE: El almacenamiento local (localStorage) no está disponible en este navegador. Verifique la configuración antes de aplicar la prueba.");
+        return false;
+      }
+    }
+
+    function saveSession() {
+      if (!session.sessionId) return;
+      try {
+        const key = `mouseTest_2026_${session.studentName}_${session.officialDate}_${session.sessionId}`;
+        localStorage.setItem(key, JSON.stringify(session));
+      } catch (e) {
+        console.error("Error al guardar sesión en LocalStorage", e);
+      }
+    }
+
+    function logTelemetry(mission, activity, indicator, expected, actual, isSuccess) {
+      const entry = {
+        mission,
+        activity,
+        indicator,
+        expectedAction: expected,
+        actualAction: actual,
+        result: isSuccess ? 'success' : 'error',
+        timestamp: new Date().toISOString()
+      };
+      session.logs.push(entry);
+      saveSession();
+    }
+
+    function showToast(message, pose = 'happy') {
+      const toast = document.getElementById('titoToast');
+      document.getElementById('toastMessage').innerText = message;
+      document.getElementById('toastTitoAvatar').innerHTML = getTitoSVG(pose);
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 3200);
+    }
+
+    /* ==========================================================================
+       5. NAVEGACIÓN Y COMPONENTES DE INTERFAZ
+       ========================================================================== */
+    function renderApp() {
+      const container = document.getElementById('mainContainer');
+
+      if (session.currentMission === 0) {
+        renderWelcomeScreen(container);
+      } else if (session.currentMission <= 7) {
+        renderMissionCard(container);
+      } else {
+        renderFinalScreen(container);
+      }
+    }
+
+    function renderWelcomeScreen(container) {
+      container.innerHTML = `
+        <div class="welcome-screen">
+          <div class="tito-welcome-box">${getTitoSVG('happy')}</div>
+          <h1 class="welcome-title">LA AVENTURA DE TITO: MISIÓN MOUSE</h1>
+          <p class="welcome-subtitle">¡Hola! Soy Tito. Ayúdame a completar todas las misiones digitales con tu mouse.</p>
+          
+          <div class="form-group">
+            <label for="inputName">Nombre completo del estudiante:</label>
+            <input type="text" id="inputName" class="form-control" placeholder="Ej. Lucía Vargas Solís" value="${session.studentName}">
+          </div>
+
+          <div class="form-group">
+            <label for="inputSection">Sección:</label>
+            <input type="text" id="inputSection" class="form-control" placeholder="Ej. 1-A" value="${session.section}">
+          </div>
+
+          <div class="form-group">
+            <label for="inputDate">Fecha oficial de aplicación:</label>
+            <input type="date" id="inputDate" class="form-control" value="${session.officialDate}">
+          </div>
+
+          <button class="btn-adventure" onclick="handleStartAdventure()">INICIAR AVENTURA 🚀</button>
+        </div>
+      `;
+    }
+
+    function handleStartAdventure() {
+      if (!checkLocalStorage()) return;
+
+      const name = document.getElementById('inputName').value.trim();
+      const section = document.getElementById('inputSection').value.trim();
+      const date = document.getElementById('inputDate').value;
+
+      if (!name || !section || !date) {
+        alert("⚠️ Por favor, la docente debe ingresar el Nombre, Sección y Fecha oficial antes de iniciar.");
+        return;
+      }
+
+      session.studentName = name;
+      session.section = section;
+      session.officialDate = date;
+      session.sessionId = 'S_' + Date.now();
+      session.startTime = new Date().toISOString();
+      session.currentMission = 1;
+
+      saveSession();
+      playSound('fanfare');
+      renderApp();
+    }
+
+    function renderMissionCard(container) {
+      const missionTitles = [
+        "",
+        "Misión 1: Conozco mi Mouse",
+        "Misión 2: Muevo el Puntero",
+        "Misión 3: Encuentra y Selecciona",
+        "Misión 4: El Reto del Clic",
+        "Misión 5: Las Cajas Mágicas",
+        "Misión 6: El Almacén de Tito",
+        "Misión 7: Busca más Objetos"
+      ];
+
+      const missionInstructions = [
+        "",
+        "Haz clic en cada parte del mouse que Tito te vaya indicando.",
+        "Mueve físicamente tu mouse para llevar el puntero a la zona indicada.",
+        "Mueve el puntero y selecciona con clic izquierdo el objeto solicitado.",
+        "Sigue las instrucciones de Tito: aplica Clic Sencillo o Doble Clic.",
+        "Aplica DOBLE CLIC sobre cada caja mágica para abrirlas todas.",
+        "Arrastra los objetos de la parte superior hacia la categoría correcta.",
+        "Usa la RUEDA del mouse para desplazarte verticalmente hacia abajo."
+      ];
+
+      // Progreso visual
+      let pathHTML = '<div class="adventure-path"><div class="path-line"></div>';
+      const progressWidth = ((session.currentMission - 1) / 6) * 100;
+      pathHTML += `<div class="path-line-progress" style="width: ${progressWidth}%"></div>`;
+
+      for (let i = 1; i <= 7; i++) {
+        let statusClass = '';
+        if (i < session.currentMission) statusClass = 'completed';
+        if (i === session.currentMission) statusClass = 'active';
+        pathHTML += `<div class="path-node ${statusClass}">${i < session.currentMission ? '✓' : i}</div>`;
+      }
+      pathHTML += '</div>';
+
+      container.innerHTML = `
+        ${pathHTML}
+        <div class="mission-header-box">
+          <div class="tito-avatar-small">${getTitoSVG('explaining')}</div>
+          <div class="mission-title-container">
+            <h2>${missionTitles[session.currentMission]}</h2>
+            <p>${missionInstructions[session.currentMission]}</p>
+          </div>
+        </div>
+        <div class="stage-canvas" id="stageArea"></div>
+      `;
+
+      loadMissionStage(session.currentMission);
+    }
+
+    /* ==========================================================================
+       6. LÓGICA INTERACTIVA DE LAS 7 MISIONES (EVENTOS REALES)
+       ========================================================================== */
+    function loadMissionStage(m) {
+      const stage = document.getElementById('stageArea');
+
+      if (m === 1) setupMission1(stage);
+      else if (m === 2) setupMission2(stage);
+      else if (m === 3) setupMission3(stage);
+      else if (m === 4) setupMission4(stage);
+      else if (m === 5) setupMission5(stage);
+      else if (m === 6) setupMission6(stage);
+      else if (m === 7) setupMission7(stage);
+    }
+
+    // MISIÓN 1: CONOZCO MI MOUSE (INDICADOR 1)
+    function setupMission1(stage) {
+      let currentStep = 0;
+      const steps = [
+        { key: 'left', name: 'Botón Izquierdo' },
+        { key: 'right', name: 'Botón Derecho' },
+        { key: 'wheel', name: 'Rueda' },
+        { key: 'sensor', name: 'Sensor / Cuerpo' }
+      ];
+
+      stage.innerHTML = `
+        <div style="text-align:center;">
+          <svg class="mouse-parts-svg" viewBox="0 0 200 260">
+            <!-- Botón Izquierdo -->
+            <path id="part-left" class="part-interactive" d="M 40 20 Q 100 20 100 80 L 40 80 Z" fill="#3B82F6"/>
+            <!-- Botón Derecho -->
+            <path id="part-right" class="part-interactive" d="M 100 20 Q 160 20 160 80 L 100 80 Z" fill="#2563EB"/>
+            <!-- Rueda -->
+            <rect id="part-wheel" class="part-interactive" x="92" y="45" width="16" height="30" rx="8" fill="#F59E0B"/>
+            <!-- Sensor / Cuerpo -->
+            <path id="part-sensor" class="part-interactive" d="M 40 80 L 160 80 Q 160 220 100 240 Q 40 220 40 80 Z" fill="#94A3B8"/>
+          </svg>
+        </div>
+      `;
+
+      showToast(`Tito dice: "Señala el ${steps[0].name}"`, "thinking");
+
+      ['left', 'right', 'wheel', 'sensor'].forEach(partKey => {
+        const el = document.getElementById(`part-${partKey}`);
+        el.addEventListener('click', () => {
+          const expected = steps[currentStep].key;
+          if (partKey === expected) {
+            playSound('success');
+            logTelemetry('Misión 1', 'Reconocimiento de partes', 1, expected, partKey, true);
+            currentStep++;
+            if (currentStep < steps.length) {
+              showToast(`¡Excelente! Ahora señala el ${steps[currentStep].name}`, "happy");
+            } else {
+              playSound('fanfare');
+              showToast("¡Magnífico! Reconoces todas las partes del mouse.", "celebrating");
+              setTimeout(nextMission, 1800);
             }
+          } else {
+            playSound('pop');
+            logTelemetry('Misión 1', 'Reconocimiento de partes', 1, expected, partKey, false);
+            showToast("¡Casi! Inténtalo nuevamente. Tito te acompaña.", "thinking");
+          }
+        });
+      });
+    }
+
+    // MISIÓN 2: MUEVO EL PUNTERO (INDICADOR 2)
+    function setupMission2(stage) {
+      let targetIdx = 0;
+      const targets = ['UP', 'DOWN', 'LEFT', 'RIGHT'];
+      const targetLabels = { UP: 'ARRIBA', DOWN: 'ABAJO', LEFT: 'IZQUIERDA', RIGHT: 'DERECHA' };
+
+      stage.innerHTML = `
+        <div class="direction-grid">
+          <div></div>
+          <div class="dir-zone" id="zone-UP">⬆️<br>ARRIBA</div>
+          <div></div>
+          <div class="dir-zone" id="zone-LEFT">⬅️<br>IZQUIERDA</div>
+          <div style="display:flex; align-items:center; justify-content:center;">🐭</div>
+          <div class="dir-zone" id="zone-RIGHT">➡️<br>DERECHA</div>
+          <div></div>
+          <div class="dir-zone" id="zone-DOWN">⬇️<br>ABAJO</div>
+          <div></div>
+        </div>
+      `;
+
+      function highlightNext() {
+        document.querySelectorAll('.dir-zone').forEach(z => z.classList.remove('highlight'));
+        const nextKey = targets[targetIdx];
+        document.getElementById(`zone-${nextKey}`).classList.add('highlight');
+        showToast(`Lleva el puntero del mouse hacia ${targetLabels[nextKey]}`, "happy");
+      }
+
+      highlightNext();
+
+      // Throttling con requestAnimationFrame para el evento real mousemove
+      let ticking = false;
+      stage.addEventListener('mousemove', (e) => {
+        if (!ticking) {
+          window.requestAnimationFrame(() => {
+            const currentTarget = targets[targetIdx];
+            const zoneEl = document.getElementById(`zone-${currentTarget}`);
+            const rect = zoneEl.getBoundingClientRect();
+
+            if (e.clientX >= rect.left && e.clientX <= rect.right && e.clientY >= rect.top && e.clientY <= rect.bottom) {
+              playSound('success');
+              logTelemetry('Misión 2', 'Desplazamiento de puntero', 2, currentTarget, currentTarget, true);
+              targetIdx++;
+              if (targetIdx < targets.length) {
+                highlightNext();
+              } else {
+                playSound('fanfare');
+                showToast("¡Fantástico! Dominas el puntero en todas direcciones.", "celebrating");
+                setTimeout(nextMission, 1800);
+              }
+            }
+            ticking = false;
+          });
+          ticking = true;
         }
+      });
+    }
 
-        const sound = new SoundEngine();
+    // MISIÓN 3: ENCUENTRA Y SELECCIONA (INDICADORES 3 Y 4)
+    function setupMission3(stage) {
+      let currentItemIdx = 0;
+      const items = [
+        { id: 'star', name: 'Estrella', svg: '<polygon points="25,2 32,18 49,18 35,29 40,46 25,35 10,46 15,29 1,18 18,18" fill="#F59E0B"/>' },
+        { id: 'robot', name: 'Robot', svg: '<rect x="10" y="10" width="30" height="30" fill="#8B5CF6"/><circle cx="20" cy="20" r="3" fill="white"/><circle cx="30" cy="20" r="3" fill="white"/>' },
+        { id: 'ball', name: 'Pelota', svg: '<circle cx="25" cy="25" r="20" fill="#EF4444"/><path d="M 10 25 Q 25 10 40 25" stroke="white" stroke-width="4" fill="none"/>' }
+      ];
 
-        // SVG Illustration Engine for Tito in multiple poses
-        function getTitoSVG(pose = 'waving') {
-            const poses = {
-                waving: `
-                    <!-- Head & Body -->
-                    <circle cx="100" cy="110" r="42" fill="#d4a373"/>
-                    <circle cx="60" cy="70" r="28" fill="#d4a373"/>
-                    <circle cx="60" cy="70" r="18" fill="#ffb7b2"/>
-                    <circle cx="140" cy="70" r="28" fill="#d4a373"/>
-                    <circle cx="140" cy="70" r="18" fill="#ffb7b2"/>
-                    <!-- Eyes -->
-                    <circle cx="88" cy="100" r="7" fill="#1e293b"/>
-                    <circle cx="86" cy="98" r="2.5" fill="#ffffff"/>
-                    <circle cx="112" cy="100" r="7" fill="#1e293b"/>
-                    <circle cx="110" cy="98" r="2.5" fill="#ffffff"/>
-                    <!-- Nose & Mouth -->
-                    <ellipse cx="100" cy="112" rx="6" ry="4" fill="#e63946"/>
-                    <path d="M 94 118 Q 100 126 106 118" fill="none" stroke="#1e293b" stroke-width="2.5" stroke-linecap="round"/>
-                    <path d="M 95 120 Q 100 128 105 120 Z" fill="#ffb7b2"/>
-                    <!-- Clothes -->
-                    <path d="M 70 145 C 70 145, 100 135, 130 145 L 135 185 L 65 185 Z" fill="#2a6f97"/>
-                    <!-- Bowtie -->
-                    <polygon points="90,142 100,147 90,152" fill="#e63946"/>
-                    <polygon points="110,142 100,147 110,152" fill="#e63946"/>
-                    <circle cx="100" cy="147" r="3" fill="#b91c1c"/>
-                    <!-- Waving Arm -->
-                    <path d="M 130 150 Q 155 120 160 95" fill="none" stroke="#d4a373" stroke-width="10" stroke-linecap="round"/>
-                    <circle cx="162" cy="92" r="7" fill="#d4a373"/>
-                    <text x="165" y="80" font-size="16">✨</text>
-                `,
-                explaining: `
-                    <circle cx="100" cy="110" r="42" fill="#d4a373"/>
-                    <circle cx="60" cy="70" r="28" fill="#d4a373"/>
-                    <circle cx="60" cy="70" r="18" fill="#ffb7b2"/>
-                    <circle cx="140" cy="70" r="28" fill="#d4a373"/>
-                    <circle cx="140" cy="70" r="18" fill="#ffb7b2"/>
-                    <circle cx="88" cy="100" r="7" fill="#1e293b"/>
-                    <circle cx="86" cy="98" r="2.5" fill="#ffffff"/>
-                    <circle cx="112" cy="100" r="7" fill="#1e293b"/>
-                    <circle cx="110" cy="98" r="2.5" fill="#ffffff"/>
-                    <ellipse cx="100" cy="112" rx="6" ry="4" fill="#e63946"/>
-                    <path d="M 92 118 Q 100 128 108 118" fill="none" stroke="#1e293b" stroke-width="2.5" stroke-linecap="round"/>
-                    <path d="M 70 145 C 70 145, 100 135, 130 145 L 135 185 L 65 185 Z" fill="#2a6f97"/>
-                    <!-- Pointing Arm -->
-                    <path d="M 130 155 L 165 155" fill="none" stroke="#d4a373" stroke-width="9" stroke-linecap="round"/>
-                    <polygon points="165,150 175,155 165,160" fill="#d4a373"/>
-                `,
-                surprised: `
-                    <circle cx="100" cy="110" r="42" fill="#d4a373"/>
-                    <circle cx="60" cy="70" r="28" fill="#d4a373"/>
-                    <circle cx="60" cy="70" r="18" fill="#ffb7b2"/>
-                    <circle cx="140" cy="70" r="28" fill="#d4a373"/>
-                    <circle cx="140" cy="70" r="18" fill="#ffb7b2"/>
-                    <!-- Big Surprised Eyes -->
-                    <circle cx="86" cy="98" r="9" fill="#1e293b"/>
-                    <circle cx="84" cy="95" r="3.5" fill="#ffffff"/>
-                    <circle cx="114" cy="98" r="9" fill="#1e293b"/>
-                    <circle cx="112" cy="95" r="3.5" fill="#ffffff"/>
-                    <ellipse cx="100" cy="110" rx="5" ry="3" fill="#e63946"/>
-                    <!-- Open O Mouth -->
-                    <ellipse cx="100" cy="122" rx="6" ry="8" fill="#1e293b"/>
-                    <path d="M 70 145 C 70 145, 100 135, 130 145 L 135 185 L 65 185 Z" fill="#2a6f97"/>
-                    <!-- Hands on cheeks -->
-                    <circle cx="70" cy="120" r="7" fill="#d4a373"/>
-                    <circle cx="130" cy="120" r="7" fill="#d4a373"/>
-                `,
-                celebrating: `
-                    <circle cx="100" cy="110" r="42" fill="#d4a373"/>
-                    <circle cx="60" cy="70" r="28" fill="#d4a373"/>
-                    <circle cx="60" cy="70" r="18" fill="#ffb7b2"/>
-                    <circle cx="140" cy="70" r="28" fill="#d4a373"/>
-                    <circle cx="140" cy="70" r="18" fill="#ffb7b2"/>
-                    <!-- Happy Eyes (Arcs) -->
-                    <path d="M 80 98 Q 88 90 96 98" fill="none" stroke="#1e293b" stroke-width="3" stroke-linecap="round"/>
-                    <path d="M 104 98 Q 112 90 120 98" fill="none" stroke="#1e293b" stroke-width="3" stroke-linecap="round"/>
-                    <ellipse cx="100" cy="108" rx="6" ry="4" fill="#e63946"/>
-                    <path d="M 90 115 Q 100 130 110 115 Z" fill="#e63946"/>
-                    <path d="M 70 145 C 70 145, 100 135, 130 145 L 135 185 L 65 185 Z" fill="#2a6f97"/>
-                    <!-- Both Arms High -->
-                    <path d="M 70 150 Q 50 120 45 95" fill="none" stroke="#d4a373" stroke-width="9" stroke-linecap="round"/>
-                    <path d="M 130 150 Q 150 120 155 95" fill="none" stroke="#d4a373" stroke-width="9" stroke-linecap="round"/>
-                    <text x="30" y="80" font-size="16">🎉</text>
-                    <text x="150" y="80" font-size="16">⭐</text>
-                `
-            };
-            
-            return `<svg viewBox="0 0 200 200" class="w-full h-full filter drop-shadow">${poses[pose] || poses.waving}</svg>`;
-        }
+      stage.innerHTML = `
+        <div class="objects-world">
+          ${items.map(it => `
+            <div class="world-item" id="item-${it.id}">
+              <svg viewBox="0 0 50 50">${it.svg}</svg>
+              <span style="font-size:0.8rem; font-weight:800; margin-top:4px;">${it.name}</span>
+            </div>
+          `).join('')}
+        </div>
+      `;
 
-        const appState = {
-            studentName: "Estudiante de 1er Grado",
-            studentSection: "1-A",
-            studentDate: new Date().toISOString().split('T')[0],
-            currentStep: 0,
-            stars: 0,
-            soundOn: true,
-            
-            // Metrics per mission
-            metrics: {
-                m1: { completed: false, errors: 0, detail: "Identificación de partes del mouse" },
-                m2: { completed: false, errors: 0, detail: "Desplazamiento direccional del puntero" },
-                m3: { completed: false, errors: 0, detail: "Selección precisa de objetos digitales" },
-                m4: { completed: false, errors: 0, detail: "Diferenciación de clic y doble clic" },
-                m5: { completed: false, errors: 0, detail: "Ejecución de doble clic en cajas mágicas" },
-                m6: { completed: false, errors: 0, detail: "Clasificación de categorías (Drag/Click)" },
-                m7: { completed: false, errors: 0, detail: "Desplazamiento vertical con rueda (Scroll)" }
-            },
+      showToast(`Busca la ${items[0].name} y haz CLIC IZQUIERDO sobre ella.`, "thinking");
 
-            toggleSound() {
-                this.soundOn = !this.soundOn;
-                sound.enabled = this.soundOn;
-                document.getElementById('sound-btn').innerText = this.soundOn ? '🔊' : '🔇';
-            },
-
-            addStars(count = 1) {
-                this.stars += count;
-                document.getElementById('star-count').innerText = this.stars;
-                sound.playSuccess();
+      items.forEach(it => {
+        document.getElementById(`item-${it.id}`).addEventListener('click', () => {
+          const expected = items[currentItemIdx].id;
+          if (it.id === expected) {
+            playSound('success');
+            logTelemetry('Misión 3', 'Señalamiento y Clic', 3, expected, it.id, true);
+            logTelemetry('Misión 3', 'Ejecución Clic Izquierdo', 4, 'left-click', 'left-click', true);
+            currentItemIdx++;
+            if (currentItemIdx < items.length) {
+              showToast(`¡Muy bien! Ahora haz clic sobre la ${items[currentItemIdx].name}.`, "happy");
+            } else {
+              playSound('fanfare');
+              showToast("¡Excelente! Seleccionaste los objetos indicados.", "celebrating");
+              setTimeout(nextMission, 1800);
             }
-        };
+          } else {
+            playSound('pop');
+            logTelemetry('Misión 3', 'Señalamiento y Clic', 3, expected, it.id, false);
+            showToast("¡Casi! Revisa bien y haz clic en el objeto correcto.", "thinking");
+          }
+        });
+      });
+    }
 
-        // Render Tito avatars on initial load
-        window.addEventListener('DOMContentLoaded', () => {
-            document.getElementById('student-date').value = appState.studentDate;
-            document.getElementById('header-tito-avatar').innerHTML = getTitoSVG('waving');
-            document.getElementById('tito-welcome-svg').innerHTML = getTitoSVG('waving');
-            
-            // Render additional SVG icons for Mission 3
-            renderM3Icons();
+    // MISIÓN 4: EL RETO DEL CLIC (INDICADORES 5 Y 6)
+    function setupMission4(stage) {
+      let step = 0;
+      const sequence = [
+        { type: 'single', label: 'CLIC SENCILLO en la Estrella ⭐' },
+        { type: 'double', label: 'DOBLE CLIC en el Cohete 🚀' }
+      ];
+
+      stage.innerHTML = `
+        <div class="magic-boxes-container">
+          <div class="world-item" id="btnStar" style="width:130px; height:130px;">
+            <span style="font-size:3rem;">⭐</span>
+            <span style="font-size:0.85rem; font-weight:800;">Estrella</span>
+          </div>
+          <div class="world-item" id="btnRocket" style="width:130px; height:130px;">
+            <span style="font-size:3rem;">🚀</span>
+            <span style="font-size:0.85rem; font-weight:800;">Cohete</span>
+          </div>
+        </div>
+      `;
+
+      showToast(`Misión: Haz ${sequence[0].label}`, "thinking");
+
+      // Desambiguador técnico de Clic Sencillo vs Doble Clic
+      let clickTimer = null;
+
+      function bindClickDisambiguator(elementId, targetKey) {
+        const el = document.getElementById(elementId);
+
+        el.addEventListener('click', (e) => {
+          if (clickTimer === null) {
+            clickTimer = setTimeout(() => {
+              clickTimer = null;
+              handleAction(targetKey, 'single');
+            }, 260);
+          }
         });
 
-        function showScreen(screenId) {
-            sound.playClick();
-            document.querySelectorAll('.app-screen').forEach(el => el.classList.add('hidden'));
-            const target = document.getElementById(screenId);
-            if (target) target.classList.remove('hidden');
-        }
+        el.addEventListener('dblclick', (e) => {
+          if (clickTimer) {
+            clearTimeout(clickTimer);
+            clickTimer = null;
+          }
+          handleAction(targetKey, 'double');
+        });
+      }
 
-        function updateProgress(stepNum) {
-            appState.currentStep = stepNum;
-            for (let i = 1; i <= 7; i++) {
-                const dot = document.querySelector(`.step-dot[data-step="${i}"]`);
-                const line = document.getElementById(`line-${i}`);
-                if (i < stepNum) {
-                    dot.className = "step-dot font-heading text-xs font-bold w-7 h-7 rounded-full flex items-center justify-center bg-emerald-500 text-white shadow";
-                    dot.innerHTML = "✓";
-                    if (line) line.className = "h-1 w-2 bg-emerald-400";
-                } else if (i === stepNum) {
-                    dot.className = "step-dot font-heading text-xs font-bold w-7 h-7 rounded-full flex items-center justify-center bg-amber-400 text-white shadow animate-pulse";
-                    if (line) line.className = "h-1 w-2 bg-amber-300";
-                } else {
-                    dot.className = "step-dot font-heading text-xs font-bold w-7 h-7 rounded-full flex items-center justify-center bg-slate-200 text-slate-500";
-                    if (line) line.className = "h-1 w-2 bg-slate-200";
-                }
+      bindClickDisambiguator('btnStar', 'star');
+      bindClickDisambiguator('btnRocket', 'rocket');
+
+      function handleAction(targetKey, actionType) {
+        const currentReq = sequence[step];
+        const expectedTarget = currentReq.type === 'single' ? 'star' : 'rocket';
+
+        if (targetKey === expectedTarget && actionType === currentReq.type) {
+          playSound('success');
+          logTelemetry('Misión 4', 'Diferenciación Clic', 6, currentReq.type, actionType, true);
+          if (actionType === 'double') {
+            logTelemetry('Misión 4', 'Aplica Doble Clic', 5, 'double', 'double', true);
+          }
+          step++;
+          if (step < sequence.length) {
+            showToast(`¡Excelente! Ahora haz ${sequence[step].label}`, "happy");
+          } else {
+            playSound('fanfare');
+            showToast("¡Increíble! Diferencias perfectamente el clic del doble clic.", "celebrating");
+            setTimeout(nextMission, 1800);
+          }
+        } else {
+          playSound('pop');
+          logTelemetry('Misión 4', 'Diferenciación Clic', 6, currentReq.type, actionType, false);
+          showToast("¡Casi! Inténtalo otra vez con la acción correcta.", "thinking");
+        }
+      }
+    }
+
+    // MISIÓN 5: LAS CAJAS MÁGICAS (INDICADOR 7)
+    function setupMission5(stage) {
+      let openedCount = 0;
+
+      stage.innerHTML = `
+        <div class="magic-boxes-container">
+          <div class="magic-box-card" id="box1"><span style="font-size:3rem;">🎁</span><span>Caja 1</span></div>
+          <div class="magic-box-card" id="box2"><span style="font-size:3rem;">🎁</span><span>Caja 2</span></div>
+        </div>
+      `;
+
+      showToast("Haz DOBLE CLIC sobre las cajas para abrir los regalos.", "happy");
+
+      ['box1', 'box2'].forEach(boxId => {
+        const boxEl = document.getElementById(boxId);
+
+        boxEl.addEventListener('click', () => {
+          if (!boxEl.classList.contains('opened')) {
+            playSound('pop');
+            logTelemetry('Misión 5', 'Abrir recursos con doble clic', 7, 'double-click', 'single-click', false);
+            showToast("Recuerda: ¡Haz DOBLE CLIC rápido para abrir la caja!", "thinking");
+          }
+        });
+
+        boxEl.addEventListener('dblclick', () => {
+          if (!boxEl.classList.contains('opened')) {
+            boxEl.classList.add('opened');
+            boxEl.innerHTML = `<span style="font-size:3.5rem;">🎉</span><span>¡Abierta!</span>`;
+            playSound('success');
+            logTelemetry('Misión 5', 'Abrir recursos con doble clic', 7, 'double-click', 'double-click', true);
+            openedCount++;
+
+            if (openedCount === 2) {
+              playSound('fanfare');
+              showToast("¡Espectacular! Abriste todas las cajas mágicas.", "celebrating");
+              setTimeout(nextMission, 1800);
             }
+          }
+        });
+      });
+    }
+
+    // MISIÓN 6: EL ALMACÉN DE TITO (INDICADORES 8 Y 9)
+    function setupMission6(stage) {
+      let sortedCount = 0;
+
+      stage.innerHTML = `
+        <div class="warehouse-container">
+          <div class="drag-items-pool" id="dragPool">
+            <div class="world-item" draggable="true" id="item-ball" data-cat="JUGUETES"><span style="font-size:2rem;">⚽</span><span>Pelota</span></div>
+            <div class="world-item" draggable="true" id="item-pencil" data-cat="ÚTILES"><span style="font-size:2rem;">✏️</span><span>Lápiz</span></div>
+            <div class="world-item" draggable="true" id="item-mouse" data-cat="OBJETOS DIGITALES"><span style="font-size:2rem;">🖱️</span><span>Mouse</span></div>
+          </div>
+          <div class="drop-categories">
+            <div class="drop-zone-box" id="drop-JUGUETES">
+              <span class="drop-zone-title">⚽ JUGUETES</span>
+            </div>
+            <div class="drop-zone-box" id="drop-ÚTILES">
+              <span class="drop-zone-title">✏️ ÚTILES</span>
+            </div>
+            <div class="drop-zone-box" id="drop-OBJETOS DIGITALES">
+              <span class="drop-zone-title">💻 DIGITALES</span>
+            </div>
+          </div>
+        </div>
+      `;
+
+      showToast("Arrastra cada objeto hacia su categoría correspondiente.", "happy");
+
+      const items = stage.querySelectorAll('[draggable="true"]');
+      const dropZones = stage.querySelectorAll('.drop-zone-box');
+
+      items.forEach(item => {
+        item.addEventListener('dragstart', (e) => {
+          e.dataTransfer.setData('text/plain', item.id);
+          logTelemetry('Misión 6', 'Acción Arrastrar', 8, 'drag', 'drag', true);
+        });
+      });
+
+      dropZones.forEach(zone => {
+        zone.addEventListener('dragover', (e) => {
+          e.preventDefault();
+          zone.classList.add('drag-over');
+        });
+
+        zone.addEventListener('dragleave', () => {
+          zone.classList.remove('drag-over');
+        });
+
+        zone.addEventListener('drop', (e) => {
+          e.preventDefault();
+          zone.classList.remove('drag-over');
+          const itemId = e.dataTransfer.getData('text/plain');
+          const itemEl = document.getElementById(itemId);
+
+          if (!itemEl) return;
+
+          const itemCat = itemEl.getAttribute('data-cat');
+          const targetCat = zone.id.replace('drop-', '');
+
+          if (itemCat === targetCat) {
+            playSound('success');
+            zone.appendChild(itemEl);
+            itemEl.setAttribute('draggable', 'false');
+            logTelemetry('Misión 6', 'Clasificación Arrastrar/Soltar', 9, targetCat, itemCat, true);
+            sortedCount++;
+
+            if (sortedCount === 3) {
+              playSound('fanfare');
+              showToast("¡Magnífico! Clasificaste todos los objetos del almacén.", "celebrating");
+              setTimeout(nextMission, 1800);
+            }
+          } else {
+            playSound('pop');
+            logTelemetry('Misión 6', 'Clasificación Arrastrar/Soltar', 9, targetCat, itemCat, false);
+            showToast("¡Busca el lugar correcto! Tito te acompaña.", "thinking");
+          }
+        });
+      });
+    }
+
+    // MISIÓN 7: BUSCA MÁS OBJETOS (INDICADOR 10)
+    function setupMission7(stage) {
+      let wheelDetected = false;
+
+      stage.innerHTML = `
+        <div class="scroll-view-stage" id="scrollStage">
+          <div class="scroll-content-long">
+            <p style="font-weight:800; color:var(--primary-dark);">👇 Usa la RUEDA del mouse para bajar por el camino...</p>
+            <div class="hidden-treasure-item" id="treasureItem">
+              <span style="font-size:2rem;">💎</span>
+              <span>¡Encontraste el Tesoro Escondido! (Haz Clic)</span>
+            </div>
+          </div>
+        </div>
+      `;
+
+      showToast("Gira la RUEDA del mouse hacia abajo para buscar el tesoro.", "happy");
+
+      const scrollStage = document.getElementById('scrollStage');
+
+      // Evento real wheel
+      scrollStage.addEventListener('wheel', (e) => {
+        if (e.deltaY > 0 && !wheelDetected) {
+          wheelDetected = true;
+          playSound('click');
+          logTelemetry('Misión 7', 'Uso Rueda del Mouse', 10, 'wheel-down', 'wheel-down', true);
+        }
+      });
+
+      document.getElementById('treasureItem').addEventListener('click', () => {
+        if (wheelDetected) {
+          playSound('fanfare');
+          logTelemetry('Misión 7', 'Localización de Objeto con Scroll', 10, 'find-item', 'find-item', true);
+          showToast("¡Felicidades! Completaste la aventura con la rueda del mouse.", "celebrating");
+          setTimeout(nextMission, 1800);
+        } else {
+          playSound('pop');
+          showToast("Primero debes usar la rueda del mouse para desplazarte.", "thinking");
+        }
+      });
+    }
+
+    function nextMission() {
+      session.currentMission++;
+      if (session.currentMission > 7) {
+        session.completed = true;
+        session.endTime = new Date().toISOString();
+      }
+      saveSession();
+      renderApp();
+    }
+
+    /* ==========================================================================
+       7. EVALUACIÓN Y CÁLCULO DE RÚBRICA (10 INDICADORES, 30 PTS MÁX)
+       ========================================================================== */
+    function calculateEvaluation() {
+      // Definición oficial de los 10 indicadores y sus rúbricas
+      const indicators = [
+        {
+          id: 1,
+          title: "Reconocer las partes principales del mouse",
+          rubric: {
+            3: "Reconoce todas las partes principales del mouse y relaciona cada una con su función.",
+            2: "Reconoce la mayoría de las partes principales del mouse y relaciona sus funciones.",
+            1: "Reconoce algunas partes principales del mouse y relaciona algunas funciones.",
+            0: "Omite el reconocimiento de las partes principales del mouse."
+          }
+        },
+        {
+          id: 2,
+          title: "Manipular el mouse en diferentes direcciones",
+          rubric: {
+            3: "Manipula el mouse para dirigir el puntero correctamente hacia las cuatro direcciones indicadas.",
+            2: "Manipula el mouse para dirigir el puntero hacia tres de las direcciones indicadas.",
+            1: "Manipula el mouse para dirigir el puntero hacia dos de las direcciones indicadas.",
+            0: "Omite la manipulación del mouse para dirigir el puntero hacia las direcciones indicadas."
+          }
+        },
+        {
+          id: 3,
+          title: "Señalar objetos en diferentes zonas",
+          rubric: {
+            3: "Señala correctamente todos los objetos ubicados en las zonas indicadas.",
+            2: "Señala correctamente la mayoría de los objetos ubicados en las zonas indicadas.",
+            1: "Señala correctamente algunos de los objetos ubicados en las zonas indicadas.",
+            0: "Omite señalar los objetos ubicados en las zonas indicadas."
+          }
+        },
+        {
+          id: 4,
+          title: "Ejecutar clic izquierdo",
+          rubric: {
+            3: "Ejecuta el clic izquierdo correctamente sobre todos los elementos indicados.",
+            2: "Ejecuta el clic izquierdo correctamente sobre la mayoría de los elementos indicados.",
+            1: "Ejecuta el clic izquierdo correctamente sobre algunos de los elementos indicados.",
+            0: "Omite la ejecución del clic izquierdo sobre los elementos indicados."
+          }
+        },
+        {
+          id: 5,
+          title: "Aplicar el doble clic para seleccionar",
+          rubric: {
+            3: "Aplica el doble clic correctamente en todas las actividades indicadas.",
+            2: "Aplica el doble clic correctamente en la mayoría de las actividades indicadas.",
+            1: "Aplica el doble clic correctamente en algunas de las actividades indicadas.",
+            0: "Omite la aplicación del doble clic en las actividades indicadas."
+          }
+        },
+        {
+          id: 6,
+          title: "Diferenciar clic sencillo de doble clic",
+          rubric: {
+            3: "Diferencia el clic sencillo del doble clic durante todas las actividades indicadas.",
+            2: "Diferencia el clic sencillo del doble clic durante la mayoría de las actividades indicadas.",
+            1: "Diferencia el clic sencillo del doble clic durante algunas de las actividades indicadas.",
+            0: "Omite la diferenciación entre el clic sencillo y el doble clic."
+          }
+        },
+        {
+          id: 7,
+          title: "Ejecutar doble clic para abrir recursos",
+          rubric: {
+            3: "Ejecuta el doble clic para abrir correctamente todos los recursos indicados.",
+            2: "Ejecuta el doble clic para abrir correctamente la mayoría de los recursos indicados.",
+            1: "Ejecuta el doble clic para abrir correctamente algunos de los recursos indicados.",
+            0: "Omite la ejecución del doble clic para abrir los recursos indicados."
+          }
+        },
+        {
+          id: 8,
+          title: "Ejecutar acción de arrastrar y soltar",
+          rubric: {
+            3: "Ejecuta correctamente el arrastre y suelta todos los objetos en los espacios indicados.",
+            2: "Ejecuta correctamente el arrastre y suelta la mayoría de los objetos en los espacios indicados.",
+            1: "Ejecuta correctamente el arrastre y suelta algunos de los objetos en los espacios indicados.",
+            0: "Omite la ejecución del arrastre y soltar de los objetos indicados."
+          }
+        },
+        {
+          id: 9,
+          title: "Clasificar objetos mediante arrastrar y soltar",
+          rubric: {
+            3: "Clasifica correctamente todos los objetos mediante arrastrar y soltar.",
+            2: "Clasifica correctamente la mayoría de los objetos mediante arrastrar y soltar.",
+            1: "Clasifica correctamente algunos objetos mediante arrastrar y soltar.",
+            0: "Omite la clasificación de los objetos mediante arrastrar y soltar."
+          }
+        },
+        {
+          id: 10,
+          title: "Utilizar la rueda del mouse (Scroll)",
+          rubric: {
+            3: "Utiliza correctamente la rueda del mouse para desplazarse verticalmente por todo el contenido indicado.",
+            2: "Utiliza correctamente la rueda del mouse para desplazarse por la mayoría del contenido indicado.",
+            1: "Utiliza correctamente la rueda del mouse para desplazarse por parte del contenido indicado.",
+            0: "Omite el uso de la rueda del mouse para desplazarse verticalmente."
+          }
+        }
+      ];
+
+      let results = [];
+      let totalEarned = 0;
+
+      indicators.forEach(ind => {
+        const indLogs = session.logs.filter(l => l.indicator === ind.id);
+        const successes = indLogs.filter(l => l.result === 'success').length;
+        const errors = indLogs.filter(l => l.result === 'error').length;
+        const attempts = indLogs.length;
+
+        let score = 3;
+        if (attempts === 0) {
+          score = 0;
+        } else if (errors === 0 || (errors <= 1 && successes >= 1)) {
+          score = 3; // Muy bueno
+        } else if (errors <= 3 && successes >= 1) {
+          score = 2; // Bueno
+        } else if (successes >= 1) {
+          score = 1; // Por mejorar
+        } else {
+          score = 0; // Omisión
         }
 
-        function startAdventure() {
-            const nameInput = document.getElementById('student-name').value.trim();
-            const secInput = document.getElementById('student-section').value.trim();
-            const dateInput = document.getElementById('student-date').value;
+        totalEarned += score;
 
-            if (nameInput) appState.studentName = nameInput;
-            if (secInput) appState.studentSection = secInput;
-            if (dateInput) appState.studentDate = dateInput;
+        let statusTag = "✓ Logrado";
+        if (score === 2 || score === 1) statusTag = "◐ En proceso";
+        if (score === 0) statusTag = "○ Pendiente";
 
-            document.getElementById('header-student-name').innerText = appState.studentName;
-            document.getElementById('progress-trail').classList.remove('hidden');
-            
-            initM1();
+        results.push({
+          indicatorId: ind.id,
+          title: ind.title,
+          score,
+          descriptor: ind.rubric[score],
+          successes,
+          errors,
+          attempts,
+          statusTag
+        });
+      });
+
+      const percentage = Math.round((totalEarned / 30) * 100);
+
+      // Dificultades observadas reales
+      let difficulties = [];
+      results.forEach(r => {
+        if (r.errors > 1) {
+          if (r.indicatorId === 6 || r.indicatorId === 5) {
+            difficulties.push("Presentó dificultad inicial para diferenciar o aplicar el doble clic.");
+          } else if (r.indicatorId === 9) {
+            difficulties.push("Presentó vacilaciones durante la clasificación de objetos mediante arrastrar y soltar.");
+          } else {
+            difficulties.push(`Requirió reintentos adicionales en la habilidad de: ${r.title}.`);
+          }
         }
+      });
 
-        let m1State = { step: 0, sequence: ['btn-left', 'wheel', 'btn-right', 'sensor'] };
-        
-        function initM1() {
-            m1State.step = 0;
-            updateProgress(1);
-            showScreen('screen-m1');
-            document.getElementById('tito-m1-avatar').innerHTML = getTitoSVG('explaining');
-            m1UpdateInstruction();
+      if (difficulties.length === 0) {
+        difficulties.push("Demostró un desempeño fluido y consistente durante todas las misiones realizadas.");
+      }
+
+      return {
+        results,
+        totalEarned,
+        maxScore: 30,
+        percentage,
+        difficulties
+      };
+    }
+
+    /* ==========================================================================
+       8. PANTALLA FINAL DE CELEBRACIÓN Y GENERACIÓN DE EVIDENCIAS
+       ========================================================================== */
+    function renderFinalScreen(container) {
+      playSound('fanfare');
+      const evalData = calculateEvaluation();
+
+      container.innerHTML = `
+        <div class="celebration-screen">
+          <div style="width:120px; height:120px;">${getTitoSVG('celebrating')}</div>
+          <h1 style="color:var(--primary-dark); margin:0;">¡AVENTURA COMPLETADA!</h1>
+          <p style="font-size:1.1rem; color:var(--text-muted); margin:0;">
+            ¡Felicitaciones <strong>${session.studentName}</strong>! Has completado con éxito la Aventura de Tito.
+          </p>
+
+          <h3 style="margin-top:20px; color:var(--primary-dark);">Resumen "LO QUE HICE HOY"</h3>
+          <table class="summary-table">
+            <thead>
+              <tr>
+                <th>Misión / Habilidad</th>
+                <th>Estado</th>
+                <th>Aciertos</th>
+                <th>Errores</th>
+                <th>Detalle Observado</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${evalData.results.map(r => `
+                <tr>
+                  <td><strong>${r.title}</strong></td>
+                  <td>${r.statusTag}</td>
+                  <td>${r.successes}</td>
+                  <td>${r.errors}</td>
+                  <td>${r.descriptor}</td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+
+          <div class="btn-action-group">
+            <button class="btn-adventure" style="width:auto; padding:12px 24px;" onclick="generatePNGCertificate()">
+              💾 GUARDAR EVIDENCIA (PNG)
+            </button>
+            <button class="btn-secondary-action" onclick="window.print()">
+              🖨️ IMPRIMIR EVIDENCIA
+            </button>
+            <button class="btn-secondary-action" style="background:var(--purple);" onclick="renderTeacherReportModal()">
+              📋 VER REPORTE DOCENTE
+            </button>
+            <button class="btn-secondary-action" style="background:#64748B;" onclick="handleNewStudent()">
+              👤 NUEVO ESTUDIANTE
+            </button>
+          </div>
+        </div>
+      `;
+    }
+
+    // GENERADOR DE CERTIFICADO PNG (100% OFFLINE VÍA CANVAS)
+    function generatePNGCertificate() {
+      const evalData = calculateEvaluation();
+      const canvas = document.createElement('canvas');
+      canvas.width = 1000;
+      canvas.height = 1300;
+      const ctx = canvas.getContext('2d');
+
+      // Fondo
+      ctx.fillStyle = '#FFFFFF';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      // Marco Decorativo
+      ctx.strokeStyle = '#3B82F6';
+      ctx.lineWidth = 12;
+      ctx.strokeRect(20, 20, canvas.width - 40, canvas.height - 40);
+
+      // Encabezado
+      ctx.fillStyle = '#1D4ED8';
+      ctx.font = 'bold 26px sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('COLEGIO DIOCESANO PADRE ELADIO SANCHO', 500, 70);
+
+      ctx.fillStyle = '#64748B';
+      ctx.font = '18px sans-serif';
+      ctx.fillText('Departamento de Informática Educativa | Evidencia de Prueba de Ejecución 2026', 500, 100);
+
+      ctx.fillStyle = '#10B981';
+      ctx.font = 'bold 32px sans-serif';
+      ctx.fillText('¡CERTIFICADO DE AVENTURA DIGITAL!', 500, 160);
+
+      // Datos del Estudiante
+      ctx.textAlign = 'left';
+      ctx.fillStyle = '#1E293B';
+      ctx.font = 'bold 20px sans-serif';
+      ctx.fillText(`Estudiante: ${session.studentName}`, 60, 220);
+      ctx.fillText(`Sección: ${session.section}`, 60, 250);
+      ctx.fillText(`Fecha Oficial: ${session.officialDate}`, 600, 220);
+      ctx.fillText(`Docente: Grettel Monge Rojas`, 600, 250);
+
+      // Calificación
+      ctx.fillStyle = '#F8FAFC';
+      ctx.fillRect(60, 280, 880, 70);
+      ctx.strokeRect(60, 280, 880, 70);
+
+      ctx.fillStyle = '#1D4ED8';
+      ctx.font = 'bold 22px sans-serif';
+      ctx.fillText(`Puntaje Obt.: ${evalData.totalEarned} / 30 pts`, 90, 322);
+      ctx.fillText(`Porcentaje: ${evalData.percentage}%`, 400, 322);
+      ctx.fillText(`Valor: 30%`, 750, 322);
+
+      // Tabla de Desempeño
+      ctx.fillStyle = '#1D4ED8';
+      ctx.font = 'bold 20px sans-serif';
+      ctx.fillText('Resumen de Indicadores Evaluados:', 60, 390);
+
+      let yPos = 430;
+      evalData.results.forEach((r, idx) => {
+        ctx.fillStyle = idx % 2 === 0 ? '#F1F5F9' : '#FFFFFF';
+        ctx.fillRect(60, yPos - 20, 880, 35);
+
+        ctx.fillStyle = '#1E293B';
+        ctx.font = '15px sans-serif';
+        ctx.fillText(`${r.indicatorId}. ${r.title.substring(0, 38)}`, 70, yPos);
+        ctx.fillText(`Pts: ${r.score}/3`, 500, yPos);
+        ctx.fillText(`${r.statusTag}`, 600, yPos);
+        ctx.fillText(`Err: ${r.errors}`, 780, yPos);
+
+        yPos += 38;
+      });
+
+      // Dificultades / Observaciones
+      yPos += 20;
+      ctx.fillStyle = '#1D4ED8';
+      ctx.font = 'bold 18px sans-serif';
+      ctx.fillText('Observaciones de Desempeño:', 60, yPos);
+
+      yPos += 30;
+      ctx.fillStyle = '#475569';
+      ctx.font = '16px sans-serif';
+      evalData.difficulties.forEach(d => {
+        ctx.fillText(`• ${d}`, 70, yPos);
+        yPos += 25;
+      });
+
+      // Descargar como archivo PNG
+      const link = document.createElement('a');
+      const cleanName = session.studentName.replace(/\s+/g, '_');
+      link.download = `Evidencia_Prueba_Mouse_${cleanName}_${session.officialDate}.png`;
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    }
+
+    // REPORTE COMPLETO PARA LA DOCENTE
+    function renderTeacherReportModal() {
+      const evalData = calculateEvaluation();
+      const reportWindow = window.open('', '_blank');
+
+      reportWindow.document.write(`
+        <!DOCTYPE html>
+        <html lang="es">
+        <head>
+          <title>Reporte Docente - ${session.studentName}</title>
+          <style>
+            body { font-family: sans-serif; padding: 30px; color: #1E293B; }
+            h1, h2 { color: #1D4ED8; margin-bottom: 4px; }
+            table { width: 100%; border-collapse: collapse; margin-top: 16px; }
+            th, td { border: 1px solid #CBD5E1; padding: 10px; text-align: left; font-size: 0.9rem; }
+            th { background: #F1F5F9; }
+            .badge { font-weight: bold; padding: 4px 8px; border-radius: 6px; }
+          </style>
+        </head>
+        <body>
+          <h1>COLEGIO DIOCESANO PADRE ELADIO SANCHO</h1>
+          <p><strong>Departamento de Informática Educativa | Reporte Docente Oficial 2026</strong></p>
+          <hr>
+          <p><strong>Estudiante:</strong> ${session.studentName} | <strong>Sección:</strong> ${session.section}</p>
+          <p><strong>Fecha Oficial de Prueba:</strong> ${session.officialDate} | <strong>Docente:</strong> Grettel Monge Rojas</p>
+          <p><strong>Puntaje Obtenido:</strong> ${evalData.totalEarned} / 30 pts | <strong>Porcentaje:</strong> ${evalData.percentage}% (Valor: 30%)</p>
+
+          <h2>Desglose de los 10 Indicadores Evaluados:</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Indicador</th>
+                <th>Puntos</th>
+                <th>Descriptor de Rúbrica</th>
+                <th>Aciertos</th>
+                <th>Errores</th>
+                <th>Intentos</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${evalData.results.map(r => `
+                <tr>
+                  <td>${r.indicatorId}</td>
+                  <td><strong>${r.title}</strong></td>
+                  <td><strong>${r.score} / 3</strong></td>
+                  <td>${r.descriptor}</td>
+                  <td>${r.successes}</td>
+                  <td>${r.errors}</td>
+                  <td>${r.attempts}</td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+
+          <h2>Dificultades y Observaciones Registradas:</h2>
+          <ul>
+            ${evalData.difficulties.map(d => `<li>${d}</li>`).join('')}
+          </ul>
+
+          <br>
+          <button onclick="window.print()">🖨️ Imprimir Reporte / Guardar PDF</button>
+        </body>
+        </html>
+      `);
+    }
+
+    function handleNewStudent() {
+      if (confirm("Antes de comenzar con otro estudiante, asegúrate de haber guardado o impreso la evidencia. ¿Deseas iniciar una nueva sesión?")) {
+        session = { ...defaultState };
+        renderApp();
+      }
+    }
+
+    /* ==========================================================================
+       9. RECUPERACIÓN DE SESIÓN EN RECARGA
+       ========================================================================== */
+    window.addEventListener('DOMContentLoaded', () => {
+      // Buscar si existe alguna prueba guardada en progreso
+      let foundKey = null;
+      for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        if (key.startsWith('mouseTest_2026_')) {
+          foundKey = key;
+          break;
         }
+      }
 
-        function m1UpdateInstruction() {
-            const target = m1State.sequence[m1State.step];
-            const prompts = {
-                'btn-left': 'Haz clic en el BOTÓN IZQUIERDO del mouse.',
-                'wheel': 'Haz clic en la RUEDA DE DESPLAZAMIENTO (Scroll).',
-                'btn-right': 'Haz clic en el BOTÓN DERECHO del mouse.',
-                'sensor': 'Haz clic en el SENSOR ÓPTICO abajo.'
-            };
-            document.getElementById('m1-instruction').innerHTML = `Tito dice: "¡Mira este gran mouse! ${prompts[target]}"`;
-        }
-
-        function m1Check(part) {
-            const currentTarget = m1State.sequence[m1State.step];
-            if (part === currentTarget) {
-                sound.playClick();
-                m1State.step++;
-                document.getElementById(`m1-step-${m1State.step}`).className = "w-3 h-3 rounded-full bg-emerald-500";
-                
-                if (m1State.step >= m1State.sequence.length) {
-                    appState.metrics.m1.completed = true;
-                    appState.addStars(1);
-                    document.getElementById('tito-m1-avatar').innerHTML = getTitoSVG('celebrating');
-                    setTimeout(() => initM2(), 1200);
-                } else {
-                    m1UpdateInstruction();
-                }
+      if (foundKey) {
+        try {
+          const savedData = JSON.parse(localStorage.getItem(foundKey));
+          if (savedData && !savedData.completed && savedData.studentName) {
+            if (confirm(`Encontramos una prueba en progreso de: ${savedData.studentName} (${savedData.section}). ¿Deseas CONTINUAR la sesión?`)) {
+              session = savedData;
             } else {
-                sound.playErrorSoft();
-                appState.metrics.m1.errors++;
+              localStorage.removeItem(foundKey);
             }
+          }
+        } catch (e) {
+          console.error("Error recuperando sesión", e);
         }
+      }
 
-        let m2State = { step: 0, sequence: ['up', 'right', 'left', 'down'] };
-
-        function initM2() {
-            m2State.step = 0;
-            updateProgress(2);
-            showScreen('screen-m2');
-            document.getElementById('tito-m2-avatar').innerHTML = getTitoSVG('explaining');
-            m2UpdateInstruction();
-        }
-
-        function m2UpdateInstruction() {
-            const target = m2State.sequence[m2State.step];
-            const labels = {
-                'up': 'ARRIBA (Estrella ⭐)',
-                'right': 'A LA DERECHA (Cohete 🚀)',
-                'left': 'A LA IZQUIERDA (Robot 🤖)',
-                'down': 'ABAJO (Pelota ⚽)'
-            };
-            document.getElementById('m2-target-txt').innerText = labels[target];
-        }
-
-        function m2Check(dir) {
-            const currentTarget = m2State.sequence[m2State.step];
-            if (dir === currentTarget) {
-                sound.playClick();
-                m2State.step++;
-                document.getElementById(`m2-step-${m2State.step}`).className = "w-3 h-3 rounded-full bg-emerald-500";
-                
-                if (m2State.step >= m2State.sequence.length) {
-                    appState.metrics.m2.completed = true;
-                    appState.addStars(1);
-                    document.getElementById('tito-m2-avatar').innerHTML = getTitoSVG('celebrating');
-                    setTimeout(() => initM3(), 1200);
-                } else {
-                    m2UpdateInstruction();
-                }
-            }
-        }
-
-        let m3State = { step: 0, sequence: ['car', 'star', 'book'] };
-
-        function renderM3Icons() {
-            document.getElementById('svg-robot').innerHTML = `<svg viewBox="0 0 100 100"><rect x="25" y="30" width="50" height="45" rx="8" fill="#6366f1"/><circle cx="40" cy="45" r="6" fill="#fef08a"/><circle cx="60" cy="45" r="6" fill="#fef08a"/><rect x="35" y="60" width="30" height="5" fill="#ffffff"/><line x1="50" y1="30" x2="50" y2="15" stroke="#6366f1" stroke-width="4"/><circle cx="50" cy="12" r="5" fill="#f43f5e"/></svg>`;
-            document.getElementById('svg-car').innerHTML = `<svg viewBox="0 0 100 100"><path d="M 15 55 L 30 35 L 70 35 L 85 55 Z" fill="#ef4444"/><rect x="10" y="55" width="80" height="20" rx="5" fill="#dc2626"/><circle cx="30" cy="75" r="10" fill="#1e293b"/><circle cx="70" cy="75" r="10" fill="#1e293b"/></svg>`;
-            document.getElementById('svg-star').innerHTML = `<svg viewBox="0 0 100 100"><polygon points="50,10 63,38 93,38 68,56 78,86 50,68 22,86 32,56 7,38 37,38" fill="#eab308"/></svg>`;
-            document.getElementById('svg-ball').innerHTML = `<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="38" fill="#10b981"/><path d="M 20 30 Q 50 60 80 30" fill="none" stroke="#ffffff" stroke-width="6"/><path d="M 20 70 Q 50 40 80 70" fill="none" stroke="#f59e0b" stroke-width="6"/></svg>`;
-            document.getElementById('svg-book').innerHTML = `<svg viewBox="0 0 100 100"><rect x="20" y="20" width="60" height="60" rx="4" fill="#3b82f6"/><path d="M 25 20 L 25 80 L 75 80" fill="none" stroke="#ffffff" stroke-width="4"/><line x1="35" y1="35" x2="65" y2="35" stroke="#ffffff" stroke-width="4"/><line x1="35" y1="50" x2="65" y2="50" stroke="#ffffff" stroke-width="4"/></svg>`;
-            document.getElementById('svg-balloon').innerHTML = `<svg viewBox="0 0 100 100"><ellipse cx="50" cy="42" rx="30" ry="36" fill="#ec4899"/><polygon points="46,78 54,78 50,84" fill="#be185d"/><path d="M 50 84 Q 45 92 50 98" fill="none" stroke="#64748b" stroke-width="2"/></svg>`;
-        }
-
-        function initM3() {
-            m3State.step = 0;
-            updateProgress(3);
-            showScreen('screen-m3');
-            document.getElementById('tito-m3-avatar').innerHTML = getTitoSVG('explaining');
-            m3UpdateInstruction();
-        }
-
-        function m3UpdateInstruction() {
-            const target = m3State.sequence[m3State.step];
-            const labels = {
-                'car': 'CARRO ROJO',
-                'star': 'ESTRELLA BRILLANTE',
-                'book': 'LIBRO DE CUENTOS'
-            };
-            document.getElementById('m3-target-txt').innerText = labels[target];
-        }
-
-        function m3Check(objId) {
-            const currentTarget = m3State.sequence[m3State.step];
-            if (objId === currentTarget) {
-                sound.playClick();
-                m3State.step++;
-                document.getElementById(`m3-step-${m3State.step}`).className = "w-3 h-3 rounded-full bg-emerald-500";
-
-                if (m3State.step >= m3State.sequence.length) {
-                    appState.metrics.m3.completed = true;
-                    appState.addStars(1);
-                    document.getElementById('tito-m3-avatar').innerHTML = getTitoSVG('celebrating');
-                    setTimeout(() => initM4(), 1200);
-                } else {
-                    m3UpdateInstruction();
-                }
-            } else {
-                sound.playErrorSoft();
-                appState.metrics.m3.errors++;
-            }
-        }
-
-        let m4State = { singleDone: false, doubleDone: false };
-
-        function initM4() {
-            m4State = { singleDone: false, doubleDone: false };
-            updateProgress(4);
-            showScreen('screen-m4');
-            document.getElementById('tito-m4-avatar').innerHTML = getTitoSVG('explaining');
-        }
-
-        function m4SingleClick() {
-            if (m4State.singleDone) return;
-            sound.playClick();
-            m4State.singleDone = true;
-            document.getElementById('sparkle-single').classList.remove('opacity-0');
-            document.getElementById('status-single').innerText = "¡Logrado! ✨";
-            document.getElementById('status-single').className = "text-xs font-bold text-emerald-600 mt-3";
-
-            // Enable Double Click Card
-            const dCard = document.getElementById('m4-card-double');
-            dCard.classList.remove('opacity-50', 'pointer-events-none');
-            document.getElementById('status-double').innerText = "¡Haz doble clic ahora!";
-            document.getElementById('status-double').className = "text-xs font-bold text-amber-600 mt-3";
-            document.getElementById('tito-m4-avatar').innerHTML = getTitoSVG('surprised');
-        }
-
-        function m4DoubleClick() {
-            if (!m4State.singleDone || m4State.doubleDone) return;
-            sound.playMagic();
-            m4State.doubleDone = true;
-            document.getElementById('sparkle-double').classList.remove('opacity-0');
-            document.getElementById('status-double').innerText = "¡Excelente Doble Clic! ✨✨";
-            document.getElementById('status-double').className = "text-xs font-bold text-emerald-600 mt-3";
-
-            appState.metrics.m4.completed = true;
-            appState.addStars(1);
-            document.getElementById('tito-m4-avatar').innerHTML = getTitoSVG('celebrating');
-            setTimeout(() => initM5(), 1200);
-        }
-
-        let m5Opened = new Set();
-
-        function initM5() {
-            m5Opened.clear();
-            updateProgress(5);
-            showScreen('screen-m5');
-            document.getElementById('tito-m5-avatar').innerHTML = getTitoSVG('explaining');
-            document.getElementById('m5-count').innerText = "0";
-        }
-
-        function m5OpenBox(num) {
-            if (m5Opened.has(num)) return;
-            sound.playMagic();
-            m5Opened.add(num);
-
-            document.getElementById(`lid-${num}`).classList.add('box-lid-open');
-            document.getElementById(`body-${num}`).classList.add('hidden');
-            document.getElementById(`content-${num}`).classList.remove('hidden');
-            document.getElementById('m5-count').innerText = m5Opened.size;
-
-            document.getElementById('tito-m5-avatar').innerHTML = getTitoSVG('surprised');
-
-            if (m5Opened.size >= 4) {
-                appState.metrics.m5.completed = true;
-                appState.addStars(1);
-                document.getElementById('tito-m5-avatar').innerHTML = getTitoSVG('celebrating');
-                setTimeout(() => initM6(), 1500);
-            }
-        }
-
-        const m6Data = [
-            { id: 'item-1', name: 'Peluche', cat: 'juguetes', icon: '🧸' },
-            { id: 'item-2', name: 'Lápiz', cat: 'utiles', icon: '✏️' },
-            { id: 'item-3', name: 'Perrito', cat: 'animales', icon: '🐶' },
-            { id: 'item-4', name: 'Carro', cat: 'juguetes', icon: '🏎️' },
-            { id: 'item-5', name: 'Cuaderno', cat: 'utiles', icon: '📓' },
-            { id: 'item-6', name: 'Gatito', cat: 'animales', icon: '🐱' }
-        ];
-
-        let m6Selected = null;
-        let m6PlacedCount = 0;
-
-        function initM6() {
-            m6Selected = null;
-            m6PlacedCount = 0;
-            updateProgress(6);
-            showScreen('screen-m6');
-            document.getElementById('tito-m6-avatar').innerHTML = getTitoSVG('explaining');
-
-            // Reset Bins
-            ['juguetes', 'utiles', 'animales'].forEach(c => {
-                document.getElementById(`bin-items-${c}`).innerHTML = '';
-            });
-
-            // Render Items
-            const container = document.getElementById('m6-items-container');
-            container.innerHTML = '';
-            m6Data.forEach(item => {
-                const el = document.createElement('div');
-                el.id = item.id;
-                el.draggable = true;
-                el.ondragstart = (e) => m6DragStart(e, item.id);
-                el.onclick = () => m6SelectItem(item.id);
-                el.className = "cursor-pointer bg-white border-2 border-sky-300 rounded-xl px-3 py-1.5 flex items-center gap-1 shadow-sm hover:scale-105 transition";
-                el.innerHTML = `<span class="text-xl">${item.icon}</span><span class="text-xs font-bold text-slate-700">${item.name}</span>`;
-                container.appendChild(el);
-            });
-        }
-
-        function m6SelectItem(id) {
-            sound.playClick();
-            m6Selected = id;
-            m6Data.forEach(item => {
-                const el = document.getElementById(item.id);
-                if (el) {
-                    if (item.id === id) {
-                        el.classList.add('ring-4', 'ring-amber-400', 'bg-amber-50');
-                    } else {
-                        el.classList.remove('ring-4', 'ring-amber-400', 'bg-amber-50');
-                    }
-                }
-            });
-        }
-
-        function m6DragStart(e, id) {
-            e.dataTransfer.setData('text/plain', id);
-            m6Selected = id;
-        }
-
-        function m6AllowDrop(e) {
-            e.preventDefault();
-            e.currentTarget.classList.add('drag-over');
-        }
-
-        function m6DragLeave(e) {
-            e.currentTarget.classList.remove('drag-over');
-        }
-
-        function m6Drop(e, targetCat) {
-            e.preventDefault();
-            e.currentTarget.classList.remove('drag-over');
-            const itemId = e.dataTransfer.getData('text/plain') || m6Selected;
-            m6ProcessPlacement(itemId, targetCat);
-        }
-
-        function m6PlaceInBin(targetCat) {
-            if (m6Selected) {
-                m6ProcessPlacement(m6Selected, targetCat);
-            }
-        }
-
-        function m6ProcessPlacement(itemId, targetCat) {
-            const itemObj = m6Data.find(i => i.id === itemId);
-            if (!itemObj) return;
-
-            if (itemObj.cat === targetCat) {
-                sound.playClick();
-                const itemEl = document.getElementById(itemId);
-                if (itemEl) {
-                    itemEl.onclick = null;
-                    itemEl.draggable = false;
-                    itemEl.classList.remove('ring-4', 'ring-amber-400');
-                    document.getElementById(`bin-items-${targetCat}`).appendChild(itemEl);
-                }
-                m6Selected = null;
-                m6PlacedCount++;
-
-                if (m6PlacedCount >= m6Data.length) {
-                    appState.metrics.m6.completed = true;
-                    appState.addStars(1);
-                    document.getElementById('tito-m6-avatar').innerHTML = getTitoSVG('celebrating');
-                    setTimeout(() => initM7(), 1200);
-                }
-            } else {
-                sound.playErrorSoft();
-                appState.metrics.m6.errors++;
-                document.getElementById('tito-m6-avatar').innerHTML = getTitoSVG('encouraging');
-            }
-        }
-
-        let m7Collected = new Set();
-
-        function initM7() {
-            m7Collected.clear();
-            updateProgress(7);
-            showScreen('screen-m7');
-            document.getElementById('tito-m7-avatar').innerHTML = getTitoSVG('explaining');
-            document.getElementById('m7-collected-count').innerText = "0";
-            document.getElementById('m7-scroll-bar').style.width = "0%";
-        }
-
-        function m7OnScroll() {
-            const win = document.getElementById('m7-scroll-window');
-            const pct = (win.scrollTop / (win.scrollHeight - win.clientHeight)) * 100;
-            document.getElementById('m7-scroll-bar').style.width = `${pct}%`;
-        }
-
-        function m7Collect(num) {
-            if (m7Collected.has(num)) return;
-            sound.playMagic();
-            m7Collected.add(num);
-
-            const item = document.getElementById(`treasure-${num}`);
-            item.classList.add('opacity-40', 'pointer-events-none');
-            item.querySelector('span:last-child').innerText = "¡Recolectado! ✨";
-
-            document.getElementById('m7-collected-count').innerText = m7Collected.size;
-
-            if (m7Collected.size >= 5) {
-                appState.metrics.m7.completed = true;
-                appState.addStars(1);
-                document.getElementById('tito-m7-avatar').innerHTML = getTitoSVG('celebrating');
-                setTimeout(() => showFinalCelebration(), 1200);
-            }
-        }
-
-        function showFinalCelebration() {
-            sound.playSuccess();
-            updateProgress(8);
-            showScreen('screen-final');
-
-            document.getElementById('tito-final-avatar').innerHTML = getTitoSVG('celebrating');
-            document.getElementById('final-student-name').innerText = appState.studentName;
-            document.getElementById('final-student-section').innerText = appState.studentSection;
-            document.getElementById('final-student-date').innerText = appState.studentDate;
-            document.getElementById('final-student-score').innerText = `${appState.stars} / 7 (${Math.round((appState.stars/7)*100)}%)`;
-
-            // Populate Table
-            const tbody = document.getElementById('final-report-table-body');
-            tbody.innerHTML = '';
-
-            Object.keys(appState.metrics).forEach((mKey, idx) => {
-                const data = appState.metrics[mKey];
-                const tr = document.createElement('tr');
-                const statusBadge = data.completed 
-                    ? '<span class="text-emerald-700 bg-emerald-100 font-bold px-2 py-0.5 rounded">Completado</span>' 
-                    : '<span class="text-amber-700 bg-amber-100 font-bold px-2 py-0.5 rounded">En Proceso</span>';
-                
-                const obs = data.errors === 0 
-                    ? 'Ejecución perfecta sin dificultades.' 
-                    : `Requirió ${data.errors} intento(s) adicional(es); demuestra persistencia.`;
-
-                tr.innerHTML = `
-                    <td class="p-2 font-bold">Misión ${idx + 1}</td>
-                    <td class="p-2">${data.detail}</td>
-                    <td class="p-2">${statusBadge}</td>
-                    <td class="p-2 text-slate-500">${obs}</td>
-                `;
-                tbody.appendChild(tr);
-            });
-        }
-    </script>
+      renderApp();
+    });
+  </script>
 </body>
 </html>
