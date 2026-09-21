@@ -1,0 +1,1309 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Aventura Educativa con Tito: Desafío de Habilidades Digitales</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: linear-gradient(135deg, #e0f2fe 0%, #f0f9ff 50%, #fef3c7 100%);
+            min-height: 100vh;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+        h1, h2, h3, .font-heading {
+            font-family: 'Fredoka', cursive;
+        }
+        /* Custom animations */
+        @keyframes bounce-gentle {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+        @keyframes pulse-glow {
+            0%, 100% { filter: drop-shadow(0 0 6px rgba(245, 158, 11, 0.6)); }
+            50% { filter: drop-shadow(0 0 16px rgba(245, 158, 11, 0.9)); }
+        }
+        @keyframes box-pop {
+            0% { transform: scale(0.9) rotate(-3deg); }
+            50% { transform: scale(1.1) rotate(3deg); }
+            100% { transform: scale(1) rotate(0deg); }
+        }
+        @keyframes confetti-fall {
+            0% { transform: translateY(-10px) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(500px) rotate(720deg); opacity: 0; }
+        }
+        .animate-gentle { animation: bounce-gentle 2.5s infinite ease-in-out; }
+        .animate-glow { animation: pulse-glow 1.8s infinite ease-in-out; }
+        .animate-box { animation: box-pop 0.4s ease-out; }
+        
+        .box-lid-open {
+            transform: translateY(-45px) rotate(-20deg);
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .drag-over {
+            border-color: #3b82f6 !important;
+            background-color: #eff6ff !important;
+            transform: scale(1.02);
+        }
+
+        /* Print styles for Certificate Report */
+        @media print {
+            body {
+                background: white !important;
+                color: black !important;
+            }
+            .no-print {
+                display: none !important;
+            }
+            .print-only {
+                display: block !important;
+            }
+            .certificate-container {
+                box-shadow: none !important;
+                border: 4px double #2563eb !important;
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body class="text-slate-800 flex flex-col min-h-screen">
+
+    <!-- Top Navigation & Progress Trail Bar -->
+    <header id="main-header" class="no-print bg-white/90 backdrop-blur-md border-b-4 border-amber-300 sticky top-0 z-40 shadow-sm px-4 py-2">
+        <div class="max-w-6xl mx-auto flex flex-wrap items-center justify-between gap-2">
+            <!-- Brand & Tito Badge -->
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-full bg-amber-100 border-2 border-amber-400 flex items-center justify-center shadow-inner overflow-hidden" id="header-tito-avatar">
+                    <!-- Dynamic mini Tito head inserted by JS -->
+                </div>
+                <div>
+                    <h1 class="text-lg font-bold text-sky-800 leading-none">La Aventura con Tito</h1>
+                    <span id="student-badge" class="text-xs text-slate-500 font-semibold">Estudiante: <span id="header-student-name" class="text-amber-600">Invitado</span></span>
+                </div>
+            </div>
+
+            <!-- Progress Trail -->
+            <div id="progress-trail" class="hidden sm:flex items-center gap-1 bg-sky-50 px-3 py-1.5 rounded-full border border-sky-200">
+                <div class="step-dot font-heading text-xs font-bold w-7 h-7 rounded-full flex items-center justify-center bg-amber-400 text-white shadow" data-step="1">M1</div>
+                <div class="h-1 w-2 bg-slate-200" id="line-1"></div>
+                <div class="step-dot font-heading text-xs font-bold w-7 h-7 rounded-full flex items-center justify-center bg-slate-200 text-slate-500" data-step="2">M2</div>
+                <div class="h-1 w-2 bg-slate-200" id="line-2"></div>
+                <div class="step-dot font-heading text-xs font-bold w-7 h-7 rounded-full flex items-center justify-center bg-slate-200 text-slate-500" data-step="3">M3</div>
+                <div class="h-1 w-2 bg-slate-200" id="line-3"></div>
+                <div class="step-dot font-heading text-xs font-bold w-7 h-7 rounded-full flex items-center justify-center bg-slate-200 text-slate-500" data-step="4">M4</div>
+                <div class="h-1 w-2 bg-slate-200" id="line-4"></div>
+                <div class="step-dot font-heading text-xs font-bold w-7 h-7 rounded-full flex items-center justify-center bg-slate-200 text-slate-500" data-step="5">M5</div>
+                <div class="h-1 w-2 bg-slate-200" id="line-5"></div>
+                <div class="step-dot font-heading text-xs font-bold w-7 h-7 rounded-full flex items-center justify-center bg-slate-200 text-slate-500" data-step="6">M6</div>
+                <div class="h-1 w-2 bg-slate-200" id="line-6"></div>
+                <div class="step-dot font-heading text-xs font-bold w-7 h-7 rounded-full flex items-center justify-center bg-slate-200 text-slate-500" data-step="7">M7</div>
+                <div class="h-1 w-2 bg-slate-200" id="line-7"></div>
+                <div class="step-dot font-heading text-xs font-bold w-7 h-7 rounded-full flex items-center justify-center bg-emerald-500 text-white" data-step="8">🏆</div>
+            </div>
+
+            <!-- Controls (Sound Toggle & Score) -->
+            <div class="flex items-center gap-3">
+                <div class="bg-amber-100 text-amber-800 text-xs font-bold px-3 py-1 rounded-full border border-amber-300 flex items-center gap-1">
+                    <span>⭐ Stars:</span> <span id="star-count" class="text-sm">0</span>
+                </div>
+                <button id="sound-btn" onclick="appState.toggleSound()" class="bg-sky-100 hover:bg-sky-200 text-sky-700 p-2 rounded-full border border-sky-300 transition" title="Activar/Desactivar Sonido">
+                    🔊
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Dynamic Application Container -->
+    <main class="flex-grow max-w-5xl w-full mx-auto p-4 flex flex-col justify-center">
+
+        <!-- SCREEN 0: WELCOME & REGISTRATION -->
+        <section id="screen-welcome" class="app-screen bg-white rounded-3xl p-6 sm:p-10 shadow-xl border-4 border-amber-200 text-center relative overflow-hidden my-auto">
+            <div class="max-w-2xl mx-auto space-y-6">
+                <!-- Large Welcome Tito Illustration -->
+                <div id="tito-welcome-svg" class="w-48 h-48 mx-auto animate-gentle"></div>
+
+                <div class="space-y-2">
+                    <span class="bg-sky-100 text-sky-700 text-xs sm:text-sm font-bold px-4 py-1.5 rounded-full uppercase tracking-wider">Aventura Infantil de Computación</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-sky-900 font-heading">¡Hola! Soy Tito, tu amigo ratoncito</h2>
+                    <p class="text-slate-600 text-base sm:text-lg">¿Estás listo para aprender a usar el mouse y explorar el mundo digital juntos?</p>
+                </div>
+
+                <!-- Registration Form Card -->
+                <div class="bg-amber-50/80 p-6 rounded-2xl border-2 border-amber-200 text-left space-y-4 max-w-md mx-auto shadow-inner">
+                    <h3 class="font-heading text-amber-900 font-bold text-center text-lg">Regístrate para empezar la misión</h3>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-600 mb-1">Nombre del Estudiante:</label>
+                        <input type="text" id="student-name" placeholder="Ej. Sofia Ramos" class="w-full px-4 py-2.5 rounded-xl border border-amber-300 focus:ring-2 focus:ring-amber-500 focus:outline-none font-semibold text-slate-700" value="Estudiante de 1er Grado">
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-600 mb-1">Sección / Grado:</label>
+                            <input type="text" id="student-section" placeholder="1-A" class="w-full px-4 py-2.5 rounded-xl border border-amber-300 focus:ring-2 focus:ring-amber-500 focus:outline-none font-semibold text-slate-700" value="Sección 1-A">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-600 mb-1">Fecha:</label>
+                            <input type="date" id="student-date" class="w-full px-4 py-2 rounded-xl border border-amber-300 focus:ring-2 focus:ring-amber-500 focus:outline-none text-xs font-semibold text-slate-700">
+                        </div>
+                    </div>
+                </div>
+
+                <button onclick="startAdventure()" class="w-full max-w-md mx-auto py-4 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white font-heading text-xl font-bold rounded-2xl shadow-lg transform hover:-translate-y-1 transition duration-200 flex items-center justify-center gap-3">
+                    <span>🚀 ¡INICIAR LA AVENTURA!</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- SCREEN 1: MISIÓN 1 - EL MOUSE Y SUS PARTES -->
+        <section id="screen-m1" class="app-screen hidden bg-white rounded-3xl p-6 shadow-xl border-4 border-sky-200 flex flex-col items-center">
+            <div class="w-full flex justify-between items-center mb-4">
+                <span class="bg-sky-100 text-sky-800 font-bold px-3 py-1 rounded-full text-xs font-heading">MISIÓN 1 DE 7</span>
+                <span class="text-slate-400 text-xs">Identificación de hardware</span>
+            </div>
+
+            <!-- Dialogue & Instruction Box -->
+            <div class="w-full bg-amber-50 border-2 border-amber-300 rounded-2xl p-4 flex items-center gap-4 mb-6 shadow-sm">
+                <div id="tito-m1-avatar" class="w-20 h-20 flex-shrink-0"></div>
+                <div>
+                    <h3 id="m1-title" class="font-heading font-bold text-sky-900 text-lg sm:text-xl">Misión 1: Conoce el Mouse</h3>
+                    <p id="m1-instruction" class="text-slate-700 text-sm sm:text-base font-medium">Tito dice: "¡Mira este gran mouse! Haz clic en el <strong class="text-amber-700 font-extrabold underline">BOTÓN IZQUIERDO</strong> que usamos para seleccionar cosas."</p>
+                </div>
+            </div>
+
+            <!-- Interactive Mouse SVG Graphic -->
+            <div class="relative w-full max-w-sm mx-auto my-2 flex justify-center">
+                <svg id="mouse-interactive-svg" viewBox="0 0 300 420" class="w-full h-auto max-h-[380px] filter drop-shadow-md">
+                    <!-- Mouse Base Body -->
+                    <path d="M 60 140 C 60 50, 240 50, 240 140 L 240 280 C 240 370, 60 370, 60 280 Z" fill="#38bdf8" stroke="#0284c7" stroke-width="6"/>
+                    <path d="M 65 140 C 65 60, 235 60, 235 140 L 235 280 C 235 360, 65 360, 65 280 Z" fill="#7dd3fc"/>
+                    
+                    <!-- Top Split Line -->
+                    <line x1="150" y1="55" x2="150" y2="180" stroke="#0284c7" stroke-width="4"/>
+                    
+                    <!-- Left Click Button -->
+                    <path id="part-btn-left" onclick="m1Check('btn-left')" class="cursor-pointer hover:fill-amber-300 transition duration-150" d="M 65 140 C 65 60, 145 55, 145 55 L 145 180 L 65 180 Z" fill="#a5f3fc" opacity="0.8"/>
+                    
+                    <!-- Right Click Button -->
+                    <path id="part-btn-right" onclick="m1Check('btn-right')" class="cursor-pointer hover:fill-amber-300 transition duration-150" d="M 235 140 C 235 60, 155 55, 155 55 L 155 180 L 235 180 Z" fill="#a5f3fc" opacity="0.8"/>
+                    
+                    <!-- Scroll Wheel Area -->
+                    <rect id="part-wheel" onclick="m1Check('wheel')" class="cursor-pointer hover:fill-amber-400 transition" x="136" y="90" width="28" height="55" rx="14" fill="#f59e0b" stroke="#b45309" stroke-width="3"/>
+                    <line x1="136" y1="105" x2="164" y2="105" stroke="#ffffff" stroke-width="2"/>
+                    <line x1="136" y1="117" x2="164" y2="117" stroke="#ffffff" stroke-width="2"/>
+                    <line x1="136" y1="129" x2="164" y2="129" stroke="#ffffff" stroke-width="2"/>
+
+                    <!-- Optical Sensor Indicator Glow -->
+                    <circle id="part-sensor" onclick="m1Check('sensor')" class="cursor-pointer hover:fill-rose-400 transition animate-pulse" cx="150" cy="310" r="22" fill="#ef4444" stroke="#991b1b" stroke-width="3"/>
+                    <circle cx="150" cy="310" r="10" fill="#fecdd3"/>
+
+                    <!-- Labels SVG -->
+                    <text x="35" y="110" font-family="Fredoka" font-size="13" font-weight="bold" fill="#0369a1">Botón Izquierdo</text>
+                    <line x1="100" y1="115" x2="60" y2="110" stroke="#0369a1" stroke-width="2" stroke-dasharray="3,3"/>
+
+                    <text x="175" y="110" font-family="Fredoka" font-size="13" font-weight="bold" fill="#0369a1">Botón Derecho</text>
+                    <line x1="200" y1="115" x2="240" y2="110" stroke="#0369a1" stroke-width="2" stroke-dasharray="3,3"/>
+
+                    <text x="150" y="45" font-family="Fredoka" font-size="13" font-weight="bold" fill="#b45309" text-anchor="middle">Rueda (Scroll)</text>
+
+                    <text x="150" y="360" font-family="Fredoka" font-size="13" font-weight="bold" fill="#991b1b" text-anchor="middle">Sensor Óptico</text>
+                </svg>
+            </div>
+
+            <!-- Task Counter -->
+            <div class="flex gap-2 mt-4">
+                <span id="m1-step-1" class="w-3 h-3 rounded-full bg-amber-400"></span>
+                <span id="m1-step-2" class="w-3 h-3 rounded-full bg-slate-200"></span>
+                <span id="m1-step-3" class="w-3 h-3 rounded-full bg-slate-200"></span>
+                <span id="m1-step-4" class="w-3 h-3 rounded-full bg-slate-200"></span>
+            </div>
+        </section>
+
+        <!-- SCREEN 2: MISIÓN 2 - EL TABLERO DE LAS DIRECCIONES -->
+        <section id="screen-m2" class="app-screen hidden bg-white rounded-3xl p-6 shadow-xl border-4 border-sky-200 flex flex-col items-center">
+            <div class="w-full flex justify-between items-center mb-3">
+                <span class="bg-sky-100 text-sky-800 font-bold px-3 py-1 rounded-full text-xs font-heading">MISIÓN 2 DE 7</span>
+                <span class="text-slate-400 text-xs">Desplazamiento del puntero</span>
+            </div>
+
+            <!-- Instruction Banner -->
+            <div class="w-full bg-amber-50 border-2 border-amber-300 rounded-2xl p-4 flex items-center gap-4 mb-4 shadow-sm">
+                <div id="tito-m2-avatar" class="w-20 h-20 flex-shrink-0"></div>
+                <div>
+                    <h3 id="m2-title" class="font-heading font-bold text-sky-900 text-lg">Misión 2: El Tablero Direccional</h3>
+                    <p id="m2-instruction" class="text-slate-700 text-sm sm:text-base font-medium">Tito dice: "Mueve el puntero del mouse hacia <strong id="m2-target-txt" class="text-amber-700 font-extrabold underline">ARRIBA (Estrella)</strong>."</p>
+                </div>
+            </div>
+
+            <!-- 2x2 Directional Grid -->
+            <div class="grid grid-cols-3 grid-rows-3 gap-3 w-full max-w-md h-80 my-2">
+                <!-- TOP Row -->
+                <div class="col-start-2 row-start-1">
+                    <div id="dir-up" onmouseenter="m2Check('up')" class="h-full bg-amber-100 hover:bg-amber-200 border-4 border-amber-400 rounded-2xl flex flex-col items-center justify-center cursor-pointer transition transform hover:scale-105 p-2 shadow">
+                        <span class="text-3xl">⭐</span>
+                        <span class="font-heading text-xs font-bold text-amber-800 mt-1">ARRIBA</span>
+                    </div>
+                </div>
+
+                <!-- LEFT Row -->
+                <div class="col-start-1 row-start-2">
+                    <div id="dir-left" onmouseenter="m2Check('left')" class="h-full bg-indigo-100 hover:bg-indigo-200 border-4 border-indigo-400 rounded-2xl flex flex-col items-center justify-center cursor-pointer transition transform hover:scale-105 p-2 shadow">
+                        <span class="text-3xl">🤖</span>
+                        <span class="font-heading text-xs font-bold text-indigo-800 mt-1">IZQUIERDA</span>
+                    </div>
+                </div>
+
+                <!-- CENTER: Tito Compass Base -->
+                <div class="col-start-2 row-start-2 flex items-center justify-center bg-sky-50 rounded-2xl border-2 border-dashed border-sky-300 p-1">
+                    <div class="text-center">
+                        <span class="text-2xl animate-bounce inline-block">🖱️</span>
+                        <p class="text-[10px] font-bold text-sky-600 uppercase">Centro</p>
+                    </div>
+                </div>
+
+                <!-- RIGHT Row -->
+                <div class="col-start-3 row-start-2">
+                    <div id="dir-right" onmouseenter="m2Check('right')" class="h-full bg-rose-100 hover:bg-rose-200 border-4 border-rose-400 rounded-2xl flex flex-col items-center justify-center cursor-pointer transition transform hover:scale-105 p-2 shadow">
+                        <span class="text-3xl">🚀</span>
+                        <span class="font-heading text-xs font-bold text-rose-800 mt-1">DERECHA</span>
+                    </div>
+                </div>
+
+                <!-- BOTTOM Row -->
+                <div class="col-start-2 row-start-3">
+                    <div id="dir-down" onmouseenter="m2Check('down')" class="h-full bg-emerald-100 hover:bg-emerald-200 border-4 border-emerald-400 rounded-2xl flex flex-col items-center justify-center cursor-pointer transition transform hover:scale-105 p-2 shadow">
+                        <span class="text-3xl">⚽</span>
+                        <span class="font-heading text-xs font-bold text-emerald-800 mt-1">ABAJO</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Direction Steps -->
+            <div class="flex gap-2 mt-2">
+                <span id="m2-step-1" class="w-3 h-3 rounded-full bg-amber-400"></span>
+                <span id="m2-step-2" class="w-3 h-3 rounded-full bg-slate-200"></span>
+                <span id="m2-step-3" class="w-3 h-3 rounded-full bg-slate-200"></span>
+                <span id="m2-step-4" class="w-3 h-3 rounded-full bg-slate-200"></span>
+            </div>
+        </section>
+
+        <!-- SCREEN 3: MISIÓN 3 - EL MUNDO DE OBJETOS DIGITALES -->
+        <section id="screen-m3" class="app-screen hidden bg-white rounded-3xl p-6 shadow-xl border-4 border-sky-200 flex flex-col items-center">
+            <div class="w-full flex justify-between items-center mb-3">
+                <span class="bg-sky-100 text-sky-800 font-bold px-3 py-1 rounded-full text-xs font-heading">MISIÓN 3 DE 7</span>
+                <span class="text-slate-400 text-xs">Selección precisa</span>
+            </div>
+
+            <div class="w-full bg-amber-50 border-2 border-amber-300 rounded-2xl p-4 flex items-center gap-4 mb-4 shadow-sm">
+                <div id="tito-m3-avatar" class="w-20 h-20 flex-shrink-0"></div>
+                <div>
+                    <h3 id="m3-title" class="font-heading font-bold text-sky-900 text-lg">Misión 3: Encuentra el Objeto</h3>
+                    <p id="m3-instruction" class="text-slate-700 text-sm sm:text-base font-medium">Tito dice: "Encuentra y haz clic en el <strong id="m3-target-txt" class="text-amber-700 font-extrabold underline">CARRO ROJO</strong>."</p>
+                </div>
+            </div>
+
+            <!-- Grid of 6 SVG Objects -->
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 w-full max-w-xl my-2">
+                <div id="obj-robot" onclick="m3Check('robot')" class="bg-slate-50 border-4 border-slate-200 hover:border-sky-400 hover:bg-sky-50 rounded-2xl p-4 flex flex-col items-center cursor-pointer transition transform hover:scale-105 shadow-sm">
+                    <div class="w-16 h-16" id="svg-robot"></div>
+                    <span class="font-heading font-bold text-slate-700 text-xs mt-2">Robot Divertido</span>
+                </div>
+
+                <div id="obj-car" onclick="m3Check('car')" class="bg-slate-50 border-4 border-slate-200 hover:border-sky-400 hover:bg-sky-50 rounded-2xl p-4 flex flex-col items-center cursor-pointer transition transform hover:scale-105 shadow-sm">
+                    <div class="w-16 h-16" id="svg-car"></div>
+                    <span class="font-heading font-bold text-slate-700 text-xs mt-2">Carro Rojo</span>
+                </div>
+
+                <div id="obj-star" onclick="m3Check('star')" class="bg-slate-50 border-4 border-slate-200 hover:border-sky-400 hover:bg-sky-50 rounded-2xl p-4 flex flex-col items-center cursor-pointer transition transform hover:scale-105 shadow-sm">
+                    <div class="w-16 h-16" id="svg-star"></div>
+                    <span class="font-heading font-bold text-slate-700 text-xs mt-2">Estrella Brillante</span>
+                </div>
+
+                <div id="obj-ball" onclick="m3Check('ball')" class="bg-slate-50 border-4 border-slate-200 hover:border-sky-400 hover:bg-sky-50 rounded-2xl p-4 flex flex-col items-center cursor-pointer transition transform hover:scale-105 shadow-sm">
+                    <div class="w-16 h-16" id="svg-ball"></div>
+                    <span class="font-heading font-bold text-slate-700 text-xs mt-2">Pelota Mágica</span>
+                </div>
+
+                <div id="obj-book" onclick="m3Check('book')" class="bg-slate-50 border-4 border-slate-200 hover:border-sky-400 hover:bg-sky-50 rounded-2xl p-4 flex flex-col items-center cursor-pointer transition transform hover:scale-105 shadow-sm">
+                    <div class="w-16 h-16" id="svg-book"></div>
+                    <span class="font-heading font-bold text-slate-700 text-xs mt-2">Libro de Cuentos</span>
+                </div>
+
+                <div id="obj-balloon" onclick="m3Check('balloon')" class="bg-slate-50 border-4 border-slate-200 hover:border-sky-400 hover:bg-sky-50 rounded-2xl p-4 flex flex-col items-center cursor-pointer transition transform hover:scale-105 shadow-sm">
+                    <div class="w-16 h-16" id="svg-balloon"></div>
+                    <span class="font-heading font-bold text-slate-700 text-xs mt-2">Globo Volador</span>
+                </div>
+            </div>
+
+            <div class="flex gap-2 mt-2">
+                <span id="m3-step-1" class="w-3 h-3 rounded-full bg-amber-400"></span>
+                <span id="m3-step-2" class="w-3 h-3 rounded-full bg-slate-200"></span>
+                <span id="m3-step-3" class="w-3 h-3 rounded-full bg-slate-200"></span>
+            </div>
+        </section>
+
+        <!-- SCREEN 4: MISIÓN 4 - EL RETO DEL CLIC Y DOBLE CLIC -->
+        <section id="screen-m4" class="app-screen hidden bg-white rounded-3xl p-6 shadow-xl border-4 border-sky-200 flex flex-col items-center">
+            <div class="w-full flex justify-between items-center mb-3">
+                <span class="bg-sky-100 text-sky-800 font-bold px-3 py-1 rounded-full text-xs font-heading">MISIÓN 4 DE 7</span>
+                <span class="text-slate-400 text-xs">Clic simple y Doble clic</span>
+            </div>
+
+            <div class="w-full bg-amber-50 border-2 border-amber-300 rounded-2xl p-4 flex items-center gap-4 mb-4 shadow-sm">
+                <div id="tito-m4-avatar" class="w-20 h-20 flex-shrink-0"></div>
+                <div>
+                    <h3 id="m4-title" class="font-heading font-bold text-sky-900 text-lg">Misión 4: El Reto del Clic</h3>
+                    <p id="m4-instruction" class="text-slate-700 text-sm sm:text-base font-medium">Tito explica: "¡Un clic hace 1 destello ✨! ¡Un doble clic rápido hace 2 destellos ✨✨!"</p>
+                </div>
+            </div>
+
+            <!-- Demonstration & Practice Targets -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full max-w-lg my-2">
+                <!-- Single Click Challenge -->
+                <div id="m4-card-single" class="bg-sky-50 border-4 border-sky-300 rounded-2xl p-5 flex flex-col items-center text-center shadow">
+                    <span class="bg-sky-200 text-sky-800 text-xs font-bold px-3 py-1 rounded-full mb-2">Paso 1</span>
+                    <h4 class="font-heading font-bold text-sky-900 text-base mb-1">Clic Sencillo (1 Clic)</h4>
+                    <p class="text-xs text-slate-600 mb-3">Haz 1 clic en la campana para hacerla sonar.</p>
+                    <button id="target-single-btn" onclick="m4SingleClick()" class="w-24 h-24 bg-white border-4 border-sky-400 hover:border-amber-400 rounded-full flex flex-col items-center justify-center text-3xl shadow-md transition transform active:scale-95">
+                        🔔
+                        <span id="sparkle-single" class="text-xs opacity-0 transition">✨</span>
+                    </button>
+                    <span id="status-single" class="text-xs font-bold text-amber-600 mt-3">¡Haz 1 clic!</span>
+                </div>
+
+                <!-- Double Click Challenge -->
+                <div id="m4-card-double" class="bg-amber-50 border-4 border-amber-300 opacity-50 rounded-2xl p-5 flex flex-col items-center text-center shadow pointer-events-none">
+                    <span class="bg-amber-200 text-amber-800 text-xs font-bold px-3 py-1 rounded-full mb-2">Paso 2</span>
+                    <h4 class="font-heading font-bold text-amber-900 text-base mb-1">Doble Clic (2 Clics Rápidos)</h4>
+                    <p class="text-xs text-slate-600 mb-3">Haz doble clic rápido en la gema mágica.</p>
+                    <button id="target-double-btn" ondblclick="m4DoubleClick()" class="w-24 h-24 bg-white border-4 border-amber-400 hover:border-indigo-400 rounded-full flex flex-col items-center justify-center text-3xl shadow-md transition transform active:scale-95">
+                        💎
+                        <span id="sparkle-double" class="text-xs opacity-0 transition">✨✨</span>
+                    </button>
+                    <span id="status-double" class="text-xs font-bold text-slate-500 mt-3">Completa el paso 1 primero</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- SCREEN 5: MISIÓN 5 - LAS CAJAS MÁGICAS -->
+        <section id="screen-m5" class="app-screen hidden bg-white rounded-3xl p-6 shadow-xl border-4 border-sky-200 flex flex-col items-center">
+            <div class="w-full flex justify-between items-center mb-3">
+                <span class="bg-sky-100 text-sky-800 font-bold px-3 py-1 rounded-full text-xs font-heading">MISIÓN 5 DE 7</span>
+                <span class="text-slate-400 text-xs">Dominio de Doble Clic</span>
+            </div>
+
+            <div class="w-full bg-amber-50 border-2 border-amber-300 rounded-2xl p-4 flex items-center gap-4 mb-4 shadow-sm">
+                <div id="tito-m5-avatar" class="w-20 h-20 flex-shrink-0"></div>
+                <div>
+                    <h3 id="m5-title" class="font-heading font-bold text-sky-900 text-lg">Misión 5: Las Cajas Mágicas</h3>
+                    <p id="m5-instruction" class="text-slate-700 text-sm sm:text-base font-medium">Tito dice: "¡Haz <strong class="text-amber-700 font-extrabold underline">DOBLE CLIC RÁPIDO</strong> en cada caja de regalo para descubrir qué hay dentro!"</p>
+                </div>
+            </div>
+
+            <!-- Grid of 4 Magic Gift Boxes -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 w-full max-w-2xl my-4">
+                <!-- Box 1 -->
+                <div id="box-1" ondblclick="m5OpenBox(1)" class="cursor-pointer bg-amber-100 border-4 border-amber-400 rounded-2xl p-4 flex flex-col items-center relative transition transform hover:scale-105 shadow-md min-h-[140px]">
+                    <div id="lid-1" class="absolute top-2 w-16 h-6 bg-amber-500 rounded-t-md shadow transition"></div>
+                    <div id="body-1" class="w-16 h-16 bg-amber-400 rounded-b-md mt-6 flex items-center justify-center text-3xl shadow-inner">🎁</div>
+                    <div id="content-1" class="hidden text-4xl animate-bounce">👑</div>
+                    <span class="text-[11px] font-bold text-amber-900 mt-2">Caja 1</span>
+                </div>
+
+                <!-- Box 2 -->
+                <div id="box-2" ondblclick="m5OpenBox(2)" class="cursor-pointer bg-purple-100 border-4 border-purple-400 rounded-2xl p-4 flex flex-col items-center relative transition transform hover:scale-105 shadow-md min-h-[140px]">
+                    <div id="lid-2" class="absolute top-2 w-16 h-6 bg-purple-500 rounded-t-md shadow transition"></div>
+                    <div id="body-2" class="w-16 h-16 bg-purple-400 rounded-b-md mt-6 flex items-center justify-center text-3xl shadow-inner">🎁</div>
+                    <div id="content-2" class="hidden text-4xl animate-bounce">🧸</div>
+                    <span class="text-[11px] font-bold text-purple-900 mt-2">Caja 2</span>
+                </div>
+
+                <!-- Box 3 -->
+                <div id="box-3" ondblclick="m5OpenBox(3)" class="cursor-pointer bg-emerald-100 border-4 border-emerald-400 rounded-2xl p-4 flex flex-col items-center relative transition transform hover:scale-105 shadow-md min-h-[140px]">
+                    <div id="lid-3" class="absolute top-2 w-16 h-6 bg-emerald-500 rounded-t-md shadow transition"></div>
+                    <div id="body-3" class="w-16 h-16 bg-emerald-400 rounded-b-md mt-6 flex items-center justify-center text-3xl shadow-inner">🎁</div>
+                    <div id="content-3" class="hidden text-4xl animate-bounce">🦕</div>
+                    <span class="text-[11px] font-bold text-emerald-900 mt-2">Caja 3</span>
+                </div>
+
+                <!-- Box 4 -->
+                <div id="box-4" ondblclick="m5OpenBox(4)" class="cursor-pointer bg-rose-100 border-4 border-rose-400 rounded-2xl p-4 flex flex-col items-center relative transition transform hover:scale-105 shadow-md min-h-[140px]">
+                    <div id="lid-4" class="absolute top-2 w-16 h-6 bg-rose-500 rounded-t-md shadow transition"></div>
+                    <div id="body-4" class="w-16 h-16 bg-rose-400 rounded-b-md mt-6 flex items-center justify-center text-3xl shadow-inner">🎁</div>
+                    <div id="content-4" class="hidden text-4xl animate-bounce">🪄</div>
+                    <span class="text-[11px] font-bold text-rose-900 mt-2">Caja 4</span>
+                </div>
+            </div>
+
+            <!-- Opened Box Counter -->
+            <p id="m5-status" class="text-xs font-bold text-sky-700">Cajas abiertas: <span id="m5-count">0</span> / 4</p>
+        </section>
+
+        <!-- SCREEN 6: MISIÓN 6 - EL ALMACÉN DE TITO -->
+        <section id="screen-m6" class="app-screen hidden bg-white rounded-3xl p-6 shadow-xl border-4 border-sky-200 flex flex-col items-center">
+            <div class="w-full flex justify-between items-center mb-2">
+                <span class="bg-sky-100 text-sky-800 font-bold px-3 py-1 rounded-full text-xs font-heading">MISIÓN 6 DE 7</span>
+                <span class="text-slate-400 text-xs">Clasificación Drag & Drop / Clic</span>
+            </div>
+
+            <div class="w-full bg-amber-50 border-2 border-amber-300 rounded-2xl p-3 flex items-center gap-3 mb-3 shadow-sm">
+                <div id="tito-m6-avatar" class="w-16 h-16 flex-shrink-0"></div>
+                <div>
+                    <h3 id="m6-title" class="font-heading font-bold text-sky-900 text-base">Misión 6: El Almacén Organizado</h3>
+                    <p id="m6-instruction" class="text-slate-700 text-xs sm:text-sm font-medium">Tito dice: "Arrastra cada objeto (o haz clic en el objeto y luego en su caja) para ordenarlo en su lugar correcto."</p>
+                </div>
+            </div>
+
+            <!-- Draggable Items Palette -->
+            <div class="w-full bg-sky-50 p-3 rounded-2xl border-2 border-sky-200 mb-4">
+                <span class="text-xs font-bold text-sky-800 uppercase block mb-2 text-center">Objetos por clasificar:</span>
+                <div id="m6-items-container" class="flex flex-wrap justify-center gap-3 min-h-[60px] items-center">
+                    <!-- Items rendered dynamically by JS -->
+                </div>
+            </div>
+
+            <!-- 3 Drop Bins -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 w-full max-w-2xl">
+                <!-- Toys Bin -->
+                <div id="bin-juguetes" onclick="m6PlaceInBin('juguetes')" ondragover="m6AllowDrop(event)" ondragleave="m6DragLeave(event)" ondrop="m6Drop(event, 'juguetes')" class="bg-amber-50 border-4 border-dashed border-amber-300 rounded-2xl p-3 flex flex-col items-center min-h-[150px] transition">
+                    <span class="text-2xl mb-1">🧸</span>
+                    <h4 class="font-heading font-bold text-amber-900 text-sm">JUGUETES</h4>
+                    <div id="bin-items-juguetes" class="w-full flex flex-wrap justify-center gap-1 mt-2"></div>
+                </div>
+
+                <!-- School Bin -->
+                <div id="bin-utiles" onclick="m6PlaceInBin('utiles')" ondragover="m6AllowDrop(event)" ondragleave="m6DragLeave(event)" ondrop="m6Drop(event, 'utiles')" class="bg-indigo-50 border-4 border-dashed border-indigo-300 rounded-2xl p-3 flex flex-col items-center min-h-[150px] transition">
+                    <span class="text-2xl mb-1">✏️</span>
+                    <h4 class="font-heading font-bold text-indigo-900 text-sm">ÚTILES ESCOLARES</h4>
+                    <div id="bin-items-utiles" class="w-full flex flex-wrap justify-center gap-1 mt-2"></div>
+                </div>
+
+                <!-- Animals Bin -->
+                <div id="bin-animales" onclick="m6PlaceInBin('animales')" ondragover="m6AllowDrop(event)" ondragleave="m6DragLeave(event)" ondrop="m6Drop(event, 'animales')" class="bg-emerald-50 border-4 border-dashed border-emerald-300 rounded-2xl p-3 flex flex-col items-center min-h-[150px] transition">
+                    <span class="text-2xl mb-1">🐶</span>
+                    <h4 class="font-heading font-bold text-emerald-900 text-sm">ANIMALES</h4>
+                    <div id="bin-items-animales" class="w-full flex flex-wrap justify-center gap-1 mt-2"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SCREEN 7: MISIÓN 7 - LA BÚSQUEDA VERTICAL (SCROLL) -->
+        <section id="screen-m7" class="app-screen hidden bg-white rounded-3xl p-6 shadow-xl border-4 border-sky-200 flex flex-col items-center">
+            <div class="w-full flex justify-between items-center mb-2">
+                <span class="bg-sky-100 text-sky-800 font-bold px-3 py-1 rounded-full text-xs font-heading">MISIÓN 7 DE 7</span>
+                <span class="text-slate-400 text-xs">Uso de la Rueda (Scroll)</span>
+            </div>
+
+            <div class="w-full bg-amber-50 border-2 border-amber-300 rounded-2xl p-3 flex items-center gap-3 mb-3 shadow-sm">
+                <div id="tito-m7-avatar" class="w-16 h-16 flex-shrink-0"></div>
+                <div>
+                    <h3 id="m7-title" class="font-heading font-bold text-sky-900 text-base">Misión 7: La Búsqueda Vertical</h3>
+                    <p id="m7-instruction" class="text-slate-700 text-xs sm:text-sm font-medium">Tito dice: "Usa la <strong class="text-amber-700 font-extrabold underline">RUEDA DEL MOUSE (SCROLL)</strong> para girar hacia abajo y encontrar los 5 tesoros."</p>
+                </div>
+            </div>
+
+            <!-- Scroll Progress Indicator -->
+            <div class="w-full max-w-md bg-slate-100 rounded-full h-3 mb-2 border border-slate-300 overflow-hidden">
+                <div id="m7-scroll-bar" class="bg-amber-400 h-full w-0 transition-all duration-200"></div>
+            </div>
+            <span class="text-xs font-bold text-slate-500 mb-2">Tesoros recolectados: <span id="m7-collected-count">0</span> / 5</span>
+
+            <!-- Vertical Scroll Adventure Window -->
+            <div id="m7-scroll-window" onscroll="m7OnScroll()" class="w-full max-w-md h-72 overflow-y-auto border-4 border-sky-300 rounded-2xl bg-gradient-to-b from-sky-100 via-amber-50 to-indigo-100 p-4 relative shadow-inner">
+                <!-- Long Trail Content -->
+                <div class="h-[1000px] relative flex flex-col items-center justify-between py-6">
+                    <p class="text-xs font-bold text-sky-600 bg-white/80 px-3 py-1 rounded-full shadow">⬇️ ¡Gira la rueda hacia abajo! ⬇️</p>
+
+                    <!-- Hidden Treasure 1 -->
+                    <div id="treasure-1" onclick="m7Collect(1)" class="my-10 bg-white p-3 rounded-2xl border-2 border-amber-300 shadow-md flex items-center gap-3 cursor-pointer transform transition hover:scale-110">
+                        <span class="text-3xl">🪙</span>
+                        <div>
+                            <span class="font-heading font-bold text-amber-800 text-xs block">Cofre de Monedas</span>
+                            <span class="text-[10px] text-slate-500">¡Haz clic para recolectar!</span>
+                        </div>
+                    </div>
+
+                    <!-- Hidden Treasure 2 -->
+                    <div id="treasure-2" onclick="m7Collect(2)" class="my-10 bg-white p-3 rounded-2xl border-2 border-amber-300 shadow-md flex items-center gap-3 cursor-pointer transform transition hover:scale-110">
+                        <span class="text-3xl">🗺️</span>
+                        <div>
+                            <span class="font-heading font-bold text-amber-800 text-xs block">Mapa de Estrellas</span>
+                            <span class="text-[10px] text-slate-500">¡Haz clic para recolectar!</span>
+                        </div>
+                    </div>
+
+                    <!-- Hidden Treasure 3 -->
+                    <div id="treasure-3" onclick="m7Collect(3)" class="my-10 bg-white p-3 rounded-2xl border-2 border-amber-300 shadow-md flex items-center gap-3 cursor-pointer transform transition hover:scale-110">
+                        <span class="text-3xl">🤖</span>
+                        <div>
+                            <span class="font-heading font-bold text-amber-800 text-xs block">Robot Galáctico</span>
+                            <span class="text-[10px] text-slate-500">¡Haz clic para recolectar!</span>
+                        </div>
+                    </div>
+
+                    <!-- Hidden Treasure 4 -->
+                    <div id="treasure-4" onclick="m7Collect(4)" class="my-10 bg-white p-3 rounded-2xl border-2 border-amber-300 shadow-md flex items-center gap-3 cursor-pointer transform transition hover:scale-110">
+                        <span class="text-3xl">💎</span>
+                        <div>
+                            <span class="font-heading font-bold text-amber-800 text-xs block">Gema Mágica</span>
+                            <span class="text-[10px] text-slate-500">¡Haz clic para recolectar!</span>
+                        </div>
+                    </div>
+
+                    <!-- Hidden Treasure 5 -->
+                    <div id="treasure-5" onclick="m7Collect(5)" class="my-10 bg-white p-3 rounded-2xl border-2 border-amber-300 shadow-md flex items-center gap-3 cursor-pointer transform transition hover:scale-110">
+                        <span class="text-3xl">🎖️</span>
+                        <div>
+                            <span class="font-heading font-bold text-amber-800 text-xs block">Medalla de Honor</span>
+                            <span class="text-[10px] text-slate-500">¡Haz clic para recolectar!</span>
+                        </div>
+                    </div>
+
+                    <p class="text-xs font-bold text-indigo-600 bg-white/80 px-3 py-1 rounded-full shadow">🏁 ¡Llegaste al final del camino!</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SCREEN 8: FINAL CELEBRATION & FAMILY CERTIFICATE REPORT -->
+        <section id="screen-final" class="app-screen hidden bg-white rounded-3xl p-6 sm:p-10 shadow-xl border-4 border-amber-300 flex flex-col items-center">
+            
+            <!-- Certificate Border Container -->
+            <div class="certificate-container w-full max-w-3xl bg-amber-50/50 p-6 sm:p-8 rounded-2xl border-4 border-amber-400 relative">
+                
+                <!-- Certificate Header -->
+                <div class="text-center space-y-2 mb-6">
+                    <div class="flex justify-center items-center gap-3 mb-2">
+                        <div id="tito-final-avatar" class="w-20 h-20 no-print"></div>
+                        <div>
+                            <span class="bg-amber-200 text-amber-900 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Reporte Educativo de Informática</span>
+                            <h2 class="text-3xl sm:text-4xl font-extrabold text-sky-900 font-heading">¡AVENTURA COMPLETADA!</h2>
+                        </div>
+                    </div>
+                    <p class="text-slate-600 text-sm sm:text-base font-semibold">Certificado Oficial de Logros en Habilidades Digitales Básicas</p>
+                </div>
+
+                <!-- Student Summary Details Box -->
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 bg-white p-4 rounded-xl border border-amber-200 mb-6 text-center text-xs shadow-sm">
+                    <div>
+                        <span class="text-slate-400 block font-bold">ESTUDIANTE</span>
+                        <span id="final-student-name" class="font-heading text-sm font-bold text-sky-900">Sofia Ramos</span>
+                    </div>
+                    <div>
+                        <span class="text-slate-400 block font-bold">SECCIÓN</span>
+                        <span id="final-student-section" class="font-heading text-sm font-bold text-sky-900">1-A</span>
+                    </div>
+                    <div>
+                        <span class="text-slate-400 block font-bold">FECHA</span>
+                        <span id="final-student-date" class="font-heading text-sm font-bold text-sky-900">2026-09-21</span>
+                    </div>
+                    <div>
+                        <span class="text-slate-400 block font-bold">PUNTAJE TOTAL</span>
+                        <span id="final-student-score" class="font-heading text-sm font-bold text-emerald-600">100% (7/7)</span>
+                    </div>
+                </div>
+
+                <!-- Table: "Lo que hice hoy" -->
+                <div class="mb-6 overflow-x-auto">
+                    <h3 class="font-heading font-bold text-sky-900 text-sm mb-2 uppercase tracking-wide">📋 Resumen de Misiones Realizadas</h3>
+                    <table class="w-full text-left text-xs border-collapse">
+                        <thead>
+                            <tr class="bg-sky-100 text-sky-900 border-b-2 border-sky-200">
+                                <th class="p-2">Misión</th>
+                                <th class="p-2">Habilidad Evaluada</th>
+                                <th class="p-2">Estado</th>
+                                <th class="p-2">Desempeño Observado</th>
+                            </tr>
+                        </thead>
+                        <tbody id="final-report-table-body" class="divide-y divide-slate-200 bg-white">
+                            <!-- Populated dynamically by JS -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Pedagogical Rubric Indicators -->
+                <div class="bg-white p-4 rounded-xl border border-amber-200 mb-6">
+                    <h3 class="font-heading font-bold text-sky-900 text-sm mb-2 uppercase tracking-wide">📊 Indicadores de la Rúbrica Pedagógica (Primer Grado)</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+                        <div class="p-2.5 bg-emerald-50 rounded-lg border border-emerald-200">
+                            <span class="font-bold text-emerald-800 block mb-1">⭐ Coordinación Visomotora</span>
+                            <p class="text-slate-600">Demuestra un manejo fluido y preciso del puntero sobre objetivos digitales.</p>
+                        </div>
+                        <div class="p-2.5 bg-emerald-50 rounded-lg border border-emerald-200">
+                            <span class="font-bold text-emerald-800 block mb-1">⭐ Clic y Doble Clic</span>
+                            <p class="text-slate-600">Diferencia la cadencia de activación entre el clic único y el doble clic.</p>
+                        </div>
+                        <div class="p-2.5 bg-emerald-50 rounded-lg border border-emerald-200">
+                            <span class="font-bold text-emerald-800 block mb-1">⭐ Navegación & Scroll</span>
+                            <p class="text-slate-600">Utiliza la rueda del mouse para desplazarse verticalmente en la pantalla.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Teacher / Parent Signature Lines -->
+                <div class="pt-6 border-t border-amber-300 grid grid-cols-2 gap-8 text-center text-xs">
+                    <div>
+                        <div class="h-10 border-b border-slate-400 w-3/4 mx-auto mb-1"></div>
+                        <span class="text-slate-500 font-bold block">Firma del Docente de Informática</span>
+                    </div>
+                    <div>
+                        <div class="h-10 border-b border-slate-400 w-3/4 mx-auto mb-1"></div>
+                        <span class="text-slate-500 font-bold block">Firma del Padre/Madre o Encargado</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="no-print mt-6 flex flex-wrap gap-4 justify-center">
+                <button onclick="window.print()" class="px-6 py-3 bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-600 hover:to-blue-700 text-white font-heading font-bold rounded-xl shadow-md transition flex items-center gap-2">
+                    <span>🖨️ Imprimir / Guardar Certificado PDF</span>
+                </button>
+                <button onclick="location.reload()" class="px-6 py-3 bg-slate-200 hover:bg-slate-300 text-slate-700 font-heading font-bold rounded-xl shadow transition">
+                    <span>🔄 Reiniciar Aventura</span>
+                </button>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        // Sound System using Web Audio API (Zero external mp3 files required)
+        class SoundEngine {
+            constructor() {
+                this.ctx = null;
+                this.enabled = true;
+            }
+
+            init() {
+                if (!this.ctx) {
+                    const AudioContext = window.AudioContext || window.webkitAudioContext;
+                    this.ctx = new AudioContext();
+                }
+            }
+
+            playClick() {
+                if (!this.enabled) return;
+                this.init();
+                const osc = this.ctx.createOscillator();
+                const gain = this.ctx.createGain();
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(600, this.ctx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(120, this.ctx.currentTime + 0.05);
+                gain.gain.setValueAtTime(0.3, this.ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + 0.05);
+                osc.connect(gain);
+                gain.connect(this.ctx.destination);
+                osc.start();
+                osc.stop(this.ctx.currentTime + 0.05);
+            }
+
+            playSuccess() {
+                if (!this.enabled) return;
+                this.init();
+                const notes = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6
+                notes.forEach((freq, idx) => {
+                    const osc = this.ctx.createOscillator();
+                    const gain = this.ctx.createGain();
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(freq, this.ctx.currentTime + idx * 0.08);
+                    gain.gain.setValueAtTime(0.2, this.ctx.currentTime + idx * 0.08);
+                    gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + idx * 0.08 + 0.2);
+                    osc.connect(gain);
+                    gain.connect(this.ctx.destination);
+                    osc.start(this.ctx.currentTime + idx * 0.08);
+                    osc.stop(this.ctx.currentTime + idx * 0.08 + 0.2);
+                });
+            }
+
+            playMagic() {
+                if (!this.enabled) return;
+                this.init();
+                for (let i = 0; i < 6; i++) {
+                    const osc = this.ctx.createOscillator();
+                    const gain = this.ctx.createGain();
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(800 + i * 200, this.ctx.currentTime + i * 0.05);
+                    gain.gain.setValueAtTime(0.15, this.ctx.currentTime + i * 0.05);
+                    gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + i * 0.05 + 0.15);
+                    osc.connect(gain);
+                    gain.connect(this.ctx.destination);
+                    osc.start(this.ctx.currentTime + i * 0.05);
+                    osc.stop(this.ctx.currentTime + i * 0.05 + 0.15);
+                }
+            }
+
+            playErrorSoft() {
+                if (!this.enabled) return;
+                this.init();
+                const osc = this.ctx.createOscillator();
+                const gain = this.ctx.createGain();
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(220, this.ctx.currentTime);
+                osc.frequency.setValueAtTime(180, this.ctx.currentTime + 0.1);
+                gain.gain.setValueAtTime(0.2, this.ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + 0.25);
+                osc.connect(gain);
+                gain.connect(this.ctx.destination);
+                osc.start();
+                osc.stop(this.ctx.currentTime + 0.25);
+            }
+        }
+
+        const sound = new SoundEngine();
+
+        // SVG Illustration Engine for Tito in multiple poses
+        function getTitoSVG(pose = 'waving') {
+            const poses = {
+                waving: `
+                    <!-- Head & Body -->
+                    <circle cx="100" cy="110" r="42" fill="#d4a373"/>
+                    <circle cx="60" cy="70" r="28" fill="#d4a373"/>
+                    <circle cx="60" cy="70" r="18" fill="#ffb7b2"/>
+                    <circle cx="140" cy="70" r="28" fill="#d4a373"/>
+                    <circle cx="140" cy="70" r="18" fill="#ffb7b2"/>
+                    <!-- Eyes -->
+                    <circle cx="88" cy="100" r="7" fill="#1e293b"/>
+                    <circle cx="86" cy="98" r="2.5" fill="#ffffff"/>
+                    <circle cx="112" cy="100" r="7" fill="#1e293b"/>
+                    <circle cx="110" cy="98" r="2.5" fill="#ffffff"/>
+                    <!-- Nose & Mouth -->
+                    <ellipse cx="100" cy="112" rx="6" ry="4" fill="#e63946"/>
+                    <path d="M 94 118 Q 100 126 106 118" fill="none" stroke="#1e293b" stroke-width="2.5" stroke-linecap="round"/>
+                    <path d="M 95 120 Q 100 128 105 120 Z" fill="#ffb7b2"/>
+                    <!-- Clothes -->
+                    <path d="M 70 145 C 70 145, 100 135, 130 145 L 135 185 L 65 185 Z" fill="#2a6f97"/>
+                    <!-- Bowtie -->
+                    <polygon points="90,142 100,147 90,152" fill="#e63946"/>
+                    <polygon points="110,142 100,147 110,152" fill="#e63946"/>
+                    <circle cx="100" cy="147" r="3" fill="#b91c1c"/>
+                    <!-- Waving Arm -->
+                    <path d="M 130 150 Q 155 120 160 95" fill="none" stroke="#d4a373" stroke-width="10" stroke-linecap="round"/>
+                    <circle cx="162" cy="92" r="7" fill="#d4a373"/>
+                    <text x="165" y="80" font-size="16">✨</text>
+                `,
+                explaining: `
+                    <circle cx="100" cy="110" r="42" fill="#d4a373"/>
+                    <circle cx="60" cy="70" r="28" fill="#d4a373"/>
+                    <circle cx="60" cy="70" r="18" fill="#ffb7b2"/>
+                    <circle cx="140" cy="70" r="28" fill="#d4a373"/>
+                    <circle cx="140" cy="70" r="18" fill="#ffb7b2"/>
+                    <circle cx="88" cy="100" r="7" fill="#1e293b"/>
+                    <circle cx="86" cy="98" r="2.5" fill="#ffffff"/>
+                    <circle cx="112" cy="100" r="7" fill="#1e293b"/>
+                    <circle cx="110" cy="98" r="2.5" fill="#ffffff"/>
+                    <ellipse cx="100" cy="112" rx="6" ry="4" fill="#e63946"/>
+                    <path d="M 92 118 Q 100 128 108 118" fill="none" stroke="#1e293b" stroke-width="2.5" stroke-linecap="round"/>
+                    <path d="M 70 145 C 70 145, 100 135, 130 145 L 135 185 L 65 185 Z" fill="#2a6f97"/>
+                    <!-- Pointing Arm -->
+                    <path d="M 130 155 L 165 155" fill="none" stroke="#d4a373" stroke-width="9" stroke-linecap="round"/>
+                    <polygon points="165,150 175,155 165,160" fill="#d4a373"/>
+                `,
+                surprised: `
+                    <circle cx="100" cy="110" r="42" fill="#d4a373"/>
+                    <circle cx="60" cy="70" r="28" fill="#d4a373"/>
+                    <circle cx="60" cy="70" r="18" fill="#ffb7b2"/>
+                    <circle cx="140" cy="70" r="28" fill="#d4a373"/>
+                    <circle cx="140" cy="70" r="18" fill="#ffb7b2"/>
+                    <!-- Big Surprised Eyes -->
+                    <circle cx="86" cy="98" r="9" fill="#1e293b"/>
+                    <circle cx="84" cy="95" r="3.5" fill="#ffffff"/>
+                    <circle cx="114" cy="98" r="9" fill="#1e293b"/>
+                    <circle cx="112" cy="95" r="3.5" fill="#ffffff"/>
+                    <ellipse cx="100" cy="110" rx="5" ry="3" fill="#e63946"/>
+                    <!-- Open O Mouth -->
+                    <ellipse cx="100" cy="122" rx="6" ry="8" fill="#1e293b"/>
+                    <path d="M 70 145 C 70 145, 100 135, 130 145 L 135 185 L 65 185 Z" fill="#2a6f97"/>
+                    <!-- Hands on cheeks -->
+                    <circle cx="70" cy="120" r="7" fill="#d4a373"/>
+                    <circle cx="130" cy="120" r="7" fill="#d4a373"/>
+                `,
+                celebrating: `
+                    <circle cx="100" cy="110" r="42" fill="#d4a373"/>
+                    <circle cx="60" cy="70" r="28" fill="#d4a373"/>
+                    <circle cx="60" cy="70" r="18" fill="#ffb7b2"/>
+                    <circle cx="140" cy="70" r="28" fill="#d4a373"/>
+                    <circle cx="140" cy="70" r="18" fill="#ffb7b2"/>
+                    <!-- Happy Eyes (Arcs) -->
+                    <path d="M 80 98 Q 88 90 96 98" fill="none" stroke="#1e293b" stroke-width="3" stroke-linecap="round"/>
+                    <path d="M 104 98 Q 112 90 120 98" fill="none" stroke="#1e293b" stroke-width="3" stroke-linecap="round"/>
+                    <ellipse cx="100" cy="108" rx="6" ry="4" fill="#e63946"/>
+                    <path d="M 90 115 Q 100 130 110 115 Z" fill="#e63946"/>
+                    <path d="M 70 145 C 70 145, 100 135, 130 145 L 135 185 L 65 185 Z" fill="#2a6f97"/>
+                    <!-- Both Arms High -->
+                    <path d="M 70 150 Q 50 120 45 95" fill="none" stroke="#d4a373" stroke-width="9" stroke-linecap="round"/>
+                    <path d="M 130 150 Q 150 120 155 95" fill="none" stroke="#d4a373" stroke-width="9" stroke-linecap="round"/>
+                    <text x="30" y="80" font-size="16">🎉</text>
+                    <text x="150" y="80" font-size="16">⭐</text>
+                `
+            };
+            
+            return `<svg viewBox="0 0 200 200" class="w-full h-full filter drop-shadow">${poses[pose] || poses.waving}</svg>`;
+        }
+
+        const appState = {
+            studentName: "Estudiante de 1er Grado",
+            studentSection: "1-A",
+            studentDate: new Date().toISOString().split('T')[0],
+            currentStep: 0,
+            stars: 0,
+            soundOn: true,
+            
+            // Metrics per mission
+            metrics: {
+                m1: { completed: false, errors: 0, detail: "Identificación de partes del mouse" },
+                m2: { completed: false, errors: 0, detail: "Desplazamiento direccional del puntero" },
+                m3: { completed: false, errors: 0, detail: "Selección precisa de objetos digitales" },
+                m4: { completed: false, errors: 0, detail: "Diferenciación de clic y doble clic" },
+                m5: { completed: false, errors: 0, detail: "Ejecución de doble clic en cajas mágicas" },
+                m6: { completed: false, errors: 0, detail: "Clasificación de categorías (Drag/Click)" },
+                m7: { completed: false, errors: 0, detail: "Desplazamiento vertical con rueda (Scroll)" }
+            },
+
+            toggleSound() {
+                this.soundOn = !this.soundOn;
+                sound.enabled = this.soundOn;
+                document.getElementById('sound-btn').innerText = this.soundOn ? '🔊' : '🔇';
+            },
+
+            addStars(count = 1) {
+                this.stars += count;
+                document.getElementById('star-count').innerText = this.stars;
+                sound.playSuccess();
+            }
+        };
+
+        // Render Tito avatars on initial load
+        window.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('student-date').value = appState.studentDate;
+            document.getElementById('header-tito-avatar').innerHTML = getTitoSVG('waving');
+            document.getElementById('tito-welcome-svg').innerHTML = getTitoSVG('waving');
+            
+            // Render additional SVG icons for Mission 3
+            renderM3Icons();
+        });
+
+        function showScreen(screenId) {
+            sound.playClick();
+            document.querySelectorAll('.app-screen').forEach(el => el.classList.add('hidden'));
+            const target = document.getElementById(screenId);
+            if (target) target.classList.remove('hidden');
+        }
+
+        function updateProgress(stepNum) {
+            appState.currentStep = stepNum;
+            for (let i = 1; i <= 7; i++) {
+                const dot = document.querySelector(`.step-dot[data-step="${i}"]`);
+                const line = document.getElementById(`line-${i}`);
+                if (i < stepNum) {
+                    dot.className = "step-dot font-heading text-xs font-bold w-7 h-7 rounded-full flex items-center justify-center bg-emerald-500 text-white shadow";
+                    dot.innerHTML = "✓";
+                    if (line) line.className = "h-1 w-2 bg-emerald-400";
+                } else if (i === stepNum) {
+                    dot.className = "step-dot font-heading text-xs font-bold w-7 h-7 rounded-full flex items-center justify-center bg-amber-400 text-white shadow animate-pulse";
+                    if (line) line.className = "h-1 w-2 bg-amber-300";
+                } else {
+                    dot.className = "step-dot font-heading text-xs font-bold w-7 h-7 rounded-full flex items-center justify-center bg-slate-200 text-slate-500";
+                    if (line) line.className = "h-1 w-2 bg-slate-200";
+                }
+            }
+        }
+
+        function startAdventure() {
+            const nameInput = document.getElementById('student-name').value.trim();
+            const secInput = document.getElementById('student-section').value.trim();
+            const dateInput = document.getElementById('student-date').value;
+
+            if (nameInput) appState.studentName = nameInput;
+            if (secInput) appState.studentSection = secInput;
+            if (dateInput) appState.studentDate = dateInput;
+
+            document.getElementById('header-student-name').innerText = appState.studentName;
+            document.getElementById('progress-trail').classList.remove('hidden');
+            
+            initM1();
+        }
+
+        let m1State = { step: 0, sequence: ['btn-left', 'wheel', 'btn-right', 'sensor'] };
+        
+        function initM1() {
+            m1State.step = 0;
+            updateProgress(1);
+            showScreen('screen-m1');
+            document.getElementById('tito-m1-avatar').innerHTML = getTitoSVG('explaining');
+            m1UpdateInstruction();
+        }
+
+        function m1UpdateInstruction() {
+            const target = m1State.sequence[m1State.step];
+            const prompts = {
+                'btn-left': 'Haz clic en el BOTÓN IZQUIERDO del mouse.',
+                'wheel': 'Haz clic en la RUEDA DE DESPLAZAMIENTO (Scroll).',
+                'btn-right': 'Haz clic en el BOTÓN DERECHO del mouse.',
+                'sensor': 'Haz clic en el SENSOR ÓPTICO abajo.'
+            };
+            document.getElementById('m1-instruction').innerHTML = `Tito dice: "¡Mira este gran mouse! ${prompts[target]}"`;
+        }
+
+        function m1Check(part) {
+            const currentTarget = m1State.sequence[m1State.step];
+            if (part === currentTarget) {
+                sound.playClick();
+                m1State.step++;
+                document.getElementById(`m1-step-${m1State.step}`).className = "w-3 h-3 rounded-full bg-emerald-500";
+                
+                if (m1State.step >= m1State.sequence.length) {
+                    appState.metrics.m1.completed = true;
+                    appState.addStars(1);
+                    document.getElementById('tito-m1-avatar').innerHTML = getTitoSVG('celebrating');
+                    setTimeout(() => initM2(), 1200);
+                } else {
+                    m1UpdateInstruction();
+                }
+            } else {
+                sound.playErrorSoft();
+                appState.metrics.m1.errors++;
+            }
+        }
+
+        let m2State = { step: 0, sequence: ['up', 'right', 'left', 'down'] };
+
+        function initM2() {
+            m2State.step = 0;
+            updateProgress(2);
+            showScreen('screen-m2');
+            document.getElementById('tito-m2-avatar').innerHTML = getTitoSVG('explaining');
+            m2UpdateInstruction();
+        }
+
+        function m2UpdateInstruction() {
+            const target = m2State.sequence[m2State.step];
+            const labels = {
+                'up': 'ARRIBA (Estrella ⭐)',
+                'right': 'A LA DERECHA (Cohete 🚀)',
+                'left': 'A LA IZQUIERDA (Robot 🤖)',
+                'down': 'ABAJO (Pelota ⚽)'
+            };
+            document.getElementById('m2-target-txt').innerText = labels[target];
+        }
+
+        function m2Check(dir) {
+            const currentTarget = m2State.sequence[m2State.step];
+            if (dir === currentTarget) {
+                sound.playClick();
+                m2State.step++;
+                document.getElementById(`m2-step-${m2State.step}`).className = "w-3 h-3 rounded-full bg-emerald-500";
+                
+                if (m2State.step >= m2State.sequence.length) {
+                    appState.metrics.m2.completed = true;
+                    appState.addStars(1);
+                    document.getElementById('tito-m2-avatar').innerHTML = getTitoSVG('celebrating');
+                    setTimeout(() => initM3(), 1200);
+                } else {
+                    m2UpdateInstruction();
+                }
+            }
+        }
+
+        let m3State = { step: 0, sequence: ['car', 'star', 'book'] };
+
+        function renderM3Icons() {
+            document.getElementById('svg-robot').innerHTML = `<svg viewBox="0 0 100 100"><rect x="25" y="30" width="50" height="45" rx="8" fill="#6366f1"/><circle cx="40" cy="45" r="6" fill="#fef08a"/><circle cx="60" cy="45" r="6" fill="#fef08a"/><rect x="35" y="60" width="30" height="5" fill="#ffffff"/><line x1="50" y1="30" x2="50" y2="15" stroke="#6366f1" stroke-width="4"/><circle cx="50" cy="12" r="5" fill="#f43f5e"/></svg>`;
+            document.getElementById('svg-car').innerHTML = `<svg viewBox="0 0 100 100"><path d="M 15 55 L 30 35 L 70 35 L 85 55 Z" fill="#ef4444"/><rect x="10" y="55" width="80" height="20" rx="5" fill="#dc2626"/><circle cx="30" cy="75" r="10" fill="#1e293b"/><circle cx="70" cy="75" r="10" fill="#1e293b"/></svg>`;
+            document.getElementById('svg-star').innerHTML = `<svg viewBox="0 0 100 100"><polygon points="50,10 63,38 93,38 68,56 78,86 50,68 22,86 32,56 7,38 37,38" fill="#eab308"/></svg>`;
+            document.getElementById('svg-ball').innerHTML = `<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="38" fill="#10b981"/><path d="M 20 30 Q 50 60 80 30" fill="none" stroke="#ffffff" stroke-width="6"/><path d="M 20 70 Q 50 40 80 70" fill="none" stroke="#f59e0b" stroke-width="6"/></svg>`;
+            document.getElementById('svg-book').innerHTML = `<svg viewBox="0 0 100 100"><rect x="20" y="20" width="60" height="60" rx="4" fill="#3b82f6"/><path d="M 25 20 L 25 80 L 75 80" fill="none" stroke="#ffffff" stroke-width="4"/><line x1="35" y1="35" x2="65" y2="35" stroke="#ffffff" stroke-width="4"/><line x1="35" y1="50" x2="65" y2="50" stroke="#ffffff" stroke-width="4"/></svg>`;
+            document.getElementById('svg-balloon').innerHTML = `<svg viewBox="0 0 100 100"><ellipse cx="50" cy="42" rx="30" ry="36" fill="#ec4899"/><polygon points="46,78 54,78 50,84" fill="#be185d"/><path d="M 50 84 Q 45 92 50 98" fill="none" stroke="#64748b" stroke-width="2"/></svg>`;
+        }
+
+        function initM3() {
+            m3State.step = 0;
+            updateProgress(3);
+            showScreen('screen-m3');
+            document.getElementById('tito-m3-avatar').innerHTML = getTitoSVG('explaining');
+            m3UpdateInstruction();
+        }
+
+        function m3UpdateInstruction() {
+            const target = m3State.sequence[m3State.step];
+            const labels = {
+                'car': 'CARRO ROJO',
+                'star': 'ESTRELLA BRILLANTE',
+                'book': 'LIBRO DE CUENTOS'
+            };
+            document.getElementById('m3-target-txt').innerText = labels[target];
+        }
+
+        function m3Check(objId) {
+            const currentTarget = m3State.sequence[m3State.step];
+            if (objId === currentTarget) {
+                sound.playClick();
+                m3State.step++;
+                document.getElementById(`m3-step-${m3State.step}`).className = "w-3 h-3 rounded-full bg-emerald-500";
+
+                if (m3State.step >= m3State.sequence.length) {
+                    appState.metrics.m3.completed = true;
+                    appState.addStars(1);
+                    document.getElementById('tito-m3-avatar').innerHTML = getTitoSVG('celebrating');
+                    setTimeout(() => initM4(), 1200);
+                } else {
+                    m3UpdateInstruction();
+                }
+            } else {
+                sound.playErrorSoft();
+                appState.metrics.m3.errors++;
+            }
+        }
+
+        let m4State = { singleDone: false, doubleDone: false };
+
+        function initM4() {
+            m4State = { singleDone: false, doubleDone: false };
+            updateProgress(4);
+            showScreen('screen-m4');
+            document.getElementById('tito-m4-avatar').innerHTML = getTitoSVG('explaining');
+        }
+
+        function m4SingleClick() {
+            if (m4State.singleDone) return;
+            sound.playClick();
+            m4State.singleDone = true;
+            document.getElementById('sparkle-single').classList.remove('opacity-0');
+            document.getElementById('status-single').innerText = "¡Logrado! ✨";
+            document.getElementById('status-single').className = "text-xs font-bold text-emerald-600 mt-3";
+
+            // Enable Double Click Card
+            const dCard = document.getElementById('m4-card-double');
+            dCard.classList.remove('opacity-50', 'pointer-events-none');
+            document.getElementById('status-double').innerText = "¡Haz doble clic ahora!";
+            document.getElementById('status-double').className = "text-xs font-bold text-amber-600 mt-3";
+            document.getElementById('tito-m4-avatar').innerHTML = getTitoSVG('surprised');
+        }
+
+        function m4DoubleClick() {
+            if (!m4State.singleDone || m4State.doubleDone) return;
+            sound.playMagic();
+            m4State.doubleDone = true;
+            document.getElementById('sparkle-double').classList.remove('opacity-0');
+            document.getElementById('status-double').innerText = "¡Excelente Doble Clic! ✨✨";
+            document.getElementById('status-double').className = "text-xs font-bold text-emerald-600 mt-3";
+
+            appState.metrics.m4.completed = true;
+            appState.addStars(1);
+            document.getElementById('tito-m4-avatar').innerHTML = getTitoSVG('celebrating');
+            setTimeout(() => initM5(), 1200);
+        }
+
+        let m5Opened = new Set();
+
+        function initM5() {
+            m5Opened.clear();
+            updateProgress(5);
+            showScreen('screen-m5');
+            document.getElementById('tito-m5-avatar').innerHTML = getTitoSVG('explaining');
+            document.getElementById('m5-count').innerText = "0";
+        }
+
+        function m5OpenBox(num) {
+            if (m5Opened.has(num)) return;
+            sound.playMagic();
+            m5Opened.add(num);
+
+            document.getElementById(`lid-${num}`).classList.add('box-lid-open');
+            document.getElementById(`body-${num}`).classList.add('hidden');
+            document.getElementById(`content-${num}`).classList.remove('hidden');
+            document.getElementById('m5-count').innerText = m5Opened.size;
+
+            document.getElementById('tito-m5-avatar').innerHTML = getTitoSVG('surprised');
+
+            if (m5Opened.size >= 4) {
+                appState.metrics.m5.completed = true;
+                appState.addStars(1);
+                document.getElementById('tito-m5-avatar').innerHTML = getTitoSVG('celebrating');
+                setTimeout(() => initM6(), 1500);
+            }
+        }
+
+        const m6Data = [
+            { id: 'item-1', name: 'Peluche', cat: 'juguetes', icon: '🧸' },
+            { id: 'item-2', name: 'Lápiz', cat: 'utiles', icon: '✏️' },
+            { id: 'item-3', name: 'Perrito', cat: 'animales', icon: '🐶' },
+            { id: 'item-4', name: 'Carro', cat: 'juguetes', icon: '🏎️' },
+            { id: 'item-5', name: 'Cuaderno', cat: 'utiles', icon: '📓' },
+            { id: 'item-6', name: 'Gatito', cat: 'animales', icon: '🐱' }
+        ];
+
+        let m6Selected = null;
+        let m6PlacedCount = 0;
+
+        function initM6() {
+            m6Selected = null;
+            m6PlacedCount = 0;
+            updateProgress(6);
+            showScreen('screen-m6');
+            document.getElementById('tito-m6-avatar').innerHTML = getTitoSVG('explaining');
+
+            // Reset Bins
+            ['juguetes', 'utiles', 'animales'].forEach(c => {
+                document.getElementById(`bin-items-${c}`).innerHTML = '';
+            });
+
+            // Render Items
+            const container = document.getElementById('m6-items-container');
+            container.innerHTML = '';
+            m6Data.forEach(item => {
+                const el = document.createElement('div');
+                el.id = item.id;
+                el.draggable = true;
+                el.ondragstart = (e) => m6DragStart(e, item.id);
+                el.onclick = () => m6SelectItem(item.id);
+                el.className = "cursor-pointer bg-white border-2 border-sky-300 rounded-xl px-3 py-1.5 flex items-center gap-1 shadow-sm hover:scale-105 transition";
+                el.innerHTML = `<span class="text-xl">${item.icon}</span><span class="text-xs font-bold text-slate-700">${item.name}</span>`;
+                container.appendChild(el);
+            });
+        }
+
+        function m6SelectItem(id) {
+            sound.playClick();
+            m6Selected = id;
+            m6Data.forEach(item => {
+                const el = document.getElementById(item.id);
+                if (el) {
+                    if (item.id === id) {
+                        el.classList.add('ring-4', 'ring-amber-400', 'bg-amber-50');
+                    } else {
+                        el.classList.remove('ring-4', 'ring-amber-400', 'bg-amber-50');
+                    }
+                }
+            });
+        }
+
+        function m6DragStart(e, id) {
+            e.dataTransfer.setData('text/plain', id);
+            m6Selected = id;
+        }
+
+        function m6AllowDrop(e) {
+            e.preventDefault();
+            e.currentTarget.classList.add('drag-over');
+        }
+
+        function m6DragLeave(e) {
+            e.currentTarget.classList.remove('drag-over');
+        }
+
+        function m6Drop(e, targetCat) {
+            e.preventDefault();
+            e.currentTarget.classList.remove('drag-over');
+            const itemId = e.dataTransfer.getData('text/plain') || m6Selected;
+            m6ProcessPlacement(itemId, targetCat);
+        }
+
+        function m6PlaceInBin(targetCat) {
+            if (m6Selected) {
+                m6ProcessPlacement(m6Selected, targetCat);
+            }
+        }
+
+        function m6ProcessPlacement(itemId, targetCat) {
+            const itemObj = m6Data.find(i => i.id === itemId);
+            if (!itemObj) return;
+
+            if (itemObj.cat === targetCat) {
+                sound.playClick();
+                const itemEl = document.getElementById(itemId);
+                if (itemEl) {
+                    itemEl.onclick = null;
+                    itemEl.draggable = false;
+                    itemEl.classList.remove('ring-4', 'ring-amber-400');
+                    document.getElementById(`bin-items-${targetCat}`).appendChild(itemEl);
+                }
+                m6Selected = null;
+                m6PlacedCount++;
+
+                if (m6PlacedCount >= m6Data.length) {
+                    appState.metrics.m6.completed = true;
+                    appState.addStars(1);
+                    document.getElementById('tito-m6-avatar').innerHTML = getTitoSVG('celebrating');
+                    setTimeout(() => initM7(), 1200);
+                }
+            } else {
+                sound.playErrorSoft();
+                appState.metrics.m6.errors++;
+                document.getElementById('tito-m6-avatar').innerHTML = getTitoSVG('encouraging');
+            }
+        }
+
+        let m7Collected = new Set();
+
+        function initM7() {
+            m7Collected.clear();
+            updateProgress(7);
+            showScreen('screen-m7');
+            document.getElementById('tito-m7-avatar').innerHTML = getTitoSVG('explaining');
+            document.getElementById('m7-collected-count').innerText = "0";
+            document.getElementById('m7-scroll-bar').style.width = "0%";
+        }
+
+        function m7OnScroll() {
+            const win = document.getElementById('m7-scroll-window');
+            const pct = (win.scrollTop / (win.scrollHeight - win.clientHeight)) * 100;
+            document.getElementById('m7-scroll-bar').style.width = `${pct}%`;
+        }
+
+        function m7Collect(num) {
+            if (m7Collected.has(num)) return;
+            sound.playMagic();
+            m7Collected.add(num);
+
+            const item = document.getElementById(`treasure-${num}`);
+            item.classList.add('opacity-40', 'pointer-events-none');
+            item.querySelector('span:last-child').innerText = "¡Recolectado! ✨";
+
+            document.getElementById('m7-collected-count').innerText = m7Collected.size;
+
+            if (m7Collected.size >= 5) {
+                appState.metrics.m7.completed = true;
+                appState.addStars(1);
+                document.getElementById('tito-m7-avatar').innerHTML = getTitoSVG('celebrating');
+                setTimeout(() => showFinalCelebration(), 1200);
+            }
+        }
+
+        function showFinalCelebration() {
+            sound.playSuccess();
+            updateProgress(8);
+            showScreen('screen-final');
+
+            document.getElementById('tito-final-avatar').innerHTML = getTitoSVG('celebrating');
+            document.getElementById('final-student-name').innerText = appState.studentName;
+            document.getElementById('final-student-section').innerText = appState.studentSection;
+            document.getElementById('final-student-date').innerText = appState.studentDate;
+            document.getElementById('final-student-score').innerText = `${appState.stars} / 7 (${Math.round((appState.stars/7)*100)}%)`;
+
+            // Populate Table
+            const tbody = document.getElementById('final-report-table-body');
+            tbody.innerHTML = '';
+
+            Object.keys(appState.metrics).forEach((mKey, idx) => {
+                const data = appState.metrics[mKey];
+                const tr = document.createElement('tr');
+                const statusBadge = data.completed 
+                    ? '<span class="text-emerald-700 bg-emerald-100 font-bold px-2 py-0.5 rounded">Completado</span>' 
+                    : '<span class="text-amber-700 bg-amber-100 font-bold px-2 py-0.5 rounded">En Proceso</span>';
+                
+                const obs = data.errors === 0 
+                    ? 'Ejecución perfecta sin dificultades.' 
+                    : `Requirió ${data.errors} intento(s) adicional(es); demuestra persistencia.`;
+
+                tr.innerHTML = `
+                    <td class="p-2 font-bold">Misión ${idx + 1}</td>
+                    <td class="p-2">${data.detail}</td>
+                    <td class="p-2">${statusBadge}</td>
+                    <td class="p-2 text-slate-500">${obs}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+    </script>
+</body>
+</html>
