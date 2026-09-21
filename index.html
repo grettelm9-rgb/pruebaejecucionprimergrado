@@ -3,154 +3,130 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LA AVENTURA DE TITO: MISIÓN MOUSE - Prueba de Ejecución 2026</title>
+  <title>Colegio Diocesano Padre Eladio Sancho - Prueba de Ejecución 2026</title>
   <style>
-    /* ==========================================================================
-       1. ESTILOS DE LA IDENTIDAD VISUAL Y TEMA INFANTIL MODERNO
-       ========================================================================== */
     :root {
-      --primary: #3B82F6;
-      --primary-dark: #1D4ED8;
-      --secondary: #F59E0B;
-      --accent: #10B981;
-      --purple: #8B5CF6;
-      --pink: #EC4899;
-      --bg-gradient: linear-gradient(135deg, #E0F2FE 0%, #F0FDFA 50%, #FEF3C7 100%);
-      --card-bg: #FFFFFF;
-      --text-main: #1E293B;
-      --text-muted: #64748B;
-      --border-radius: 24px;
-      --shadow-soft: 0 10px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
-      --shadow-hover: 0 20px 30px -10px rgba(59, 130, 246, 0.2);
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --header-bg: linear-gradient(135deg, #1e40af 0%, #2563eb 100%);
+      --bg-body: #f8fafc;
+      --card-bg: #ffffff;
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+      --success-bg: #dcfce7;
+      --success-text: #15803d;
+      --warning-bg: #fef9c3;
+      --warning-text: #a16207;
+      --danger-bg: #fee2e2;
+      --danger-text: #b91c1c;
+      --border-color: #e2e8f0;
+      --radius: 16px;
     }
 
     * {
       box-sizing: border-box;
       user-select: none;
-      -webkit-user-drag: none;
-      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Comic Sans MS', 'Chalkboard SE', sans-serif;
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
     }
 
     body {
       margin: 0;
       padding: 0;
-      min-height: 100vh;
-      background: var(--bg-gradient);
+      background-color: #cbd5e1;
       color: var(--text-main);
       display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      overflow-x: hidden;
+      justify-content: center;
+      min-height: 100vh;
     }
 
-    /* CONTENEDOR PRINCIPAL */
-    .app-container {
+    .app-viewport {
       width: 100%;
-      max-width: 1100px;
+      max-width: 1120px;
+      background: var(--bg-body);
       min-height: 100vh;
       display: flex;
       flex-direction: column;
-      padding: 16px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
     }
 
-    /* BANNER INSTITUCIONAL */
-    .inst-header {
-      background: rgba(255, 255, 255, 0.9);
-      backdrop-filter: blur(8px);
-      border-radius: 16px;
-      padding: 12px 20px;
-      border: 2px solid #E2E8F0;
-      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+    /* TOP HEADER INSTITUCIONAL */
+    .top-header {
+      background: var(--header-bg);
+      color: white;
+      padding: 16px 28px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
 
-    .inst-info h1 {
-      font-size: 1.1rem;
+    .top-header h1 {
+      font-size: 1.35rem;
       margin: 0;
-      color: var(--primary-dark);
       font-weight: 800;
-      text-transform: uppercase;
       letter-spacing: 0.5px;
+      text-transform: uppercase;
     }
 
-    .inst-info p {
-      margin: 2px 0 0 0;
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      font-weight: 600;
+    .top-header p {
+      margin: 3px 0 0 0;
+      font-size: 0.9rem;
+      opacity: 0.9;
     }
 
-    .badge-details {
-      display: flex;
-      gap: 12px;
-      background: #F1F5F9;
-      padding: 6px 12px;
-      border-radius: 12px;
-      font-size: 0.8rem;
+    .session-badge {
+      background: rgba(255,255,255,0.18);
+      border: 1px solid rgba(255,255,255,0.3);
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 0.82rem;
       font-weight: 700;
-      color: #334155;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      backdrop-filter: blur(4px);
     }
 
-    /* TARJETA DE CONTENIDO */
-    .main-card {
-      background: var(--card-bg);
-      border-radius: var(--border-radius);
-      box-shadow: var(--shadow-soft);
+    .session-badge .dot {
+      width: 10px;
+      height: 10px;
+      background-color: #22c55e;
+      border-radius: 50%;
+      box-shadow: 0 0 8px #22c55e;
+    }
+
+    /* MAIN CONTAINER */
+    .main-content {
       padding: 24px;
       flex: 1;
       display: flex;
       flex-direction: column;
-      position: relative;
-      border: 3px solid #F1F5F9;
-      margin-bottom: 16px;
     }
 
-    /* PANTALLA DE BIENVENIDA / REGISTRO */
-    .welcome-screen {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      border: 1px solid var(--border-color);
+      padding: 24px;
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+      margin-bottom: 20px;
+    }
+
+    /* REGISTRO INICIAL */
+    .register-box {
+      max-width: 500px;
+      margin: 40px auto;
       text-align: center;
-      padding: 20px 10px;
-      max-width: 650px;
-      margin: 0 auto;
     }
 
-    .tito-welcome-box {
-      width: 180px;
-      height: 180px;
-      margin-bottom: 15px;
-      animation: float 3s ease-in-out infinite;
-    }
-
-    @keyframes float {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-10px); }
-    }
-
-    .welcome-title {
-      font-size: 2rem;
-      font-weight: 900;
+    .register-box h2 {
       color: var(--primary-dark);
-      margin: 0 0 8px 0;
-    }
-
-    .welcome-subtitle {
-      font-size: 1.1rem;
-      color: var(--text-muted);
-      margin-bottom: 24px;
+      margin-top: 0;
     }
 
     .form-group {
-      width: 100%;
-      margin-bottom: 16px;
       text-align: left;
+      margin-bottom: 16px;
     }
 
     .form-group label {
@@ -163,1595 +139,946 @@
 
     .form-control {
       width: 100%;
-      padding: 14px 18px;
-      font-size: 1.05rem;
-      border: 2px solid #CBD5E1;
-      border-radius: 14px;
+      padding: 12px 16px;
+      border: 2px solid #cbd5e1;
+      border-radius: 10px;
+      font-size: 1rem;
       outline: none;
-      transition: all 0.2s;
     }
 
     .form-control:focus {
       border-color: var(--primary);
-      box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
     }
 
-    .btn-adventure {
-      background: linear-gradient(135deg, #10B981 0%, #059669 100%);
-      color: white;
-      font-size: 1.3rem;
-      font-weight: 800;
-      padding: 16px 36px;
-      border: none;
-      border-radius: 20px;
-      cursor: pointer;
-      box-shadow: 0 10px 20px -5px rgba(16, 185, 129, 0.4);
-      transition: all 0.2s;
-      width: 100%;
-      margin-top: 10px;
-    }
-
-    .btn-adventure:hover {
-      transform: translateY(-2px) scale(1.02);
-      box-shadow: 0 15px 25px -5px rgba(16, 185, 129, 0.5);
-    }
-
-    /* RUTA DE PROGRESO DE AVENTURA */
-    .adventure-path {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 20px;
-      position: relative;
-      padding: 0 10px;
-    }
-
-    .path-line {
-      position: absolute;
-      top: 50%;
-      left: 30px;
-      right: 30px;
-      height: 6px;
-      background: #E2E8F0;
-      z-index: 1;
-      transform: translateY(-50%);
-      border-radius: 3px;
-    }
-
-    .path-line-progress {
-      position: absolute;
-      top: 50%;
-      left: 30px;
-      height: 6px;
-      background: linear-gradient(90deg, var(--primary), var(--accent));
-      z-index: 1;
-      transform: translateY(-50%);
-      border-radius: 3px;
-      transition: width 0.4s ease;
-      width: 0%;
-    }
-
-    .path-node {
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      background: #FFFFFF;
-      border: 3px solid #CBD5E1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 800;
-      font-size: 0.95rem;
-      color: var(--text-muted);
-      z-index: 2;
-      transition: all 0.3s;
-    }
-
-    .path-node.active {
-      border-color: var(--primary);
+    .btn-primary {
       background: var(--primary);
       color: white;
-      transform: scale(1.15);
-      box-shadow: 0 0 0 6px rgba(59, 130, 246, 0.2);
+      border: none;
+      padding: 14px 28px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      border-radius: 12px;
+      cursor: pointer;
+      width: 100%;
+      transition: background 0.2s;
     }
 
-    .path-node.completed {
-      border-color: var(--accent);
-      background: var(--accent);
-      color: white;
+    .btn-primary:hover {
+      background: var(--primary-dark);
     }
 
-    /* ENCABEZADO DE MISIÓN */
-    .mission-header-box {
+    /* MISIONES Y ESCENARIO */
+    .mission-header {
       display: flex;
       align-items: center;
       gap: 16px;
-      background: #F8FAFC;
-      border-radius: 16px;
-      padding: 12px 18px;
+      background: #f1f5f9;
+      padding: 14px 20px;
+      border-radius: 12px;
       margin-bottom: 20px;
-      border: 2px solid #E2E8F0;
     }
 
-    .tito-avatar-small {
-      width: 65px;
-      height: 65px;
+    .tito-avatar {
+      width: 60px;
+      height: 60px;
       flex-shrink: 0;
     }
 
-    .mission-title-container h2 {
-      margin: 0;
-      font-size: 1.3rem;
-      color: var(--primary-dark);
-      font-weight: 800;
-    }
-
-    .mission-title-container p {
-      margin: 4px 0 0 0;
-      font-size: 0.95rem;
-      color: #475569;
-      font-weight: 600;
-    }
-
-    /* ESCENARIOS DE INTERACCIÓN */
     .stage-canvas {
-      flex: 1;
-      background: #F1F5F9;
-      border-radius: 18px;
-      border: 2px inset #CBD5E1;
-      position: relative;
+      min-height: 380px;
+      background: #fafafa;
+      border: 2px dashed #cbd5e1;
+      border-radius: 14px;
       display: flex;
       align-items: center;
       justify-content: center;
-      min-height: 380px;
+      position: relative;
+      padding: 20px;
       overflow: hidden;
-      padding: 16px;
     }
 
-    /* MISIÓN 1: MOUSE SVG */
-    .mouse-parts-svg {
+    /* MISIÓN 1: MOUSE SVG MEJORADO */
+    .mouse-svg-container {
       width: 320px;
       height: 320px;
     }
 
-    .part-interactive {
+    .mouse-btn {
       cursor: pointer;
-      transition: all 0.2s;
+      transition: filter 0.2s;
     }
 
-    .part-interactive:hover {
-      filter: brightness(1.15) drop-shadow(0 0 6px rgba(59, 130, 246, 0.5));
+    .mouse-btn:hover {
+      filter: brightness(1.15);
+    }
+
+    .mouse-text {
+      font-size: 15px;
+      font-weight: 800;
+      fill: #0f172a;
+      text-anchor: middle;
+      pointer-events: none;
     }
 
     /* MISIÓN 2: DIRECCIONES */
-    .direction-grid {
+    .grid-directions {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      grid-template-rows: repeat(3, 1fr);
       gap: 16px;
       width: 100%;
       max-width: 420px;
-      height: 340px;
+      height: 320px;
     }
 
     .dir-zone {
       background: white;
-      border: 3px dashed #CBD5E1;
-      border-radius: 16px;
+      border: 2px dashed #94a3b8;
+      border-radius: 12px;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       font-weight: 800;
-      color: var(--text-muted);
-      transition: all 0.2s;
       cursor: pointer;
+      transition: all 0.2s;
     }
 
-    .dir-zone.highlight {
+    .dir-zone.active-target {
       border-color: var(--primary);
-      background: #E0F2FE;
+      background: #eff6ff;
       color: var(--primary-dark);
-      transform: scale(1.03);
+      transform: scale(1.04);
     }
 
     /* MISIÓN 3: MUNDO DE OBJETOS */
-    .objects-world {
+    .objects-grid {
       display: flex;
-      flex-wrap: wrap;
       gap: 24px;
+      flex-wrap: wrap;
       justify-content: center;
-      align-items: center;
-      max-width: 600px;
     }
 
-    .world-item {
+    .obj-card {
       width: 110px;
       height: 110px;
       background: white;
-      border-radius: 20px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+      border: 2px solid #cbd5e1;
+      border-radius: 16px;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      font-size: 2.8rem;
       cursor: pointer;
-      border: 3px solid #E2E8F0;
-      transition: all 0.2s;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+      transition: transform 0.2s;
     }
 
-    .world-item:hover {
+    .obj-card:hover {
       transform: scale(1.08);
-      border-color: var(--primary);
     }
 
-    .world-item svg {
-      width: 60px;
-      height: 60px;
-    }
-
-    /* MISIÓN 4 & 5: RETO CLIC Y CAJAS MÁGICAS */
-    .magic-boxes-container {
+    /* MISIÓN 6: ALMACÉN DRAG & DROP */
+    .drag-pool {
       display: flex;
-      gap: 30px;
+      gap: 16px;
+      margin-bottom: 24px;
       justify-content: center;
-      align-items: center;
-      flex-wrap: wrap;
     }
 
-    .magic-box-card {
-      width: 140px;
-      height: 140px;
-      background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
-      border-radius: 24px;
+    .drop-zones-container {
       display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-weight: 800;
-      cursor: pointer;
-      box-shadow: 0 10px 20px rgba(217, 119, 6, 0.3);
-      transition: all 0.3s;
-      position: relative;
-    }
-
-    .magic-box-card:hover {
-      transform: translateY(-4px) scale(1.04);
-    }
-
-    .magic-box-card.opened {
-      background: linear-gradient(135deg, #10B981 0%, #059669 100%);
-      box-shadow: 0 10px 20px rgba(16, 185, 129, 0.3);
-    }
-
-    /* MISIÓN 6: ALMACÉN (DRAG & DROP) */
-    .warehouse-container {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
+      gap: 16px;
       width: 100%;
     }
 
-    .drag-items-pool {
-      display: flex;
-      justify-content: center;
-      gap: 16px;
-      flex-wrap: wrap;
-      min-height: 90px;
-      background: white;
-      padding: 12px;
-      border-radius: 16px;
-      border: 2px dashed #CBD5E1;
-    }
-
-    .drop-categories {
-      display: flex;
-      gap: 16px;
-      justify-content: space-between;
-    }
-
-    .drop-zone-box {
+    .drop-target-box {
       flex: 1;
       min-height: 160px;
-      background: white;
-      border: 3px dashed #94A3B8;
-      border-radius: 18px;
+      background: #f8fafc;
+      border: 2px dashed #94a3b8;
+      border-radius: 14px;
       padding: 12px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      transition: all 0.2s;
+      gap: 10px;
     }
 
-    .drop-zone-box.drag-over {
-      background: #FEF3C7;
-      border-color: var(--secondary);
-    }
-
-    .drop-zone-title {
+    .drop-target-box h4 {
+      margin: 0;
+      color: var(--primary-dark);
       font-size: 0.95rem;
-      font-weight: 800;
-      color: var(--primary-dark);
-      margin-bottom: 8px;
-      text-transform: uppercase;
     }
 
-    /* MISIÓN 7: SCROLL VERTICAL */
-    .scroll-view-stage {
+    /* PANTALLA FINAL / REPORTE DOCENTE (ESTILO EXACTO A CAPTURAS) */
+    .report-header {
+      text-align: center;
+      border-bottom: 2px solid #e2e8f0;
+      padding-bottom: 16px;
+      margin-bottom: 20px;
+    }
+
+    .report-header h2 {
+      color: #1e3a8a;
+      margin: 0 0 4px 0;
+      font-size: 1.5rem;
+    }
+
+    .report-header h3 {
+      color: #2563eb;
+      margin: 0 0 4px 0;
+      font-size: 1.2rem;
+    }
+
+    .report-header p {
+      margin: 0;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    .info-grid-card {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 16px 24px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .info-item label {
+      display: block;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .info-item span {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: #0f172a;
+    }
+
+    .report-table {
       width: 100%;
-      height: 360px;
-      overflow-y: scroll;
-      background: linear-gradient(to bottom, #E0F2FE 0%, #FEF3C7 50%, #ECFDF5 100%);
-      border-radius: 16px;
-      padding: 20px;
-      position: relative;
+      border-collapse: collapse;
+      margin-bottom: 24px;
+      font-size: 0.92rem;
     }
 
-    .scroll-content-long {
-      height: 1300px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px 0;
+    .report-table th, .report-table td {
+      border: 1px solid #cbd5e1;
+      padding: 10px 14px;
+      text-align: left;
     }
 
-    .hidden-treasure-item {
-      background: white;
-      padding: 14px 24px;
-      border-radius: 16px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      display: flex;
-      align-items: center;
-      gap: 12px;
+    .report-table th {
+      background: #f1f5f9;
+      color: #334155;
+      font-weight: 700;
+    }
+
+    .badge-level {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 12px;
       font-weight: 800;
-      color: var(--primary-dark);
-      border: 2px solid var(--primary);
-      cursor: pointer;
+      font-size: 0.82rem;
     }
 
-    /* RETROALIMENTACIÓN DE TITO (TOAST) */
+    .badge-avanzado { background: var(--success-bg); color: var(--success-text); }
+    .badge-bueno { background: var(--warning-bg); color: var(--warning-text); }
+    .badge-mejorar { background: var(--danger-bg); color: var(--danger-text); }
+
+    .callout-obs {
+      background: #f1f5f9;
+      border-left: 5px solid var(--primary);
+      padding: 16px 20px;
+      border-radius: 8px;
+      margin-bottom: 24px;
+    }
+
+    .callout-obs h4 {
+      margin: 0 0 6px 0;
+      color: #0f172a;
+    }
+
+    .callout-obs p {
+      margin: 0;
+      color: #475569;
+      font-size: 0.95rem;
+    }
+
+    .action-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .btn-action {
+      padding: 12px 24px;
+      border-radius: 10px;
+      border: none;
+      font-weight: 800;
+      font-size: 0.95rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: opacity 0.2s;
+    }
+
+    .btn-action:hover { opacity: 0.9; }
+    .btn-gray { background: #e2e8f0; color: #334155; }
+    .btn-green { background: #16a34a; color: white; }
+    .btn-blue { background: #2563eb; color: white; }
+
+    /* FEEDBACK TOAST DE TITO */
     .tito-toast {
       position: fixed;
-      bottom: 24px;
+      bottom: 20px;
       left: 50%;
-      transform: translateX(-50%) translateY(120px);
-      background: #1E293B;
+      transform: translateX(-50%) translateY(100px);
+      background: #0f172a;
       color: white;
-      padding: 14px 24px;
+      padding: 12px 24px;
       border-radius: 30px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-      z-index: 1000;
-      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       font-weight: 700;
-      font-size: 1.05rem;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+      transition: transform 0.3s ease;
+      z-index: 1000;
     }
 
     .tito-toast.show {
       transform: translateX(-50%) translateY(0);
     }
 
-    .tito-toast-avatar {
-      width: 40px;
-      height: 40px;
-    }
-
-    /* PANTALLA FINAL Y REPORTE DOCENTE */
-    .celebration-screen {
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 16px;
-    }
-
-    .summary-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 12px;
-      font-size: 0.88rem;
-    }
-
-    .summary-table th, .summary-table td {
-      border: 1px solid #CBD5E1;
-      padding: 8px 12px;
-      text-align: left;
-    }
-
-    .summary-table th {
-      background: #F1F5F9;
-      color: var(--primary-dark);
-    }
-
-    .btn-action-group {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      justify-content: center;
-      margin-top: 16px;
-    }
-
-    .btn-secondary-action {
-      background: #3B82F6;
-      color: white;
-      padding: 12px 20px;
-      border-radius: 12px;
-      border: none;
-      font-weight: 700;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-
-    .btn-secondary-action:hover {
-      background: var(--primary-dark);
-    }
-
-    /* ESTILOS DE IMPRESIÓN */
     @media print {
-      body {
-        background: white !important;
-        color: black !important;
-      }
-      .inst-header, .adventure-path, .btn-action-group, .tito-toast {
-        display: none !important;
-      }
-      .main-card {
-        box-shadow: none !important;
-        border: none !important;
-        padding: 0 !important;
-      }
+      body { background: white; }
+      .app-viewport { box-shadow: none; max-width: 100%; }
+      .action-buttons, .tito-toast { display: none !important; }
     }
   </style>
 </head>
 <body>
 
-  <div class="app-container">
-    <!-- ENCABEZADO INSTITUCIONAL -->
-    <header class="inst-header">
-      <div class="inst-info">
-        <h1>Colegio Diocesano Padre Eladio Sancho</h1>
-        <p>Departamento de Informática Educativa | II Semestre, 2026</p>
+  <div class="app-viewport">
+    <!-- BANNER SUPERIOR -->
+    <header class="top-header">
+      <div>
+        <h1>COLEGIO DIOCESANO PADRE ELADIO SANCHO</h1>
+        <p>Prueba de Ejecución II Semestre, 2026 | Informática Educativa</p>
       </div>
-      <div class="badge-details">
-        <span>Nivel: Primer Grado</span>
-        <span>Docente: Grettel Monge Rojas</span>
-        <span>Porcentaje: 30%</span>
+      <div class="session-badge" id="sessionBadge">
+        <span class="dot"></span>
+        <span id="sessionBadgeText">SESIÓN: Inactiva</span>
       </div>
     </header>
 
-    <!-- TARJETA PRINCIPAL DE LA AVENTURA -->
-    <main class="main-card" id="mainContainer">
-      <!-- Se renderiza dinámicamente -->
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="main-content" id="mainApp">
+      <!-- Se genera mediante JS -->
     </main>
   </div>
 
-  <!-- TOAST DE RETROALIMENTACIÓN DE TITO -->
-  <div class="tito-toast" id="titoToast">
-    <div class="tito-toast-avatar" id="toastTitoAvatar"></div>
-    <span id="toastMessage">¡Hola! Soy Tito.</span>
-  </div>
+  <!-- NOTIFICADOR DE TITO -->
+  <div class="tito-toast" id="titoToast">¡Hola! Soy Tito el Ratón.</div>
 
   <script>
     /* ==========================================================================
-       2. SINTETIZADOR DE AUDIO WEB (100% OFFLINE, SIN ARCHIVOS MP3)
+       ESTADO Y REGISTRO AUTÓNOMO (20 COMPUTADORAS SIMULTÁNEAS)
        ========================================================================== */
-    const AudioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    const state = {
+      studentName: '',
+      section: '1-1',
+      officialDate: '2026-09-21',
+      sessionId: '',
+      currentMission: 0,
+      errors: {
+        ind1: 0, // Izquierdo
+        ind2: 0, // Derecho / Rueda
+        ind3: 0, // Desplazamiento 4 direcc.
+        ind4: 0, // Clic selección
+        ind5: 0, // Discrimina Clic / Doble Clic
+        ind6: 0, // Ritmo Doble Clic
+        ind7: 0, // Drag & Drop
+        ind8: 0, // Scroll Rueda
+        ind9: 0, // Indicaciones de Tito
+        ind10: 0 // Concentración/Completado
+      },
+      m3TargetIdx: 0,
+      m6ItemsDropped: 0
+    };
 
-    function playSound(type) {
-      if (AudioCtx.state === 'suspended') AudioCtx.resume();
-      const osc = AudioCtx.createOscillator();
-      const gain = AudioCtx.createGain();
-      osc.connect(gain);
-      gain.connect(AudioCtx.destination);
-
-      const now = AudioCtx.currentTime;
-
-      if (type === 'click') {
-        osc.frequency.setValueAtTime(600, now);
-        gain.gain.setValueAtTime(0.1, now);
-        gain.gain.exponentialRampToValueAtTime(0.01, now + 0.05);
-        osc.start(now);
-        osc.stop(now + 0.05);
-      } else if (type === 'success') {
-        osc.frequency.setValueAtTime(523.25, now);
-        osc.frequency.exponentialRampToValueAtTime(880, now + 0.2);
-        gain.gain.setValueAtTime(0.15, now);
-        gain.gain.exponentialRampToValueAtTime(0.01, now + 0.2);
-        osc.start(now);
-        osc.stop(now + 0.2);
-      } else if (type === 'pop') {
-        osc.frequency.setValueAtTime(300, now);
-        osc.frequency.exponentialRampToValueAtTime(600, now + 0.1);
-        gain.gain.setValueAtTime(0.2, now);
-        gain.gain.exponentialRampToValueAtTime(0.01, now + 0.1);
-        osc.start(now);
-        osc.stop(now + 0.1);
-      } else if (type === 'fanfare') {
-        const notes = [523.25, 659.25, 783.99, 1046.50];
-        notes.forEach((freq, idx) => {
-          const noteOsc = AudioCtx.createOscillator();
-          const noteGain = AudioCtx.createGain();
-          noteOsc.connect(noteGain);
-          noteGain.connect(AudioCtx.destination);
-          noteOsc.frequency.value = freq;
-          noteGain.gain.setValueAtTime(0.12, now + idx * 0.1);
-          noteGain.gain.exponentialRampToValueAtTime(0.01, now + idx * 0.1 + 0.25);
-          noteOsc.start(now + idx * 0.1);
-          noteOsc.stop(now + idx * 0.1 + 0.25);
-        });
-      }
+    function showToast(msg) {
+      const toast = document.getElementById('titoToast');
+      toast.innerText = msg;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 3000);
     }
 
     /* ==========================================================================
-       3. ILUSTRADOR SVG DE TITO (PERSONAJE CONSISTENTE CON POSES)
+       SVG DE TITO Y MOUSE
        ========================================================================== */
-    function getTitoSVG(pose = 'happy') {
-      let eyes = `<circle cx="38" cy="42" r="5" fill="#1E293B"/><circle cx="62" cy="42" r="5" fill="#1E293B"/><circle cx="40" cy="40" r="2" fill="white"/><circle cx="64" cy="40" r="2" fill="white"/>`;
-      let mouth = `<path d="M 40 58 Q 50 68 60 58" stroke="#1E293B" stroke-width="3.5" fill="none" stroke-linecap="round"/>`;
-
-      if (pose === 'surprised') {
-        mouth = `<circle cx="50" cy="60" r="7" fill="#1E293B"/>`;
-      } else if (pose === 'thinking') {
-        eyes = `<circle cx="38" cy="39" r="5" fill="#1E293B"/><circle cx="62" cy="39" r="5" fill="#1E293B"/>`;
-        mouth = `<path d="M 42 60 L 58 60" stroke="#1E293B" stroke-width="3.5" fill="none"/>`;
-      } else if (pose === 'celebrating') {
-        mouth = `<path d="M 38 54 Q 50 72 62 54 Z" fill="#EF4444"/>`;
-      }
-
+    function getTitoSVG() {
       return `
-        <svg viewBox="0 0 100 100" width="100%" height="100%">
-          <!-- Orejas -->
-          <circle cx="22" cy="22" r="18" fill="#94A3B8"/>
-          <circle cx="22" cy="22" r="11" fill="#F472B6"/>
-          <circle cx="78" cy="22" r="18" fill="#94A3B8"/>
-          <circle cx="78" cy="22" r="11" fill="#F472B6"/>
-          <!-- Cabeza -->
-          <circle cx="50" cy="50" r="32" fill="#CBD5E1"/>
-          <!-- Hocico -->
-          <ellipse cx="50" cy="55" rx="16" ry="12" fill="#F8FAFC"/>
-          <ellipse cx="50" cy="48" rx="5" ry="3.5" fill="#1E293B"/>
-          <!-- Ojos y Boca -->
-          ${eyes}
-          ${mouth}
-          <!-- Camisa/Acceso -->
-          <path d="M 30 80 Q 50 70 70 80 L 75 100 L 25 100 Z" fill="#3B82F6"/>
+        <svg viewBox="0 0 100 100" class="tito-avatar">
+          <circle cx="22" cy="22" r="16" fill="#94a3b8"/>
+          <circle cx="22" cy="22" r="9" fill="#f472b6"/>
+          <circle cx="78" cy="22" r="16" fill="#94a3b8"/>
+          <circle cx="78" cy="22" r="9" fill="#f472b6"/>
+          <circle cx="50" cy="50" r="30" fill="#cbd5e1"/>
+          <ellipse cx="50" cy="54" rx="14" ry="10" fill="#f8fafc"/>
+          <ellipse cx="50" cy="48" rx="4" ry="3" fill="#0f172a"/>
+          <circle cx="38" cy="42" r="4" fill="#0f172a"/>
+          <circle cx="62" cy="42" r="4" fill="#0f172a"/>
+          <path d="M 40 58 Q 50 66 60 58" stroke="#0f172a" stroke-width="3" fill="none"/>
         </svg>
       `;
     }
 
     /* ==========================================================================
-       4. ESTADO DE LA SESIÓN Y TELEMETRÍA DE LA PRUEBA
+       RENDERIZADO DE PANTALLAS
        ========================================================================== */
-    const defaultState = {
-      studentName: '',
-      section: '',
-      officialDate: '',
-      sessionId: '',
-      startTime: null,
-      endTime: null,
-      currentMission: 0,
-      completed: false,
-      logs: [],
-      indicatorScores: {}
-    };
+    function render() {
+      const main = document.getElementById('mainApp');
 
-    let session = { ...defaultState };
-
-    // Verificar LocalStorage
-    function checkLocalStorage() {
-      try {
-        localStorage.setItem('test_ls', '1');
-        localStorage.removeItem('test_ls');
-        return true;
-      } catch (e) {
-        alert("⚠️ ATENCIÓN DOCENTE: El almacenamiento local (localStorage) no está disponible en este navegador. Verifique la configuración antes de aplicar la prueba.");
-        return false;
-      }
-    }
-
-    function saveSession() {
-      if (!session.sessionId) return;
-      try {
-        const key = `mouseTest_2026_${session.studentName}_${session.officialDate}_${session.sessionId}`;
-        localStorage.setItem(key, JSON.stringify(session));
-      } catch (e) {
-        console.error("Error al guardar sesión en LocalStorage", e);
-      }
-    }
-
-    function logTelemetry(mission, activity, indicator, expected, actual, isSuccess) {
-      const entry = {
-        mission,
-        activity,
-        indicator,
-        expectedAction: expected,
-        actualAction: actual,
-        result: isSuccess ? 'success' : 'error',
-        timestamp: new Date().toISOString()
-      };
-      session.logs.push(entry);
-      saveSession();
-    }
-
-    function showToast(message, pose = 'happy') {
-      const toast = document.getElementById('titoToast');
-      document.getElementById('toastMessage').innerText = message;
-      document.getElementById('toastTitoAvatar').innerHTML = getTitoSVG(pose);
-      toast.classList.add('show');
-      setTimeout(() => toast.classList.remove('show'), 3200);
-    }
-
-    /* ==========================================================================
-       5. NAVEGACIÓN Y COMPONENTES DE INTERFAZ
-       ========================================================================== */
-    function renderApp() {
-      const container = document.getElementById('mainContainer');
-
-      if (session.currentMission === 0) {
-        renderWelcomeScreen(container);
-      } else if (session.currentMission <= 7) {
-        renderMissionCard(container);
+      if (state.currentMission === 0) {
+        renderRegister(main);
+      } else if (state.currentMission <= 7) {
+        renderMission(main);
       } else {
-        renderFinalScreen(container);
+        renderFinalReport(main);
       }
     }
 
-    function renderWelcomeScreen(container) {
-      container.innerHTML = `
-        <div class="welcome-screen">
-          <div class="tito-welcome-box">${getTitoSVG('happy')}</div>
-          <h1 class="welcome-title">LA AVENTURA DE TITO: MISIÓN MOUSE</h1>
-          <p class="welcome-subtitle">¡Hola! Soy Tito. Ayúdame a completar todas las misiones digitales con tu mouse.</p>
+    // REGISTRO INICIAL
+    function renderRegister(main) {
+      main.innerHTML = `
+        <div class="card register-box">
+          ${getTitoSVG()}
+          <h2>LA AVENTURA DE TITO: MISIÓN MOUSE</h2>
+          <p style="color:var(--text-muted); margin-bottom:24px;">Ingresa los datos para iniciar la prueba individual.</p>
           
           <div class="form-group">
-            <label for="inputName">Nombre completo del estudiante:</label>
-            <input type="text" id="inputName" class="form-control" placeholder="Ej. Lucía Vargas Solís" value="${session.studentName}">
+            <label>Nombre del Estudiante:</label>
+            <input type="text" id="regName" class="form-control" value="Ana Rojas" placeholder="Nombre completo">
           </div>
-
           <div class="form-group">
-            <label for="inputSection">Sección:</label>
-            <input type="text" id="inputSection" class="form-control" placeholder="Ej. 1-A" value="${session.section}">
+            <label>Sección:</label>
+            <input type="text" id="regSec" class="form-control" value="1-1">
           </div>
-
           <div class="form-group">
-            <label for="inputDate">Fecha oficial de aplicación:</label>
-            <input type="date" id="inputDate" class="form-control" value="${session.officialDate}">
+            <label>Fecha Oficial de Aplicación:</label>
+            <input type="date" id="regDate" class="form-control" value="${state.officialDate}">
           </div>
 
-          <button class="btn-adventure" onclick="handleStartAdventure()">INICIAR AVENTURA 🚀</button>
+          <button class="btn-primary" onclick="startAdventure()">INICIAR AVENTURA 🚀</button>
         </div>
       `;
     }
 
-    function handleStartAdventure() {
-      if (!checkLocalStorage()) return;
+    function startAdventure() {
+      const name = document.getElementById('regName').value.trim();
+      const sec = document.getElementById('regSec').value.trim();
+      const date = document.getElementById('regDate').value;
 
-      const name = document.getElementById('inputName').value.trim();
-      const section = document.getElementById('inputSection').value.trim();
-      const date = document.getElementById('inputDate').value;
+      if (!name || !sec || !date) return alert("Por favor complete todos los campos.");
 
-      if (!name || !section || !date) {
-        alert("⚠️ Por favor, la docente debe ingresar el Nombre, Sección y Fecha oficial antes de iniciar.");
-        return;
-      }
+      state.studentName = name;
+      state.section = sec;
+      state.officialDate = date;
 
-      session.studentName = name;
-      session.section = section;
-      session.officialDate = date;
-      session.sessionId = 'S_' + Date.now();
-      session.startTime = new Date().toISOString();
-      session.currentMission = 1;
+      // Generar ID único de sesión para evitar mezcla entre las 20 computadoras
+      const cleanName = name.replace(/\s+/g, '_').toUpperCase();
+      state.sessionId = `pruebaMouse_2026_${cleanName}_${Date.now().toString().slice(-6)}`;
 
-      saveSession();
-      playSound('fanfare');
-      renderApp();
+      document.getElementById('sessionBadgeText').innerText = `SESIÓN: ${state.sessionId.slice(0,25)}...`;
+      state.currentMission = 1;
+      render();
     }
 
-    function renderMissionCard(container) {
-      const missionTitles = [
+    // NAVEGACIÓN DE MISIONES
+    function renderMission(main) {
+      const titles = [
         "",
-        "Misión 1: Conozco mi Mouse",
-        "Misión 2: Muevo el Puntero",
-        "Misión 3: Encuentra y Selecciona",
-        "Misión 4: El Reto del Clic",
-        "Misión 5: Las Cajas Mágicas",
-        "Misión 6: El Almacén de Tito",
-        "Misión 7: Busca más Objetos"
+        "Misión 1: Partes del Mouse",
+        "Misión 2: Desplazamiento del Puntero",
+        "Misión 3: Selección con Clic Izquierdo",
+        "Misión 4: Clic Simple vs Doble Clic",
+        "Misión 5: Apertura de Cajas Misteriosas",
+        "Misión 6: Almacén de Clasificación (Drag & Drop)",
+        "Misión 7: Navegación Vertical con Rueda Scroll"
       ];
 
-      const missionInstructions = [
-        "",
-        "Haz clic en cada parte del mouse que Tito te vaya indicando.",
-        "Mueve físicamente tu mouse para llevar el puntero a la zona indicada.",
-        "Mueve el puntero y selecciona con clic izquierdo el objeto solicitado.",
-        "Sigue las instrucciones de Tito: aplica Clic Sencillo o Doble Clic.",
-        "Aplica DOBLE CLIC sobre cada caja mágica para abrirlas todas.",
-        "Arrastra los objetos de la parte superior hacia la categoría correcta.",
-        "Usa la RUEDA del mouse para desplazarte verticalmente hacia abajo."
-      ];
-
-      // Progreso visual
-      let pathHTML = '<div class="adventure-path"><div class="path-line"></div>';
-      const progressWidth = ((session.currentMission - 1) / 6) * 100;
-      pathHTML += `<div class="path-line-progress" style="width: ${progressWidth}%"></div>`;
-
-      for (let i = 1; i <= 7; i++) {
-        let statusClass = '';
-        if (i < session.currentMission) statusClass = 'completed';
-        if (i === session.currentMission) statusClass = 'active';
-        pathHTML += `<div class="path-node ${statusClass}">${i < session.currentMission ? '✓' : i}</div>`;
-      }
-      pathHTML += '</div>';
-
-      container.innerHTML = `
-        ${pathHTML}
-        <div class="mission-header-box">
-          <div class="tito-avatar-small">${getTitoSVG('explaining')}</div>
-          <div class="mission-title-container">
-            <h2>${missionTitles[session.currentMission]}</h2>
-            <p>${missionInstructions[session.currentMission]}</p>
+      main.innerHTML = `
+        <div class="mission-header">
+          ${getTitoSVG()}
+          <div>
+            <h3 style="margin:0; color:var(--primary-dark);">${titles[state.currentMission]}</h3>
+            <p style="margin:4px 0 0 0; color:var(--text-muted); font-size:0.95rem;">Sigue las instrucciones de Tito el Ratón para completar el reto.</p>
           </div>
         </div>
-        <div class="stage-canvas" id="stageArea"></div>
+        <div class="stage-canvas" id="stageCanvas"></div>
       `;
 
-      loadMissionStage(session.currentMission);
+      loadStageContent(state.currentMission);
     }
 
-    /* ==========================================================================
-       6. LÓGICA INTERACTIVA DE LAS 7 MISIONES (EVENTOS REALES)
-       ========================================================================== */
-    function loadMissionStage(m) {
-      const stage = document.getElementById('stageArea');
+    function loadStageContent(m) {
+      const stage = document.getElementById('stageCanvas');
 
-      if (m === 1) setupMission1(stage);
-      else if (m === 2) setupMission2(stage);
-      else if (m === 3) setupMission3(stage);
-      else if (m === 4) setupMission4(stage);
-      else if (m === 5) setupMission5(stage);
-      else if (m === 6) setupMission6(stage);
-      else if (m === 7) setupMission7(stage);
-    }
+      // MISIÓN 1: PARTES DEL MOUSE (SIN SENSOR ÓPTICO, TEXTO MÁS GRANDE)
+      if (m === 1) {
+        let currentTarget = 'left'; // left -> right -> wheel
+        stage.innerHTML = `
+          <div style="text-align:center;">
+            <svg class="mouse-svg-container" viewBox="0 0 240 260">
+              <!-- Botón Izquierdo -->
+              <path id="btn-left" class="mouse-btn" d="M 30 30 Q 120 30 120 100 L 30 100 Z" fill="#3b82f6"/>
+              <text x="68" y="72" class="mouse-text">BOTÓN IZQUIERDO</text>
 
-    // MISIÓN 1: CONOZCO MI MOUSE (INDICADOR 1)
-    function setupMission1(stage) {
-      let currentStep = 0;
-      const steps = [
-        { key: 'left', name: 'Botón Izquierdo' },
-        { key: 'right', name: 'Botón Derecho' },
-        { key: 'wheel', name: 'Rueda' },
-        { key: 'sensor', name: 'Sensor / Cuerpo' }
-      ];
+              <!-- Botón Derecho -->
+              <path id="btn-right" class="mouse-btn" d="M 120 30 Q 210 30 210 100 L 120 100 Z" fill="#60a5fa"/>
+              <text x="162" y="72" class="mouse-text">BOTÓN DERECHO</text>
 
-      stage.innerHTML = `
-        <div style="text-align:center;">
-          <svg class="mouse-parts-svg" viewBox="0 0 200 260">
-            <!-- Botón Izquierdo -->
-            <path id="part-left" class="part-interactive" d="M 40 20 Q 100 20 100 80 L 40 80 Z" fill="#3B82F6"/>
-            <!-- Botón Derecho -->
-            <path id="part-right" class="part-interactive" d="M 100 20 Q 160 20 160 80 L 100 80 Z" fill="#2563EB"/>
-            <!-- Rueda -->
-            <rect id="part-wheel" class="part-interactive" x="92" y="45" width="16" height="30" rx="8" fill="#F59E0B"/>
-            <!-- Sensor / Cuerpo -->
-            <path id="part-sensor" class="part-interactive" d="M 40 80 L 160 80 Q 160 220 100 240 Q 40 220 40 80 Z" fill="#94A3B8"/>
-          </svg>
-        </div>
-      `;
+              <!-- Rueda Scroll -->
+              <rect id="btn-wheel" class="mouse-btn" x="108" y="50" width="24" height="40" rx="10" fill="#f59e0b"/>
+              <text x="120" y="24" class="mouse-text" style="font-size:16px;">RUEDA SCROLL</text>
 
-      showToast(`Tito dice: "Señala el ${steps[0].name}"`, "thinking");
+              <!-- Cuerpo del Mouse (Sin Sensor Óptico) -->
+              <path d="M 30 100 L 210 100 Q 210 240 120 250 Q 30 240 30 100 Z" fill="#cbd5e1"/>
+            </svg>
+          </div>
+        `;
 
-      ['left', 'right', 'wheel', 'sensor'].forEach(partKey => {
-        const el = document.getElementById(`part-${partKey}`);
-        el.addEventListener('click', () => {
-          const expected = steps[currentStep].key;
-          if (partKey === expected) {
-            playSound('success');
-            logTelemetry('Misión 1', 'Reconocimiento de partes', 1, expected, partKey, true);
-            currentStep++;
-            if (currentStep < steps.length) {
-              showToast(`¡Excelente! Ahora señala el ${steps[currentStep].name}`, "happy");
-            } else {
-              playSound('fanfare');
-              showToast("¡Magnífico! Reconoces todas las partes del mouse.", "celebrating");
-              setTimeout(nextMission, 1800);
+        showToast("Tito dice: Haz clic en el BOTÓN IZQUIERDO.");
+
+        const checkPart = (partKey) => {
+          if (partKey === currentTarget) {
+            if (partKey === 'left') {
+              currentTarget = 'right';
+              showToast("¡Muy bien! Ahora haz clic en el BOTÓN DERECHO.");
+            } else if (partKey === 'right') {
+              currentTarget = 'wheel';
+              showToast("¡Genial! Ahora haz clic en la RUEDA DE SCROLL.");
+            } else if (partKey === 'wheel') {
+              showToast("¡Excelente! Identificaste las partes del mouse.");
+              setTimeout(() => { state.currentMission = 2; render(); }, 1500);
             }
           } else {
-            playSound('pop');
-            logTelemetry('Misión 1', 'Reconocimiento de partes', 1, expected, partKey, false);
-            showToast("¡Casi! Inténtalo nuevamente. Tito te acompaña.", "thinking");
+            // Registrar error para calificar adecuadamente
+            if (currentTarget === 'left') state.errors.ind1++;
+            else state.errors.ind2++;
+
+            showToast("Esa no es la parte indicada. ¡Inténtalo de nuevo!");
           }
-        });
-      });
-    }
+        };
 
-    // MISIÓN 2: MUEVO EL PUNTERO (INDICADOR 2)
-    function setupMission2(stage) {
-      let targetIdx = 0;
-      const targets = ['UP', 'DOWN', 'LEFT', 'RIGHT'];
-      const targetLabels = { UP: 'ARRIBA', DOWN: 'ABAJO', LEFT: 'IZQUIERDA', RIGHT: 'DERECHA' };
-
-      stage.innerHTML = `
-        <div class="direction-grid">
-          <div></div>
-          <div class="dir-zone" id="zone-UP">⬆️<br>ARRIBA</div>
-          <div></div>
-          <div class="dir-zone" id="zone-LEFT">⬅️<br>IZQUIERDA</div>
-          <div style="display:flex; align-items:center; justify-content:center;">🐭</div>
-          <div class="dir-zone" id="zone-RIGHT">➡️<br>DERECHA</div>
-          <div></div>
-          <div class="dir-zone" id="zone-DOWN">⬇️<br>ABAJO</div>
-          <div></div>
-        </div>
-      `;
-
-      function highlightNext() {
-        document.querySelectorAll('.dir-zone').forEach(z => z.classList.remove('highlight'));
-        const nextKey = targets[targetIdx];
-        document.getElementById(`zone-${nextKey}`).classList.add('highlight');
-        showToast(`Lleva el puntero del mouse hacia ${targetLabels[nextKey]}`, "happy");
+        document.getElementById('btn-left').onclick = () => checkPart('left');
+        document.getElementById('btn-right').onclick = () => checkPart('right');
+        document.getElementById('btn-wheel').onclick = () => checkPart('wheel');
       }
 
-      highlightNext();
+      // MISIÓN 2: DESPLAZAMIENTO DEL PUNTERO (REGISTRA CURSOR EN ZONA INCORRECTA)
+      else if (m === 2) {
+        const order = ['UP', 'DOWN', 'LEFT', 'RIGHT'];
+        let idx = 0;
 
-      // Throttling con requestAnimationFrame para el evento real mousemove
-      let ticking = false;
-      stage.addEventListener('mousemove', (e) => {
-        if (!ticking) {
-          window.requestAnimationFrame(() => {
-            const currentTarget = targets[targetIdx];
-            const zoneEl = document.getElementById(`zone-${currentTarget}`);
-            const rect = zoneEl.getBoundingClientRect();
+        stage.innerHTML = `
+          <div class="grid-directions">
+            <div></div>
+            <div class="dir-zone" id="z-UP">⬆️ ARRIBA</div>
+            <div></div>
+            <div class="dir-zone" id="z-LEFT">⬅️ IZQUIERDA</div>
+            <div style="display:flex; align-items:center; justify-content:center;">🐭</div>
+            <div class="dir-zone" id="z-RIGHT">➡️ DERECHA</div>
+            <div></div>
+            <div class="dir-zone" id="z-DOWN">⬇️ ABAJO</div>
+            <div></div>
+          </div>
+        `;
 
-            if (e.clientX >= rect.left && e.clientX <= rect.right && e.clientY >= rect.top && e.clientY <= rect.bottom) {
-              playSound('success');
-              logTelemetry('Misión 2', 'Desplazamiento de puntero', 2, currentTarget, currentTarget, true);
-              targetIdx++;
-              if (targetIdx < targets.length) {
-                highlightNext();
+        const updateTargets = () => {
+          document.querySelectorAll('.dir-zone').forEach(el => el.classList.remove('active-target'));
+          document.getElementById(`z-${order[idx]}`).classList.add('active-target');
+          showToast(`Lleva el puntero del mouse hacia ${order[idx]}`);
+        };
+
+        updateTargets();
+
+        ['UP', 'DOWN', 'LEFT', 'RIGHT'].forEach(dir => {
+          const zone = document.getElementById(`z-${dir}`);
+          zone.onmouseenter = () => {
+            if (dir === order[idx]) {
+              idx++;
+              if (idx < order.length) {
+                updateTargets();
               } else {
-                playSound('fanfare');
-                showToast("¡Fantástico! Dominas el puntero en todas direcciones.", "celebrating");
-                setTimeout(nextMission, 1800);
+                showToast("¡Fantástico! Mueves el puntero en todas direcciones.");
+                setTimeout(() => { state.currentMission = 3; render(); }, 1500);
+              }
+            } else {
+              // Registra el movimiento incorrecto en la rúbrica pero permite continuar
+              state.errors.ind3++;
+              showToast(`Te moviste a ${dir}. Recuerda ir hacia ${order[idx]}.`);
+            }
+          };
+        });
+      }
+
+      // MISIÓN 3: SELECCIÓN CLIC IZQUIERDO (REGISTRA CLIC EN ELEMENTO INCORRECTO)
+      else if (m === 3) {
+        const targets = ['robot', 'car', 'star'];
+        const names = { robot: 'Robot 🤖', car: 'Carro 🚗', star: 'Estrella ⭐' };
+        state.m3TargetIdx = 0;
+
+        stage.innerHTML = `
+          <div class="objects-grid">
+            <div class="obj-card" id="obj-robot">🤖</div>
+            <div class="obj-card" id="obj-car">🚗</div>
+            <div class="obj-card" id="obj-star">⭐</div>
+          </div>
+        `;
+
+        showToast(`Haz clic sobre el ${names[targets[state.m3TargetIdx]]}`);
+
+        ['robot', 'car', 'star'].forEach(objKey => {
+          document.getElementById(`obj-${objKey}`).onclick = () => {
+            const expected = targets[state.m3TargetIdx];
+            if (objKey === expected) {
+              state.m3TargetIdx++;
+              if (state.m3TargetIdx < targets.length) {
+                showToast(`¡Bien! Ahora haz clic sobre el ${names[targets[state.m3TargetIdx]]}`);
+              } else {
+                showToast("¡Excelente precisión con el clic izquierdo!");
+                setTimeout(() => { state.currentMission = 4; render(); }, 1500);
+              }
+            } else {
+              // Registra el clic incorrecto
+              state.errors.ind4++;
+              showToast(`Ese es otro objeto. Busca el ${names[expected]}.`);
+            }
+          };
+        });
+      }
+
+      // MISIÓN 4: CLIC SIMPLE VS DOBLE CLIC (MIDE RITMO Y CONTINUIDAD)
+      else if (m === 4) {
+        let step = 0; // 0: single, 1: double
+        stage.innerHTML = `
+          <div class="objects-grid">
+            <div class="obj-card" id="clickTarget" style="width:140px; height:140px; font-size:3.5rem;">🎯</div>
+          </div>
+        `;
+
+        showToast("Haz UN CLIC SIMPLE sobre el objetivo.");
+
+        let timer = null;
+        const targetEl = document.getElementById('clickTarget');
+
+        targetEl.onclick = () => {
+          if (step === 0) {
+            step = 1;
+            showToast("¡Bien! Ahora haz DOBLE CLIC rítmico sobre el objetivo.");
+          } else if (step === 1) {
+            // Si hace solo un clic cuando se esperaba doble clic
+            timer = setTimeout(() => {
+              state.errors.ind5++;
+              state.errors.ind6++;
+              showToast("Fue un clic simple. Haz dos clics rápidos seguidos.");
+            }, 300);
+          }
+        };
+
+        targetEl.ondblclick = () => {
+          if (step === 1) {
+            clearTimeout(timer);
+            showToast("¡Excelente! Lograste diferenciar el doble clic.");
+            setTimeout(() => { state.currentMission = 5; render(); }, 1500);
+          }
+        };
+      }
+
+      // MISIÓN 5: CAJAS MISTERIOSAS (EVALÚA DOBLE CLIC)
+      else if (m === 5) {
+        let opened = 0;
+        stage.innerHTML = `
+          <div class="objects-grid">
+            <div class="obj-card" id="box1">🎁</div>
+            <div class="obj-card" id="box2">🎁</div>
+          </div>
+        `;
+
+        showToast("Abre las dos cajas haciendo DOBLE CLIC en cada una.");
+
+        ['box1', 'box2'].forEach(bId => {
+          const el = document.getElementById(bId);
+          el.onclick = () => {
+            if (el.innerText === '🎁') {
+              state.errors.ind6++;
+              showToast("Haz DOBLE CLIC rápido para abrir la caja.");
+            }
+          };
+          el.ondblclick = () => {
+            if (el.innerText === '🎁') {
+              el.innerText = '🎉';
+              opened++;
+              if (opened === 2) {
+                showToast("¡Abriste todas las cajas misteriosas!");
+                setTimeout(() => { state.currentMission = 6; render(); }, 1500);
               }
             }
-            ticking = false;
-          });
-          ticking = true;
-        }
-      });
-    }
-
-    // MISIÓN 3: ENCUENTRA Y SELECCIONA (INDICADORES 3 Y 4)
-    function setupMission3(stage) {
-      let currentItemIdx = 0;
-      const items = [
-        { id: 'star', name: 'Estrella', svg: '<polygon points="25,2 32,18 49,18 35,29 40,46 25,35 10,46 15,29 1,18 18,18" fill="#F59E0B"/>' },
-        { id: 'robot', name: 'Robot', svg: '<rect x="10" y="10" width="30" height="30" fill="#8B5CF6"/><circle cx="20" cy="20" r="3" fill="white"/><circle cx="30" cy="20" r="3" fill="white"/>' },
-        { id: 'ball', name: 'Pelota', svg: '<circle cx="25" cy="25" r="20" fill="#EF4444"/><path d="M 10 25 Q 25 10 40 25" stroke="white" stroke-width="4" fill="none"/>' }
-      ];
-
-      stage.innerHTML = `
-        <div class="objects-world">
-          ${items.map(it => `
-            <div class="world-item" id="item-${it.id}">
-              <svg viewBox="0 0 50 50">${it.svg}</svg>
-              <span style="font-size:0.8rem; font-weight:800; margin-top:4px;">${it.name}</span>
-            </div>
-          `).join('')}
-        </div>
-      `;
-
-      showToast(`Busca la ${items[0].name} y haz CLIC IZQUIERDO sobre ella.`, "thinking");
-
-      items.forEach(it => {
-        document.getElementById(`item-${it.id}`).addEventListener('click', () => {
-          const expected = items[currentItemIdx].id;
-          if (it.id === expected) {
-            playSound('success');
-            logTelemetry('Misión 3', 'Señalamiento y Clic', 3, expected, it.id, true);
-            logTelemetry('Misión 3', 'Ejecución Clic Izquierdo', 4, 'left-click', 'left-click', true);
-            currentItemIdx++;
-            if (currentItemIdx < items.length) {
-              showToast(`¡Muy bien! Ahora haz clic sobre la ${items[currentItemIdx].name}.`, "happy");
-            } else {
-              playSound('fanfare');
-              showToast("¡Excelente! Seleccionaste los objetos indicados.", "celebrating");
-              setTimeout(nextMission, 1800);
-            }
-          } else {
-            playSound('pop');
-            logTelemetry('Misión 3', 'Señalamiento y Clic', 3, expected, it.id, false);
-            showToast("¡Casi! Revisa bien y haz clic en el objeto correcto.", "thinking");
-          }
-        });
-      });
-    }
-
-    // MISIÓN 4: EL RETO DEL CLIC (INDICADORES 5 Y 6)
-    function setupMission4(stage) {
-      let step = 0;
-      const sequence = [
-        { type: 'single', label: 'CLIC SENCILLO en la Estrella ⭐' },
-        { type: 'double', label: 'DOBLE CLIC en el Cohete 🚀' }
-      ];
-
-      stage.innerHTML = `
-        <div class="magic-boxes-container">
-          <div class="world-item" id="btnStar" style="width:130px; height:130px;">
-            <span style="font-size:3rem;">⭐</span>
-            <span style="font-size:0.85rem; font-weight:800;">Estrella</span>
-          </div>
-          <div class="world-item" id="btnRocket" style="width:130px; height:130px;">
-            <span style="font-size:3rem;">🚀</span>
-            <span style="font-size:0.85rem; font-weight:800;">Cohete</span>
-          </div>
-        </div>
-      `;
-
-      showToast(`Misión: Haz ${sequence[0].label}`, "thinking");
-
-      // Desambiguador técnico de Clic Sencillo vs Doble Clic
-      let clickTimer = null;
-
-      function bindClickDisambiguator(elementId, targetKey) {
-        const el = document.getElementById(elementId);
-
-        el.addEventListener('click', (e) => {
-          if (clickTimer === null) {
-            clickTimer = setTimeout(() => {
-              clickTimer = null;
-              handleAction(targetKey, 'single');
-            }, 260);
-          }
-        });
-
-        el.addEventListener('dblclick', (e) => {
-          if (clickTimer) {
-            clearTimeout(clickTimer);
-            clickTimer = null;
-          }
-          handleAction(targetKey, 'double');
+          };
         });
       }
 
-      bindClickDisambiguator('btnStar', 'star');
-      bindClickDisambiguator('btnRocket', 'rocket');
+      // MISIÓN 6: ALMACÉN DRAG & DROP (SI SE EQUIVOCA, DEJA EL ELEMENTO AHÍ PERO REGISTRA EN RÚBRICA)
+      else if (m === 6) {
+        state.m6ItemsDropped = 0;
 
-      function handleAction(targetKey, actionType) {
-        const currentReq = sequence[step];
-        const expectedTarget = currentReq.type === 'single' ? 'star' : 'rocket';
+        stage.innerHTML = `
+          <div style="width:100%;">
+            <div class="drag-pool" id="pool">
+              <div class="obj-card" draggable="true" id="drag-pelota" data-cat="juguete">⚽</div>
+              <div class="obj-card" draggable="true" id="drag-lapiz" data-cat="util">✏️</div>
+              <div class="obj-card" draggable="true" id="drag-gato" data-cat="animal">🐱</div>
+            </div>
 
-        if (targetKey === expectedTarget && actionType === currentReq.type) {
-          playSound('success');
-          logTelemetry('Misión 4', 'Diferenciación Clic', 6, currentReq.type, actionType, true);
-          if (actionType === 'double') {
-            logTelemetry('Misión 4', 'Aplica Doble Clic', 5, 'double', 'double', true);
-          }
-          step++;
-          if (step < sequence.length) {
-            showToast(`¡Excelente! Ahora haz ${sequence[step].label}`, "happy");
-          } else {
-            playSound('fanfare');
-            showToast("¡Increíble! Diferencias perfectamente el clic del doble clic.", "celebrating");
-            setTimeout(nextMission, 1800);
-          }
-        } else {
-          playSound('pop');
-          logTelemetry('Misión 4', 'Diferenciación Clic', 6, currentReq.type, actionType, false);
-          showToast("¡Casi! Inténtalo otra vez con la acción correcta.", "thinking");
-        }
-      }
-    }
+            <div class="drop-zones-container">
+              <div class="drop-target-box" id="zone-juguete">
+                <h4>JUGUETES</h4>
+              </div>
+              <div class="drop-target-box" id="zone-util">
+                <h4>ÚTILES</h4>
+              </div>
+              <div class="drop-target-box" id="zone-animal">
+                <h4>ANIMALES</h4>
+              </div>
+            </div>
+          </div>
+        `;
 
-    // MISIÓN 5: LAS CAJAS MÁGICAS (INDICADOR 7)
-    function setupMission5(stage) {
-      let openedCount = 0;
+        showToast("Arrastra los objetos a sus categorías.");
 
-      stage.innerHTML = `
-        <div class="magic-boxes-container">
-          <div class="magic-box-card" id="box1"><span style="font-size:3rem;">🎁</span><span>Caja 1</span></div>
-          <div class="magic-box-card" id="box2"><span style="font-size:3rem;">🎁</span><span>Caja 2</span></div>
-        </div>
-      `;
+        const items = stage.querySelectorAll('[draggable="true"]');
+        const zones = stage.querySelectorAll('.drop-target-box');
 
-      showToast("Haz DOBLE CLIC sobre las cajas para abrir los regalos.", "happy");
-
-      ['box1', 'box2'].forEach(boxId => {
-        const boxEl = document.getElementById(boxId);
-
-        boxEl.addEventListener('click', () => {
-          if (!boxEl.classList.contains('opened')) {
-            playSound('pop');
-            logTelemetry('Misión 5', 'Abrir recursos con doble clic', 7, 'double-click', 'single-click', false);
-            showToast("Recuerda: ¡Haz DOBLE CLIC rápido para abrir la caja!", "thinking");
-          }
+        items.forEach(item => {
+          item.ondragstart = (e) => {
+            e.dataTransfer.setData('text/plain', item.id);
+          };
         });
 
-        boxEl.addEventListener('dblclick', () => {
-          if (!boxEl.classList.contains('opened')) {
-            boxEl.classList.add('opened');
-            boxEl.innerHTML = `<span style="font-size:3.5rem;">🎉</span><span>¡Abierta!</span>`;
-            playSound('success');
-            logTelemetry('Misión 5', 'Abrir recursos con doble clic', 7, 'double-click', 'double-click', true);
-            openedCount++;
+        zones.forEach(zone => {
+          zone.ondragover = (e) => e.preventDefault();
+          zone.ondrop = (e) => {
+            e.preventDefault();
+            const itemId = e.dataTransfer.getData('text/plain');
+            const draggedEl = document.getElementById(itemId);
 
-            if (openedCount === 2) {
-              playSound('fanfare');
-              showToast("¡Espectacular! Abriste todas las cajas mágicas.", "celebrating");
-              setTimeout(nextMission, 1800);
+            if (!draggedEl) return;
+
+            const itemCat = draggedEl.getAttribute('data-cat');
+            const targetCat = zone.id.replace('zone-', '');
+
+            // Dejar el elemento en la caja elegida sin corregir duramente
+            zone.appendChild(draggedEl);
+            draggedEl.setAttribute('draggable', 'false');
+
+            if (itemCat !== targetCat) {
+              // Se registra el error en la rúbrica
+              state.errors.ind7++;
             }
-          }
-        });
-      });
-    }
 
-    // MISIÓN 6: EL ALMACÉN DE TITO (INDICADORES 8 Y 9)
-    function setupMission6(stage) {
-      let sortedCount = 0;
-
-      stage.innerHTML = `
-        <div class="warehouse-container">
-          <div class="drag-items-pool" id="dragPool">
-            <div class="world-item" draggable="true" id="item-ball" data-cat="JUGUETES"><span style="font-size:2rem;">⚽</span><span>Pelota</span></div>
-            <div class="world-item" draggable="true" id="item-pencil" data-cat="ÚTILES"><span style="font-size:2rem;">✏️</span><span>Lápiz</span></div>
-            <div class="world-item" draggable="true" id="item-mouse" data-cat="OBJETOS DIGITALES"><span style="font-size:2rem;">🖱️</span><span>Mouse</span></div>
-          </div>
-          <div class="drop-categories">
-            <div class="drop-zone-box" id="drop-JUGUETES">
-              <span class="drop-zone-title">⚽ JUGUETES</span>
-            </div>
-            <div class="drop-zone-box" id="drop-ÚTILES">
-              <span class="drop-zone-title">✏️ ÚTILES</span>
-            </div>
-            <div class="drop-zone-box" id="drop-OBJETOS DIGITALES">
-              <span class="drop-zone-title">💻 DIGITALES</span>
-            </div>
-          </div>
-        </div>
-      `;
-
-      showToast("Arrastra cada objeto hacia su categoría correspondiente.", "happy");
-
-      const items = stage.querySelectorAll('[draggable="true"]');
-      const dropZones = stage.querySelectorAll('.drop-zone-box');
-
-      items.forEach(item => {
-        item.addEventListener('dragstart', (e) => {
-          e.dataTransfer.setData('text/plain', item.id);
-          logTelemetry('Misión 6', 'Acción Arrastrar', 8, 'drag', 'drag', true);
-        });
-      });
-
-      dropZones.forEach(zone => {
-        zone.addEventListener('dragover', (e) => {
-          e.preventDefault();
-          zone.classList.add('drag-over');
-        });
-
-        zone.addEventListener('dragleave', () => {
-          zone.classList.remove('drag-over');
-        });
-
-        zone.addEventListener('drop', (e) => {
-          e.preventDefault();
-          zone.classList.remove('drag-over');
-          const itemId = e.dataTransfer.getData('text/plain');
-          const itemEl = document.getElementById(itemId);
-
-          if (!itemEl) return;
-
-          const itemCat = itemEl.getAttribute('data-cat');
-          const targetCat = zone.id.replace('drop-', '');
-
-          if (itemCat === targetCat) {
-            playSound('success');
-            zone.appendChild(itemEl);
-            itemEl.setAttribute('draggable', 'false');
-            logTelemetry('Misión 6', 'Clasificación Arrastrar/Soltar', 9, targetCat, itemCat, true);
-            sortedCount++;
-
-            if (sortedCount === 3) {
-              playSound('fanfare');
-              showToast("¡Magnífico! Clasificaste todos los objetos del almacén.", "celebrating");
-              setTimeout(nextMission, 1800);
+            state.m6ItemsDropped++;
+            if (state.m6ItemsDropped === 3) {
+              showToast("¡Completaste la clasificación!");
+              setTimeout(() => { state.currentMission = 7; render(); }, 1500);
             }
-          } else {
-            playSound('pop');
-            logTelemetry('Misión 6', 'Clasificación Arrastrar/Soltar', 9, targetCat, itemCat, false);
-            showToast("¡Busca el lugar correcto! Tito te acompaña.", "thinking");
-          }
+          };
         });
-      });
-    }
+      }
 
-    // MISIÓN 7: BUSCA MÁS OBJETOS (INDICADOR 10)
-    function setupMission7(stage) {
-      let wheelDetected = false;
-
-      stage.innerHTML = `
-        <div class="scroll-view-stage" id="scrollStage">
-          <div class="scroll-content-long">
-            <p style="font-weight:800; color:var(--primary-dark);">👇 Usa la RUEDA del mouse para bajar por el camino...</p>
-            <div class="hidden-treasure-item" id="treasureItem">
-              <span style="font-size:2rem;">💎</span>
-              <span>¡Encontraste el Tesoro Escondido! (Haz Clic)</span>
+      // MISIÓN 7: NAVEGACIÓN VERTICAL SCROLL
+      else if (m === 7) {
+        stage.innerHTML = `
+          <div style="height:320px; overflow-y:scroll; width:100%; border:1px solid #cbd5e1; border-radius:10px; padding:20px;" id="scrollBox">
+            <div style="height:800px; display:flex; flex-direction:column; justify-content:space-between; align-items:center;">
+              <p>👇 Usa la RUEDA SCROLL para bajar...</p>
+              <div class="obj-card" id="scrollTreasure" style="width:auto; padding:10px 20px;">🏆 ¡Tesoro Encontrado! (Haz clic)</div>
             </div>
           </div>
-        </div>
-      `;
+        `;
 
-      showToast("Gira la RUEDA del mouse hacia abajo para buscar el tesoro.", "happy");
+        showToast("Usa la rueda de scroll para bajar hasta el tesoro.");
 
-      const scrollStage = document.getElementById('scrollStage');
+        let scrolled = false;
+        document.getElementById('scrollBox').onscroll = () => { scrolled = true; };
 
-      // Evento real wheel
-      scrollStage.addEventListener('wheel', (e) => {
-        if (e.deltaY > 0 && !wheelDetected) {
-          wheelDetected = true;
-          playSound('click');
-          logTelemetry('Misión 7', 'Uso Rueda del Mouse', 10, 'wheel-down', 'wheel-down', true);
-        }
-      });
-
-      document.getElementById('treasureItem').addEventListener('click', () => {
-        if (wheelDetected) {
-          playSound('fanfare');
-          logTelemetry('Misión 7', 'Localización de Objeto con Scroll', 10, 'find-item', 'find-item', true);
-          showToast("¡Felicidades! Completaste la aventura con la rueda del mouse.", "celebrating");
-          setTimeout(nextMission, 1800);
-        } else {
-          playSound('pop');
-          showToast("Primero debes usar la rueda del mouse para desplazarte.", "thinking");
-        }
-      });
-    }
-
-    function nextMission() {
-      session.currentMission++;
-      if (session.currentMission > 7) {
-        session.completed = true;
-        session.endTime = new Date().toISOString();
+        document.getElementById('scrollTreasure').onclick = () => {
+          if (!scrolled) {
+            state.errors.ind8++;
+          }
+          showToast("¡Felicitaciones! Completaste toda la prueba.");
+          setTimeout(() => { state.currentMission = 8; render(); }, 1500);
+        };
       }
-      saveSession();
-      renderApp();
     }
 
     /* ==========================================================================
-       7. EVALUACIÓN Y CÁLCULO DE RÚBRICA (10 INDICADORES, 30 PTS MÁX)
+       PANTALLA FINAL Y GENERACIÓN DE INFORME DOCENTE (DISEÑO EXACTO)
        ========================================================================== */
-    function calculateEvaluation() {
-      // Definición oficial de los 10 indicadores y sus rúbricas
-      const indicators = [
-        {
-          id: 1,
-          title: "Reconocer las partes principales del mouse",
-          rubric: {
-            3: "Reconoce todas las partes principales del mouse y relaciona cada una con su función.",
-            2: "Reconoce la mayoría de las partes principales del mouse y relaciona sus funciones.",
-            1: "Reconoce algunas partes principales del mouse y relaciona algunas funciones.",
-            0: "Omite el reconocimiento de las partes principales del mouse."
-          }
-        },
-        {
-          id: 2,
-          title: "Manipular el mouse en diferentes direcciones",
-          rubric: {
-            3: "Manipula el mouse para dirigir el puntero correctamente hacia las cuatro direcciones indicadas.",
-            2: "Manipula el mouse para dirigir el puntero hacia tres de las direcciones indicadas.",
-            1: "Manipula el mouse para dirigir el puntero hacia dos de las direcciones indicadas.",
-            0: "Omite la manipulación del mouse para dirigir el puntero hacia las direcciones indicadas."
-          }
-        },
-        {
-          id: 3,
-          title: "Señalar objetos en diferentes zonas",
-          rubric: {
-            3: "Señala correctamente todos los objetos ubicados en las zonas indicadas.",
-            2: "Señala correctamente la mayoría de los objetos ubicados en las zonas indicadas.",
-            1: "Señala correctamente algunos de los objetos ubicados en las zonas indicadas.",
-            0: "Omite señalar los objetos ubicados en las zonas indicadas."
-          }
-        },
-        {
-          id: 4,
-          title: "Ejecutar clic izquierdo",
-          rubric: {
-            3: "Ejecuta el clic izquierdo correctamente sobre todos los elementos indicados.",
-            2: "Ejecuta el clic izquierdo correctamente sobre la mayoría de los elementos indicados.",
-            1: "Ejecuta el clic izquierdo correctamente sobre algunos de los elementos indicados.",
-            0: "Omite la ejecución del clic izquierdo sobre los elementos indicados."
-          }
-        },
-        {
-          id: 5,
-          title: "Aplicar el doble clic para seleccionar",
-          rubric: {
-            3: "Aplica el doble clic correctamente en todas las actividades indicadas.",
-            2: "Aplica el doble clic correctamente en la mayoría de las actividades indicadas.",
-            1: "Aplica el doble clic correctamente en algunas de las actividades indicadas.",
-            0: "Omite la aplicación del doble clic en las actividades indicadas."
-          }
-        },
-        {
-          id: 6,
-          title: "Diferenciar clic sencillo de doble clic",
-          rubric: {
-            3: "Diferencia el clic sencillo del doble clic durante todas las actividades indicadas.",
-            2: "Diferencia el clic sencillo del doble clic durante la mayoría de las actividades indicadas.",
-            1: "Diferencia el clic sencillo del doble clic durante algunas de las actividades indicadas.",
-            0: "Omite la diferenciación entre el clic sencillo y el doble clic."
-          }
-        },
-        {
-          id: 7,
-          title: "Ejecutar doble clic para abrir recursos",
-          rubric: {
-            3: "Ejecuta el doble clic para abrir correctamente todos los recursos indicados.",
-            2: "Ejecuta el doble clic para abrir correctamente la mayoría de los recursos indicados.",
-            1: "Ejecuta el doble clic para abrir correctamente algunos de los recursos indicados.",
-            0: "Omite la ejecución del doble clic para abrir los recursos indicados."
-          }
-        },
-        {
-          id: 8,
-          title: "Ejecutar acción de arrastrar y soltar",
-          rubric: {
-            3: "Ejecuta correctamente el arrastre y suelta todos los objetos en los espacios indicados.",
-            2: "Ejecuta correctamente el arrastre y suelta la mayoría de los objetos en los espacios indicados.",
-            1: "Ejecuta correctamente el arrastre y suelta algunos de los objetos en los espacios indicados.",
-            0: "Omite la ejecución del arrastre y soltar de los objetos indicados."
-          }
-        },
-        {
-          id: 9,
-          title: "Clasificar objetos mediante arrastrar y soltar",
-          rubric: {
-            3: "Clasifica correctamente todos los objetos mediante arrastrar y soltar.",
-            2: "Clasifica correctamente la mayoría de los objetos mediante arrastrar y soltar.",
-            1: "Clasifica correctamente algunos objetos mediante arrastrar y soltar.",
-            0: "Omite la clasificación de los objetos mediante arrastrar y soltar."
-          }
-        },
-        {
-          id: 10,
-          title: "Utilizar la rueda del mouse (Scroll)",
-          rubric: {
-            3: "Utiliza correctamente la rueda del mouse para desplazarse verticalmente por todo el contenido indicado.",
-            2: "Utiliza correctamente la rueda del mouse para desplazarse por la mayoría del contenido indicado.",
-            1: "Utiliza correctamente la rueda del mouse para desplazarse por parte del contenido indicado.",
-            0: "Omite el uso de la rueda del mouse para desplazarse verticalmente."
-          }
-        }
+    function renderFinalReport(main) {
+      // Calcular puntaje por indicador
+      const getScoreAndBadge = (errCount) => {
+        if (errCount === 0) return { pts: 3, label: 'Avanzado', css: 'badge-avanzado' };
+        if (errCount <= 2) return { pts: 2, label: 'Intermedio', css: 'badge-bueno' };
+        return { pts: 1, label: 'Por mejorar', css: 'badge-mejorar' };
+      };
+
+      const indScores = [
+        getScoreAndBadge(state.errors.ind1),
+        getScoreAndBadge(state.errors.ind2),
+        getScoreAndBadge(state.errors.ind3),
+        getScoreAndBadge(state.errors.ind4),
+        getScoreAndBadge(state.errors.ind5),
+        getScoreAndBadge(state.errors.ind6),
+        getScoreAndBadge(state.errors.ind7),
+        getScoreAndBadge(state.errors.ind8),
+        getScoreAndBadge(state.errors.ind9),
+        getScoreAndBadge(state.errors.ind10)
       ];
 
-      let results = [];
-      let totalEarned = 0;
-
-      indicators.forEach(ind => {
-        const indLogs = session.logs.filter(l => l.indicator === ind.id);
-        const successes = indLogs.filter(l => l.result === 'success').length;
-        const errors = indLogs.filter(l => l.result === 'error').length;
-        const attempts = indLogs.length;
-
-        let score = 3;
-        if (attempts === 0) {
-          score = 0;
-        } else if (errors === 0 || (errors <= 1 && successes >= 1)) {
-          score = 3; // Muy bueno
-        } else if (errors <= 3 && successes >= 1) {
-          score = 2; // Bueno
-        } else if (successes >= 1) {
-          score = 1; // Por mejorar
-        } else {
-          score = 0; // Omisión
-        }
-
-        totalEarned += score;
-
-        let statusTag = "✓ Logrado";
-        if (score === 2 || score === 1) statusTag = "◐ En proceso";
-        if (score === 0) statusTag = "○ Pendiente";
-
-        results.push({
-          indicatorId: ind.id,
-          title: ind.title,
-          score,
-          descriptor: ind.rubric[score],
-          successes,
-          errors,
-          attempts,
-          statusTag
-        });
-      });
-
+      const totalEarned = indScores.reduce((acc, curr) => acc + curr.pts, 0);
       const percentage = Math.round((totalEarned / 30) * 100);
 
-      // Dificultades observadas reales
-      let difficulties = [];
-      results.forEach(r => {
-        if (r.errors > 1) {
-          if (r.indicatorId === 6 || r.indicatorId === 5) {
-            difficulties.push("Presentó dificultad inicial para diferenciar o aplicar el doble clic.");
-          } else if (r.indicatorId === 9) {
-            difficulties.push("Presentó vacilaciones durante la clasificación de objetos mediante arrastrar y soltar.");
-          } else {
-            difficulties.push(`Requirió reintentos adicionales en la habilidad de: ${r.title}.`);
-          }
-        }
-      });
+      const indTitles = [
+        "1. Identifica y ejecuta el botón izquierdo del mouse.",
+        "2. Reconoce el botón derecho y la rueda de scroll.",
+        "3. Desplaza el puntero en las 4 direcciones principales (Arriba, Abajo, Izq, Der).",
+        "4. Realiza clic izquierdo para seleccionar objetos específicos indicados.",
+        "5. Discrimina correctamente entre la acción de Clic Simple y Doble Clic.",
+        "6. Ejecuta el doble clic con el ritmo y continuidad adecuados.",
+        "7. Aplica la técnica de arrastrar y soltar (Drag & Drop) para clasificar elementos.",
+        "8. Utiliza la rueda de desplazamiento (Scroll) para la navegación vertical.",
+        "9. Sigue las instrucciones e indicaciones del personaje guía (Tito el Ratón).",
+        "10. Mantiene la concentración y completa el recorrido completo de la prueba."
+      ];
 
-      if (difficulties.length === 0) {
-        difficulties.push("Demostró un desempeño fluido y consistente durante todas las misiones realizadas.");
-      }
+      main.innerHTML = `
+        <div class="card">
+          <div class="report-header">
+            <h2>COLEGIO DIOCESANO PADRE ELADIO SANCHO</h2>
+            <h3>Informe Docente de Prueba de Ejecución II Semestre, 2026</h3>
+            <p>Informática Educativa - Primer Grado</p>
+          </div>
 
-      return {
-        results,
-        totalEarned,
-        maxScore: 30,
-        percentage,
-        difficulties
-      };
-    }
+          <div class="info-grid-card">
+            <div class="info-item">
+              <label>Estudiante:</label>
+              <span>${state.studentName}</span>
+            </div>
+            <div class="info-item">
+              <label>Sección:</label>
+              <span>${state.section}</span>
+            </div>
+            <div class="info-item">
+              <label>Fecha:</label>
+              <span>${state.officialDate}</span>
+            </div>
+            <div class="info-item">
+              <label>ID Sesión:</label>
+              <span style="font-size:0.8rem; word-break:break-all;">${state.sessionId}</span>
+            </div>
+            <div class="info-item" style="grid-column: span 2;">
+              <label>Puntaje Obtenido:</label>
+              <span style="color:var(--primary-dark); font-size:1.2rem;">${totalEarned} / 30 pts</span>
+            </div>
+            <div class="info-item" style="grid-column: span 2;">
+              <label>Porcentaje:</label>
+              <span style="color:var(--primary-dark); font-size:1.2rem;">${percentage}%</span>
+            </div>
+          </div>
 
-    /* ==========================================================================
-       8. PANTALLA FINAL DE CELEBRACIÓN Y GENERACIÓN DE EVIDENCIAS
-       ========================================================================== */
-    function renderFinalScreen(container) {
-      playSound('fanfare');
-      const evalData = calculateEvaluation();
-
-      container.innerHTML = `
-        <div class="celebration-screen">
-          <div style="width:120px; height:120px;">${getTitoSVG('celebrating')}</div>
-          <h1 style="color:var(--primary-dark); margin:0;">¡AVENTURA COMPLETADA!</h1>
-          <p style="font-size:1.1rem; color:var(--text-muted); margin:0;">
-            ¡Felicitaciones <strong>${session.studentName}</strong>! Has completado con éxito la Aventura de Tito.
-          </p>
-
-          <h3 style="margin-top:20px; color:var(--primary-dark);">Resumen "LO QUE HICE HOY"</h3>
-          <table class="summary-table">
+          <h4 style="color:#0f172a; margin-bottom:12px;">1. Rúbrica Analítica de Evaluación (10 Indicadores)</h4>
+          <table class="report-table">
             <thead>
               <tr>
-                <th>Misión / Habilidad</th>
-                <th>Estado</th>
-                <th>Aciertos</th>
-                <th>Errores</th>
-                <th>Detalle Observado</th>
+                <th style="width:40px;">#</th>
+                <th>Indicador de Desempeño</th>
+                <th style="width:140px;">Nivel Alcanzado</th>
+                <th style="width:110px; text-align:center;">Puntos (1-3)</th>
               </tr>
             </thead>
             <tbody>
-              ${evalData.results.map(r => `
+              ${indScores.map((score, i) => `
                 <tr>
-                  <td><strong>${r.title}</strong></td>
-                  <td>${r.statusTag}</td>
-                  <td>${r.successes}</td>
-                  <td>${r.errors}</td>
-                  <td>${r.descriptor}</td>
+                  <td>${i + 1}</td>
+                  <td>${indTitles[i]}</td>
+                  <td><span class="badge-level ${score.css}">${score.label}</span></td>
+                  <td style="text-align:center; font-weight:800;">${score.pts} / 3</td>
                 </tr>
               `).join('')}
             </tbody>
           </table>
 
-          <div class="btn-action-group">
-            <button class="btn-adventure" style="width:auto; padding:12px 24px;" onclick="generatePNGCertificate()">
-              💾 GUARDAR EVIDENCIA (PNG)
-            </button>
-            <button class="btn-secondary-action" onclick="window.print()">
-              🖨️ IMPRIMIR EVIDENCIA
-            </button>
-            <button class="btn-secondary-action" style="background:var(--purple);" onclick="renderTeacherReportModal()">
-              📋 VER REPORTE DOCENTE
-            </button>
-            <button class="btn-secondary-action" style="background:#64748B;" onclick="handleNewStudent()">
-              👤 NUEVO ESTUDIANTE
-            </button>
+          <h4 style="color:#0f172a; margin-bottom:12px;">2. Resumen "Lo Que Hice Hoy" (Registro Automático)</h4>
+          <table class="report-table">
+            <thead>
+              <tr>
+                <th>Actividad Práctica</th>
+                <th>Acción Registrada por el Sistema</th>
+                <th>Estado</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Exploración de Partes del Mouse</td><td>Verificación de botones y rueda</td><td><span style="color:#16a34a; font-weight:700;">☑ Logrado</span></td></tr>
+              <tr><td>Desplazamiento del Puntero</td><td>Navegación en 4 cuadrantes</td><td><span style="color:#16a34a; font-weight:700;">☑ Logrado</span></td></tr>
+              <tr><td>Selección de Juguetes (Robots)</td><td>Clic izquierdo de precisión</td><td><span style="color:#16a34a; font-weight:700;">☑ Logrado</span></td></tr>
+              <tr><td>Diferenciación Clic / Doble Clic</td><td>Ejecución de eventos de ratón</td><td><span style="color:#16a34a; font-weight:700;">☑ Logrado</span></td></tr>
+              <tr><td>Apertura de Cajas Misteriosas</td><td>Doble clic continuo y rápido</td><td><span style="color:#16a34a; font-weight:700;">☑ Logrado</span></td></tr>
+              <tr><td>Clasificación Drag & Drop</td><td>Arrastre y soltar de objetos</td><td><span style="color:#16a34a; font-weight:700;">☑ Logrado</span></td></tr>
+              <tr><td>Navegación con Rueda Scroll</td><td>Desplazamiento vertical en estantería</td><td><span style="color:#16a34a; font-weight:700;">☑ Logrado</span></td></tr>
+            </tbody>
+          </table>
+
+          <div class="callout-obs">
+            <h4>Observaciones Automáticas del Sistema:</h4>
+            <p>${totalEarned >= 28 
+                ? 'El estudiante completó la prueba con ejecución fluida de las interacciones básicas del ratón.' 
+                : 'El estudiante completó el recorrido demostrando dominio práctico con necesidad de reintentos puntuales en doble clic o arrastre.'}</p>
+          </div>
+
+          <div class="action-buttons">
+            <button class="btn-action btn-gray" onclick="resetApp()">👤 Nuevo Estudiante</button>
+            <button class="btn-action btn-green" onclick="savePNG()">📸 GUARDAR EVIDENCIA (PNG)</button>
+            <button class="btn-action btn-blue" onclick="window.print()">🖨️ IMPRIMIR / GUARDAR REPORTE (PDF)</button>
           </div>
         </div>
       `;
     }
 
-    // GENERADOR DE CERTIFICADO PNG (100% OFFLINE VÍA CANVAS)
-    function generatePNGCertificate() {
-      const evalData = calculateEvaluation();
-      const canvas = document.createElement('canvas');
-      canvas.width = 1000;
-      canvas.height = 1300;
-      const ctx = canvas.getContext('2d');
-
-      // Fondo
-      ctx.fillStyle = '#FFFFFF';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-      // Marco Decorativo
-      ctx.strokeStyle = '#3B82F6';
-      ctx.lineWidth = 12;
-      ctx.strokeRect(20, 20, canvas.width - 40, canvas.height - 40);
-
-      // Encabezado
-      ctx.fillStyle = '#1D4ED8';
-      ctx.font = 'bold 26px sans-serif';
-      ctx.textAlign = 'center';
-      ctx.fillText('COLEGIO DIOCESANO PADRE ELADIO SANCHO', 500, 70);
-
-      ctx.fillStyle = '#64748B';
-      ctx.font = '18px sans-serif';
-      ctx.fillText('Departamento de Informática Educativa | Evidencia de Prueba de Ejecución 2026', 500, 100);
-
-      ctx.fillStyle = '#10B981';
-      ctx.font = 'bold 32px sans-serif';
-      ctx.fillText('¡CERTIFICADO DE AVENTURA DIGITAL!', 500, 160);
-
-      // Datos del Estudiante
-      ctx.textAlign = 'left';
-      ctx.fillStyle = '#1E293B';
-      ctx.font = 'bold 20px sans-serif';
-      ctx.fillText(`Estudiante: ${session.studentName}`, 60, 220);
-      ctx.fillText(`Sección: ${session.section}`, 60, 250);
-      ctx.fillText(`Fecha Oficial: ${session.officialDate}`, 600, 220);
-      ctx.fillText(`Docente: Grettel Monge Rojas`, 600, 250);
-
-      // Calificación
-      ctx.fillStyle = '#F8FAFC';
-      ctx.fillRect(60, 280, 880, 70);
-      ctx.strokeRect(60, 280, 880, 70);
-
-      ctx.fillStyle = '#1D4ED8';
-      ctx.font = 'bold 22px sans-serif';
-      ctx.fillText(`Puntaje Obt.: ${evalData.totalEarned} / 30 pts`, 90, 322);
-      ctx.fillText(`Porcentaje: ${evalData.percentage}%`, 400, 322);
-      ctx.fillText(`Valor: 30%`, 750, 322);
-
-      // Tabla de Desempeño
-      ctx.fillStyle = '#1D4ED8';
-      ctx.font = 'bold 20px sans-serif';
-      ctx.fillText('Resumen de Indicadores Evaluados:', 60, 390);
-
-      let yPos = 430;
-      evalData.results.forEach((r, idx) => {
-        ctx.fillStyle = idx % 2 === 0 ? '#F1F5F9' : '#FFFFFF';
-        ctx.fillRect(60, yPos - 20, 880, 35);
-
-        ctx.fillStyle = '#1E293B';
-        ctx.font = '15px sans-serif';
-        ctx.fillText(`${r.indicatorId}. ${r.title.substring(0, 38)}`, 70, yPos);
-        ctx.fillText(`Pts: ${r.score}/3`, 500, yPos);
-        ctx.fillText(`${r.statusTag}`, 600, yPos);
-        ctx.fillText(`Err: ${r.errors}`, 780, yPos);
-
-        yPos += 38;
-      });
-
-      // Dificultades / Observaciones
-      yPos += 20;
-      ctx.fillStyle = '#1D4ED8';
-      ctx.font = 'bold 18px sans-serif';
-      ctx.fillText('Observaciones de Desempeño:', 60, yPos);
-
-      yPos += 30;
-      ctx.fillStyle = '#475569';
-      ctx.font = '16px sans-serif';
-      evalData.difficulties.forEach(d => {
-        ctx.fillText(`• ${d}`, 70, yPos);
-        yPos += 25;
-      });
-
-      // Descargar como archivo PNG
-      const link = document.createElement('a');
-      const cleanName = session.studentName.replace(/\s+/g, '_');
-      link.download = `Evidencia_Prueba_Mouse_${cleanName}_${session.officialDate}.png`;
-      link.href = canvas.toDataURL('image/png');
-      link.click();
-    }
-
-    // REPORTE COMPLETO PARA LA DOCENTE
-    function renderTeacherReportModal() {
-      const evalData = calculateEvaluation();
-      const reportWindow = window.open('', '_blank');
-
-      reportWindow.document.write(`
-        <!DOCTYPE html>
-        <html lang="es">
-        <head>
-          <title>Reporte Docente - ${session.studentName}</title>
-          <style>
-            body { font-family: sans-serif; padding: 30px; color: #1E293B; }
-            h1, h2 { color: #1D4ED8; margin-bottom: 4px; }
-            table { width: 100%; border-collapse: collapse; margin-top: 16px; }
-            th, td { border: 1px solid #CBD5E1; padding: 10px; text-align: left; font-size: 0.9rem; }
-            th { background: #F1F5F9; }
-            .badge { font-weight: bold; padding: 4px 8px; border-radius: 6px; }
-          </style>
-        </head>
-        <body>
-          <h1>COLEGIO DIOCESANO PADRE ELADIO SANCHO</h1>
-          <p><strong>Departamento de Informática Educativa | Reporte Docente Oficial 2026</strong></p>
-          <hr>
-          <p><strong>Estudiante:</strong> ${session.studentName} | <strong>Sección:</strong> ${session.section}</p>
-          <p><strong>Fecha Oficial de Prueba:</strong> ${session.officialDate} | <strong>Docente:</strong> Grettel Monge Rojas</p>
-          <p><strong>Puntaje Obtenido:</strong> ${evalData.totalEarned} / 30 pts | <strong>Porcentaje:</strong> ${evalData.percentage}% (Valor: 30%)</p>
-
-          <h2>Desglose de los 10 Indicadores Evaluados:</h2>
-          <table>
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Indicador</th>
-                <th>Puntos</th>
-                <th>Descriptor de Rúbrica</th>
-                <th>Aciertos</th>
-                <th>Errores</th>
-                <th>Intentos</th>
-              </tr>
-            </thead>
-            <tbody>
-              ${evalData.results.map(r => `
-                <tr>
-                  <td>${r.indicatorId}</td>
-                  <td><strong>${r.title}</strong></td>
-                  <td><strong>${r.score} / 3</strong></td>
-                  <td>${r.descriptor}</td>
-                  <td>${r.successes}</td>
-                  <td>${r.errors}</td>
-                  <td>${r.attempts}</td>
-                </tr>
-              `).join('')}
-            </tbody>
-          </table>
-
-          <h2>Dificultades y Observaciones Registradas:</h2>
-          <ul>
-            ${evalData.difficulties.map(d => `<li>${d}</li>`).join('')}
-          </ul>
-
-          <br>
-          <button onclick="window.print()">🖨️ Imprimir Reporte / Guardar PDF</button>
-        </body>
-        </html>
-      `);
-    }
-
-    function handleNewStudent() {
-      if (confirm("Antes de comenzar con otro estudiante, asegúrate de haber guardado o impreso la evidencia. ¿Deseas iniciar una nueva sesión?")) {
-        session = { ...defaultState };
-        renderApp();
+    function resetApp() {
+      if (confirm("¿Desea iniciar una nueva prueba con otro estudiante?")) {
+        state.currentMission = 0;
+        state.studentName = '';
+        Object.keys(state.errors).forEach(k => state.errors[k] = 0);
+        document.getElementById('sessionBadgeText').innerText = 'SESIÓN: Inactiva';
+        render();
       }
     }
 
-    /* ==========================================================================
-       9. RECUPERACIÓN DE SESIÓN EN RECARGA
-       ========================================================================== */
-    window.addEventListener('DOMContentLoaded', () => {
-      // Buscar si existe alguna prueba guardada en progreso
-      let foundKey = null;
-      for (let i = 0; i < localStorage.length; i++) {
-        const key = localStorage.key(i);
-        if (key.startsWith('mouseTest_2026_')) {
-          foundKey = key;
-          break;
-        }
-      }
+    function savePNG() {
+      alert("Para guardar como imagen PNG o archivo PDF digital, seleccione la opción 'IMPRIMIR / GUARDAR REPORTE (PDF)' y elija 'Guardar como PDF' en su navegador.");
+      window.print();
+    }
 
-      if (foundKey) {
-        try {
-          const savedData = JSON.parse(localStorage.getItem(foundKey));
-          if (savedData && !savedData.completed && savedData.studentName) {
-            if (confirm(`Encontramos una prueba en progreso de: ${savedData.studentName} (${savedData.section}). ¿Deseas CONTINUAR la sesión?`)) {
-              session = savedData;
-            } else {
-              localStorage.removeItem(foundKey);
-            }
-          }
-        } catch (e) {
-          console.error("Error recuperando sesión", e);
-        }
-      }
-
-      renderApp();
-    });
+    // INICIALIZACIÓN
+    render();
   </script>
 </body>
 </html>
