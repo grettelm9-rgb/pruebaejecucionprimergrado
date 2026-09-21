@@ -119,7 +119,7 @@
         <div id="main-card-viewport" class="w-full"></div>
     </main>
 
-    <!-- Tito Toast Feedback (Configurado con no-print) -->
+    <!-- Tito Toast Feedback (Oculto al imprimir) -->
     <div id="tito-toast" class="no-print fixed bottom-6 left-1/2 -translate-x-1/2 bg-slate-900/95 text-white px-6 py-3 rounded-full font-bold shadow-2xl transition-all duration-300 transform translate-y-28 z-50 flex items-center gap-3 border-2 border-amber-400 backdrop-blur-sm">
         <div id="toast-tito-icon" class="w-10 h-10 flex-shrink-0"></div>
         <span id="toast-msg" class="text-sm sm:text-base font-heading tracking-wide">¡Hola! Soy Tito el Ratón.</span>
@@ -391,7 +391,7 @@
         }
 
         /* ==========================================================================
-           3. ESTADO GLOBAL DE LA PRUEBA
+           3. ESTADO GLOBAL DE LA PRUEBA (7 INDICADORES)
            ========================================================================== */
         const state = {
             studentName: 'Ana Rojas',
@@ -400,8 +400,7 @@
             sessionId: '',
             currentMission: 0,
             errors: {
-                ind1: 0, ind2: 0, ind3: 0, ind4: 0, ind5: 0,
-                ind6: 0, ind7: 0, ind8: 0, ind9: 0, ind10: 0
+                ind1: 0, ind2: 0, ind3: 0, ind4: 0, ind5: 0, ind6: 0, ind7: 0
             },
             m3TargetIdx: 0,
             m5ItemsDropped: 0
@@ -665,7 +664,7 @@
                 });
             }
 
-            // MISIÓN 3: SELECCIÓN CLIC (6 OBJETOS)
+            // MISIÓN 3: SELECCIÓN CLIC
             else if (m === 3) {
                 const targets = ['car', 'robot', 'star'];
                 const names = { car: 'Carro', robot: 'Robot', star: 'Estrella' };
@@ -747,7 +746,6 @@
                     if (step === 1) {
                         timer = setTimeout(() => {
                             state.errors.ind5++;
-                            state.errors.ind6++;
                             showFeedback(false, "¡Inténtalo otra vez! Dos clics rápidos.", 'thinking');
                         }, 300);
                     }
@@ -819,7 +817,7 @@
                         draggedEl.setAttribute('draggable', 'false');
 
                         if (itemCat !== targetCat) {
-                            state.errors.ind7++;
+                            state.errors.ind6++;
                             showFeedback(false, "Tito te ayuda.", 'thinking');
                         } else {
                             showFeedback(true, "¡Excelente!", 'encouraging');
@@ -878,7 +876,7 @@
 
                 document.getElementById('scrollTreasure').onclick = () => {
                     if (!scrolled) {
-                        state.errors.ind8++;
+                        state.errors.ind7++;
                     }
                     playSound('fanfare');
                     showFeedback(true, "¡Lo lograste! Prueba completada.", 'celebrating');
@@ -888,10 +886,10 @@
         }
 
         /* ==========================================================================
-           5. PANTALLA FINAL Y REPORTE DOCENTE OFICIAL CON CONTEO DE ERRORES
+           5. PANTALLA FINAL Y REPORTE DOCENTE OFICIAL (7 INDICADORES / 21 PTS)
            ========================================================================== */
         function renderFinalReport(container) {
-            // Ocultar notificación de Tito de forma inmediata al cargar el reporte
+            // Ocultar notificación de Tito al cargar el reporte
             const toast = document.getElementById('tito-toast');
             if (toast) toast.classList.add('translate-y-28');
 
@@ -908,27 +906,21 @@
                 getScoreAndBadge(state.errors.ind4),
                 getScoreAndBadge(state.errors.ind5),
                 getScoreAndBadge(state.errors.ind6),
-                getScoreAndBadge(state.errors.ind7),
-                getScoreAndBadge(state.errors.ind8),
-                getScoreAndBadge(state.errors.ind9),
-                getScoreAndBadge(state.errors.ind10)
+                getScoreAndBadge(state.errors.ind7)
             ];
 
             const totalEarned = indScores.reduce((acc, curr) => acc + curr.pts, 0);
             const totalErrors = Object.values(state.errors).reduce((acc, curr) => acc + curr, 0);
-            const percentage = Math.round((totalEarned / 30) * 100);
+            const percentage = Math.round((totalEarned / 21) * 100);
 
             const indTitles = [
                 "1. Identifica y ejecuta el botón izquierdo del mouse.",
-                "2. Reconoce el botón derecho y la rueda de scroll.",
-                "3. Desplaza el puntero en las 4 direcciones principales (Arriba, Abajo, Izq, Der).",
+                "2. Reconoce el botón derecho y la rueda de scroll del mouse.",
+                "3. Desplaza el puntero en las 4 direcciones principales (Arriba, Abajo, Izquierda, Derecha).",
                 "4. Realiza clic izquierdo para seleccionar objetos específicos indicados.",
-                "5. Discrimina correctamente entre la acción de Clic Simple y Doble Clic.",
-                "6. Ejecuta el doble clic con el ritmo y continuidad adecuados.",
-                "7. Aplica la técnica de arrastrar y soltar (Drag & Drop) para clasificar elementos.",
-                "8. Utiliza la rueda de desplazamiento (Scroll) para la navegación vertical.",
-                "9. Sigue las instrucciones e indicaciones del personaje guía (Tito el Ratón).",
-                "10. Mantiene la concentración y completa el recorrido completo de la prueba."
+                "5. Discrimina y ejecuta correctamente las acciones de Clic Simple y Doble Clic.",
+                "6. Aplica la técnica de arrastrar y soltar (Drag & Drop) para clasificar elementos.",
+                "7. Utiliza la rueda de desplazamiento (Scroll) para la navegación vertical."
             ];
 
             container.innerHTML = `
@@ -956,7 +948,7 @@
                         </div>
                         <div>
                             <span class="block text-xs font-semibold text-slate-500">Puntaje Obtenido:</span>
-                            <span class="text-lg font-black text-blue-700">${totalEarned} / 30 pts (${percentage}%)</span>
+                            <span class="text-lg font-black text-blue-700">${totalEarned} / 21 pts (${percentage}%)</span>
                         </div>
                         <div>
                             <span class="block text-xs font-semibold text-amber-700">Total Errores / Reintentos:</span>
@@ -964,7 +956,7 @@
                         </div>
                     </div>
 
-                    <h4 class="font-heading font-bold text-slate-900 mb-3">1. Rúbrica Analítica de Evaluación (Con Registro de Errores)</h4>
+                    <h4 class="font-heading font-bold text-slate-900 mb-3">1. Rúbrica Analítica de Evaluación (7 Indicadores - Base 21 Puntos)</h4>
                     <div class="overflow-x-auto mb-6">
                         <table class="w-full text-xs text-left border-collapse border border-slate-300">
                             <thead>
@@ -1003,7 +995,7 @@
                             <tbody>
                                 <tr>
                                     <td class="border border-slate-300 p-2">Exploración de Partes del Mouse</td>
-                                    <td class="border border-slate-300 p-2">Verificación de botones y rueda</td>
+                                    <td class="border border-slate-300 p-2">Verificación de botones y rueda </td>
                                     <td class="border border-slate-300 p-2 font-bold text-emerald-600 flex items-center gap-1">${getSvg('check', 16)} Logrado</td>
                                 </tr>
                                 <tr>
