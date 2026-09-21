@@ -920,7 +920,7 @@
 
             const indTitles = [
                 "1. Identifica y ejecuta el botón izquierdo del mouse.",
-                "2. Reconoce el botón derecho, la rueda de scroll y el sensor óptico.",
+                "2. Reconoce el botón derecho y la rueda de scroll.",
                 "3. Desplaza el puntero en las 4 direcciones principales (Arriba, Abajo, Izq, Der).",
                 "4. Realiza clic izquierdo para seleccionar objetos específicos indicados.",
                 "5. Discrimina correctamente entre la acción de Clic Simple y Doble Clic.",
@@ -1003,7 +1003,7 @@
                             <tbody>
                                 <tr>
                                     <td class="border border-slate-300 p-2">Exploración de Partes del Mouse</td>
-                                    <td class="border border-slate-300 p-2">Verificación de botones, rueda y sensor</td>
+                                    <td class="border border-slate-300 p-2">Verificación de botones y rueda</td>
                                     <td class="border border-slate-300 p-2 font-bold text-emerald-600 flex items-center gap-1">${getSvg('check', 16)} Logrado</td>
                                 </tr>
                                 <tr>
