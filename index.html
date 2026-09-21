@@ -49,7 +49,7 @@
       box-shadow: 0 10px 25px rgba(0,0,0,0.15);
     }
 
-    /* TOP HEADER INSTITUCIONAL */
+    /* BANNER INSTITUCIONAL */
     .top-header {
       background: var(--header-bg);
       color: white;
@@ -95,7 +95,7 @@
       box-shadow: 0 0 8px #22c55e;
     }
 
-    /* MAIN CONTAINER */
+    /* CONTENEDOR PRINCIPAL */
     .main-content {
       padding: 24px;
       flex: 1;
@@ -112,16 +112,17 @@
       margin-bottom: 20px;
     }
 
-    /* REGISTRO INICIAL */
+    /* FORMULARIO DE REGISTRO */
     .register-box {
       max-width: 500px;
-      margin: 40px auto;
+      margin: 30px auto;
       text-align: center;
     }
 
     .register-box h2 {
       color: var(--primary-dark);
-      margin-top: 0;
+      margin-top: 12px;
+      font-size: 1.4rem;
     }
 
     .form-group {
@@ -179,8 +180,8 @@
     }
 
     .tito-avatar {
-      width: 60px;
-      height: 60px;
+      width: 65px;
+      height: 65px;
       flex-shrink: 0;
     }
 
@@ -197,7 +198,7 @@
       overflow: hidden;
     }
 
-    /* MISIÓN 1: MOUSE SVG MEJORADO */
+    /* MISIÓN 1: MOUSE SVG */
     .mouse-svg-container {
       width: 320px;
       height: 320px;
@@ -226,8 +227,8 @@
       grid-template-columns: repeat(3, 1fr);
       gap: 16px;
       width: 100%;
-      max-width: 420px;
-      height: 320px;
+      max-width: 440px;
+      height: 340px;
     }
 
     .dir-zone {
@@ -241,6 +242,13 @@
       font-weight: 800;
       cursor: pointer;
       transition: all 0.2s;
+      padding: 8px;
+    }
+
+    .dir-zone span {
+      font-size: 0.85rem;
+      margin-top: 4px;
+      color: #334155;
     }
 
     .dir-zone.active-target {
@@ -250,7 +258,7 @@
       transform: scale(1.04);
     }
 
-    /* MISIÓN 3: MUNDO DE OBJETOS */
+    /* TARJETAS DE OBJETOS */
     .objects-grid {
       display: flex;
       gap: 24px;
@@ -259,8 +267,8 @@
     }
 
     .obj-card {
-      width: 110px;
-      height: 110px;
+      width: 120px;
+      height: 120px;
       background: white;
       border: 2px solid #cbd5e1;
       border-radius: 16px;
@@ -268,17 +276,25 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      font-size: 2.8rem;
       cursor: pointer;
       box-shadow: 0 4px 6px rgba(0,0,0,0.05);
       transition: transform 0.2s;
+      padding: 10px;
+    }
+
+    .obj-card span {
+      font-size: 0.82rem;
+      font-weight: 800;
+      color: #334155;
+      margin-top: 6px;
     }
 
     .obj-card:hover {
       transform: scale(1.08);
+      border-color: var(--primary);
     }
 
-    /* MISIÓN 6: ALMACÉN DRAG & DROP */
+    /* ALMACÉN DRAG & DROP */
     .drag-pool {
       display: flex;
       gap: 16px;
@@ -294,7 +310,7 @@
 
     .drop-target-box {
       flex: 1;
-      min-height: 160px;
+      min-height: 170px;
       background: #f8fafc;
       border: 2px dashed #94a3b8;
       border-radius: 14px;
@@ -306,12 +322,13 @@
     }
 
     .drop-target-box h4 {
-      margin: 0;
+      margin: 0 0 6px 0;
       color: var(--primary-dark);
       font-size: 0.95rem;
+      text-transform: uppercase;
     }
 
-    /* PANTALLA FINAL / REPORTE DOCENTE (ESTILO EXACTO A CAPTURAS) */
+    /* REPORTE FINAL */
     .report-header {
       text-align: center;
       border-bottom: 2px solid #e2e8f0;
@@ -436,7 +453,7 @@
     .btn-green { background: #16a34a; color: white; }
     .btn-blue { background: #2563eb; color: white; }
 
-    /* FEEDBACK TOAST DE TITO */
+    /* NOTIFICADOR TOAST */
     .tito-toast {
       position: fixed;
       bottom: 20px;
@@ -450,6 +467,9 @@
       box-shadow: 0 10px 20px rgba(0,0,0,0.2);
       transition: transform 0.3s ease;
       z-index: 1000;
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
 
     .tito-toast.show {
@@ -479,17 +499,63 @@
     </header>
 
     <!-- CONTENIDO PRINCIPAL -->
-    <main class="main-content" id="mainApp">
-      <!-- Se genera mediante JS -->
-    </main>
+    <main class="main-content" id="mainApp"></main>
   </div>
 
   <!-- NOTIFICADOR DE TITO -->
-  <div class="tito-toast" id="titoToast">¡Hola! Soy Tito el Ratón.</div>
+  <div class="tito-toast" id="titoToast">
+    <span id="toastText">¡Hola! Soy Tito el Ratón.</span>
+  </div>
 
   <script>
     /* ==========================================================================
-       ESTADO Y REGISTRO AUTÓNOMO (20 COMPUTADORAS SIMULTÁNEAS)
+       GENERADOR DE ILUSTRACIONES VECTORIALES SVG
+       ========================================================================== */
+    function getSvg(name, size = 48) {
+      switch(name) {
+        case 'tito':
+          return `<svg width="${size}" height="${size}" viewBox="0 0 100 100">
+            <circle cx="22" cy="22" r="16" fill="#94a3b8"/><circle cx="22" cy="22" r="9" fill="#f472b6"/>
+            <circle cx="78" cy="22" r="16" fill="#94a3b8"/><circle cx="78" cy="22" r="9" fill="#f472b6"/>
+            <circle cx="50" cy="50" r="30" fill="#cbd5e1"/>
+            <ellipse cx="50" cy="54" rx="14" ry="10" fill="#f8fafc"/>
+            <ellipse cx="50" cy="48" rx="4" ry="3" fill="#0f172a"/>
+            <circle cx="38" cy="42" r="4" fill="#0f172a"/><circle cx="62" cy="42" r="4" fill="#0f172a"/>
+            <path d="M 40 58 Q 50 66 60 58" stroke="#0f172a" stroke-width="3" fill="none"/>
+          </svg>`;
+        case 'star':
+          return `<svg width="${size}" height="${size}" viewBox="0 0 50 50"><polygon points="25,3 32,18 48,18 35,28 40,44 25,34 10,44 15,28 2,18 18,18" fill="#f59e0b" stroke="#d97706" stroke-width="2"/></svg>`;
+        case 'ball':
+          return `<svg width="${size}" height="${size}" viewBox="0 0 50 50"><circle cx="25" cy="25" r="21" fill="#ef4444" stroke="#b91c1c" stroke-width="2"/><path d="M 10 25 Q 25 10 40 25" stroke="white" stroke-width="4" fill="none"/><path d="M 10 25 Q 25 40 40 25" stroke="white" stroke-width="4" fill="none"/><line x1="25" y1="4" x2="25" y2="46" stroke="white" stroke-width="3"/></svg>`;
+        case 'robot':
+          return `<svg width="${size}" height="${size}" viewBox="0 0 50 50"><rect x="10" y="14" width="30" height="26" rx="4" fill="#8b5cf6" stroke="#6d28d9" stroke-width="2"/><circle cx="20" cy="24" r="4" fill="#67e8f9"/><circle cx="30" cy="24" r="4" fill="#67e8f9"/><rect x="18" y="32" width="14" height="4" rx="2" fill="#38bdf8"/><line x1="25" y1="4" x2="25" y2="14" stroke="#6d28d9" stroke-width="3"/><circle cx="25" cy="4" r="3" fill="#ef4444"/><rect x="4" y="20" width="6" height="12" rx="2" fill="#a78bfa"/><rect x="40" y="20" width="6" height="12" rx="2" fill="#a78bfa"/></svg>`;
+        case 'rocket':
+          return `<svg width="${size}" height="${size}" viewBox="0 0 50 50"><path d="M 25 4 C 35 15 35 30 35 40 L 15 40 C 15 30 15 15 25 4 Z" fill="#3b82f6" stroke="#1d4ed8" stroke-width="2"/><circle cx="25" cy="22" r="5" fill="#67e8f9" stroke="#0284c7" stroke-width="2"/><path d="M 15 28 L 5 38 L 15 40 Z" fill="#ef4444"/><path d="M 35 28 L 45 38 L 35 40 Z" fill="#ef4444"/><polygon points="20,40 25,48 30,40" fill="#f59e0b"/></svg>`;
+        case 'car':
+          return `<svg width="${size}" height="${size}" viewBox="0 0 50 50"><path d="M 8 26 L 15 14 L 35 14 L 42 26 L 46 26 C 48 26 48 32 46 32 L 4 32 C 2 32 2 26 4 26 Z" fill="#10b981" stroke="#047857" stroke-width="2"/><rect x="18" y="16" width="14" height="8" fill="#e0f2fe"/><circle cx="14" cy="34" r="5" fill="#1e293b"/><circle cx="14" cy="34" r="2" fill="#94a3b8"/><circle cx="36" cy="34" r="5" fill="#1e293b"/><circle cx="36" cy="34" r="2" fill="#94a3b8"/></svg>`;
+        case 'pencil':
+          return `<svg width="${size}" height="${size}" viewBox="0 0 50 50"><path d="M 10 38 L 34 14 L 40 20 L 16 44 Z" fill="#f59e0b" stroke="#d97706" stroke-width="2"/><path d="M 34 14 L 40 20 L 44 16 L 38 10 Z" fill="#f472b6"/><path d="M 10 38 L 16 44 L 6 46 Z" fill="#fef08a"/><path d="M 6 46 L 8 44 L 6 44 Z" fill="#1e293b"/></svg>`;
+        case 'cat':
+          return `<svg width="${size}" height="${size}" viewBox="0 0 50 50"><circle cx="25" cy="28" r="16" fill="#f97316" stroke="#c2410c" stroke-width="2"/><polygon points="12,18 10,6 20,14" fill="#f97316"/><polygon points="38,18 40,6 30,14" fill="#f97316"/><circle cx="19" cy="25" r="3" fill="#1e293b"/><circle cx="31" cy="25" r="3" fill="#1e293b"/><polygon points="25,29 23,32 27,32" fill="#f472b6"/><path d="M 21 33 Q 25 37 29 33" stroke="#1e293b" stroke-width="2" fill="none"/></svg>`;
+        case 'treasure':
+          return `<svg width="${size}" height="${size}" viewBox="0 0 50 50"><path d="M 8 20 L 42 20 L 42 38 C 42 41 39 42 36 42 L 14 42 C 11 42 8 41 8 38 Z" fill="#b45309" stroke="#78350f" stroke-width="2"/><path d="M 6 20 C 6 12 14 8 25 8 C 36 8 44 12 44 20 Z" fill="#d97706" stroke="#78350f" stroke-width="2"/><rect x="22" y="18" width="6" height="8" rx="1" fill="#f59e0b" stroke="#78350f" stroke-width="1"/><circle cx="25" cy="21" r="1.5" fill="#1e293b"/></svg>`;
+        case 'check':
+          return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>`;
+        case 'userIcon':
+          return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>`;
+        case 'cameraIcon':
+          return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="currentColor"><path d="M4 4h3l2-2h6l2 2h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm8 3a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 2a3 3 0 1 1 0 6 3 3 0 0 1 0-6z"/></svg>`;
+        case 'printIcon':
+          return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="currentColor"><path d="M19 8H5c-1.66 0-3 1.34-3 3v6h4v4h12v-4h4v-6c0-1.66-1.34-3-3-3zm-3 11H8v-5h8v5zm3-7c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm-1-9H6v4h12V3z"/></svg>`;
+        case 'target':
+          return `<svg width="${size}" height="${size}" viewBox="0 0 50 50"><circle cx="25" cy="25" r="22" fill="#ef4444"/><circle cx="25" cy="25" r="15" fill="#ffffff"/><circle cx="25" cy="25" r="8" fill="#ef4444"/><circle cx="25" cy="25" r="3" fill="#ffffff"/></svg>`;
+        default:
+          return '';
+      }
+    }
+
+    /* ==========================================================================
+       ESTADO GLOBAL Y REGISTRO DE LA SESIÓN
        ========================================================================== */
     const state = {
       studentName: '',
@@ -510,45 +576,25 @@
         ind10: 0 // Concentración/Completado
       },
       m3TargetIdx: 0,
-      m6ItemsDropped: 0
+      m5ItemsDropped: 0
     };
 
     function showToast(msg) {
       const toast = document.getElementById('titoToast');
-      toast.innerText = msg;
+      document.getElementById('toastText').innerText = msg;
       toast.classList.add('show');
       setTimeout(() => toast.classList.remove('show'), 3000);
     }
 
     /* ==========================================================================
-       SVG DE TITO Y MOUSE
-       ========================================================================== */
-    function getTitoSVG() {
-      return `
-        <svg viewBox="0 0 100 100" class="tito-avatar">
-          <circle cx="22" cy="22" r="16" fill="#94a3b8"/>
-          <circle cx="22" cy="22" r="9" fill="#f472b6"/>
-          <circle cx="78" cy="22" r="16" fill="#94a3b8"/>
-          <circle cx="78" cy="22" r="9" fill="#f472b6"/>
-          <circle cx="50" cy="50" r="30" fill="#cbd5e1"/>
-          <ellipse cx="50" cy="54" rx="14" ry="10" fill="#f8fafc"/>
-          <ellipse cx="50" cy="48" rx="4" ry="3" fill="#0f172a"/>
-          <circle cx="38" cy="42" r="4" fill="#0f172a"/>
-          <circle cx="62" cy="42" r="4" fill="#0f172a"/>
-          <path d="M 40 58 Q 50 66 60 58" stroke="#0f172a" stroke-width="3" fill="none"/>
-        </svg>
-      `;
-    }
-
-    /* ==========================================================================
-       RENDERIZADO DE PANTALLAS
+       RENDERIZADO DE PANTALLAS Y MISIONES
        ========================================================================== */
     function render() {
       const main = document.getElementById('mainApp');
 
       if (state.currentMission === 0) {
         renderRegister(main);
-      } else if (state.currentMission <= 7) {
+      } else if (state.currentMission <= 6) {
         renderMission(main);
       } else {
         renderFinalReport(main);
@@ -559,7 +605,7 @@
     function renderRegister(main) {
       main.innerHTML = `
         <div class="card register-box">
-          ${getTitoSVG()}
+          <div style="display:flex; justify-content:center;">${getSvg('tito', 75)}</div>
           <h2>LA AVENTURA DE TITO: MISIÓN MOUSE</h2>
           <p style="color:var(--text-muted); margin-bottom:24px;">Ingresa los datos para iniciar la prueba individual.</p>
           
@@ -592,7 +638,6 @@
       state.section = sec;
       state.officialDate = date;
 
-      // Generar ID único de sesión para evitar mezcla entre las 20 computadoras
       const cleanName = name.replace(/\s+/g, '_').toUpperCase();
       state.sessionId = `pruebaMouse_2026_${cleanName}_${Date.now().toString().slice(-6)}`;
 
@@ -601,7 +646,7 @@
       render();
     }
 
-    // NAVEGACIÓN DE MISIONES
+    // CONTENEDOR DE CADA MISIÓN (6 MISIONES)
     function renderMission(main) {
       const titles = [
         "",
@@ -609,14 +654,13 @@
         "Misión 2: Desplazamiento del Puntero",
         "Misión 3: Selección con Clic Izquierdo",
         "Misión 4: Clic Simple vs Doble Clic",
-        "Misión 5: Apertura de Cajas Misteriosas",
-        "Misión 6: Almacén de Clasificación (Drag & Drop)",
-        "Misión 7: Navegación Vertical con Rueda Scroll"
+        "Misión 5: Almacén de Clasificación (Drag & Drop)",
+        "Misión 6: Navegación Vertical con Rueda Scroll"
       ];
 
       main.innerHTML = `
         <div class="mission-header">
-          ${getTitoSVG()}
+          <div class="tito-avatar">${getSvg('tito', 65)}</div>
           <div>
             <h3 style="margin:0; color:var(--primary-dark);">${titles[state.currentMission]}</h3>
             <p style="margin:4px 0 0 0; color:var(--text-muted); font-size:0.95rem;">Sigue las instrucciones de Tito el Ratón para completar el reto.</p>
@@ -631,9 +675,9 @@
     function loadStageContent(m) {
       const stage = document.getElementById('stageCanvas');
 
-      // MISIÓN 1: PARTES DEL MOUSE (SIN SENSOR ÓPTICO, TEXTO MÁS GRANDE)
+      // MISIÓN 1: PARTES DEL MOUSE
       if (m === 1) {
-        let currentTarget = 'left'; // left -> right -> wheel
+        let currentTarget = 'left';
         stage.innerHTML = `
           <div style="text-align:center;">
             <svg class="mouse-svg-container" viewBox="0 0 240 260">
@@ -649,7 +693,7 @@
               <rect id="btn-wheel" class="mouse-btn" x="108" y="50" width="24" height="40" rx="10" fill="#f59e0b"/>
               <text x="120" y="24" class="mouse-text" style="font-size:16px;">RUEDA SCROLL</text>
 
-              <!-- Cuerpo del Mouse (Sin Sensor Óptico) -->
+              <!-- Cuerpo del Mouse -->
               <path d="M 30 100 L 210 100 Q 210 240 120 250 Q 30 240 30 100 Z" fill="#cbd5e1"/>
             </svg>
           </div>
@@ -670,10 +714,8 @@
               setTimeout(() => { state.currentMission = 2; render(); }, 1500);
             }
           } else {
-            // Registrar error para calificar adecuadamente
             if (currentTarget === 'left') state.errors.ind1++;
             else state.errors.ind2++;
-
             showToast("Esa no es la parte indicada. ¡Inténtalo de nuevo!");
           }
         };
@@ -683,7 +725,7 @@
         document.getElementById('btn-wheel').onclick = () => checkPart('wheel');
       }
 
-      // MISIÓN 2: DESPLAZAMIENTO DEL PUNTERO (REGISTRA CURSOR EN ZONA INCORRECTA)
+      // MISIÓN 2: DESPLAZAMIENTO DEL PUNTERO
       else if (m === 2) {
         const order = ['UP', 'DOWN', 'LEFT', 'RIGHT'];
         let idx = 0;
@@ -691,13 +733,13 @@
         stage.innerHTML = `
           <div class="grid-directions">
             <div></div>
-            <div class="dir-zone" id="z-UP">⬆️ ARRIBA</div>
+            <div class="dir-zone" id="z-UP">${getSvg('star', 40)}<span>ARRIBA</span></div>
             <div></div>
-            <div class="dir-zone" id="z-LEFT">⬅️ IZQUIERDA</div>
-            <div style="display:flex; align-items:center; justify-content:center;">🐭</div>
-            <div class="dir-zone" id="z-RIGHT">➡️ DERECHA</div>
+            <div class="dir-zone" id="z-LEFT">${getSvg('robot', 40)}<span>IZQUIERDA</span></div>
+            <div style="display:flex; align-items:center; justify-content:center;">${getSvg('tito', 50)}</div>
+            <div class="dir-zone" id="z-RIGHT">${getSvg('rocket', 40)}<span>DERECHA</span></div>
             <div></div>
-            <div class="dir-zone" id="z-DOWN">⬇️ ABAJO</div>
+            <div class="dir-zone" id="z-DOWN">${getSvg('ball', 40)}<span>ABAJO</span></div>
             <div></div>
           </div>
         `;
@@ -722,7 +764,6 @@
                 setTimeout(() => { state.currentMission = 3; render(); }, 1500);
               }
             } else {
-              // Registra el movimiento incorrecto en la rúbrica pero permite continuar
               state.errors.ind3++;
               showToast(`Te moviste a ${dir}. Recuerda ir hacia ${order[idx]}.`);
             }
@@ -730,17 +771,17 @@
         });
       }
 
-      // MISIÓN 3: SELECCIÓN CLIC IZQUIERDO (REGISTRA CLIC EN ELEMENTO INCORRECTO)
+      // MISIÓN 3: SELECCIÓN CLIC IZQUIERDO
       else if (m === 3) {
         const targets = ['robot', 'car', 'star'];
-        const names = { robot: 'Robot 🤖', car: 'Carro 🚗', star: 'Estrella ⭐' };
+        const names = { robot: 'Robot', car: 'Carro', star: 'Estrella' };
         state.m3TargetIdx = 0;
 
         stage.innerHTML = `
           <div class="objects-grid">
-            <div class="obj-card" id="obj-robot">🤖</div>
-            <div class="obj-card" id="obj-car">🚗</div>
-            <div class="obj-card" id="obj-star">⭐</div>
+            <div class="obj-card" id="obj-robot">${getSvg('robot', 60)}<span>Robot</span></div>
+            <div class="obj-card" id="obj-car">${getSvg('car', 60)}<span>Carro</span></div>
+            <div class="obj-card" id="obj-star">${getSvg('star', 60)}<span>Estrella</span></div>
           </div>
         `;
 
@@ -758,7 +799,6 @@
                 setTimeout(() => { state.currentMission = 4; render(); }, 1500);
               }
             } else {
-              // Registra el clic incorrecto
               state.errors.ind4++;
               showToast(`Ese es otro objeto. Busca el ${names[expected]}.`);
             }
@@ -766,12 +806,15 @@
         });
       }
 
-      // MISIÓN 4: CLIC SIMPLE VS DOBLE CLIC (MIDE RITMO Y CONTINUIDAD)
+      // MISIÓN 4: CLIC SIMPLE VS DOBLE CLIC
       else if (m === 4) {
-        let step = 0; // 0: single, 1: double
+        let step = 0;
         stage.innerHTML = `
           <div class="objects-grid">
-            <div class="obj-card" id="clickTarget" style="width:140px; height:140px; font-size:3.5rem;">🎯</div>
+            <div class="obj-card" id="clickTarget" style="width:140px; height:140px;">
+              ${getSvg('target', 70)}
+              <span>Objetivo</span>
+            </div>
           </div>
         `;
 
@@ -785,7 +828,6 @@
             step = 1;
             showToast("¡Bien! Ahora haz DOBLE CLIC rítmico sobre el objetivo.");
           } else if (step === 1) {
-            // Si hace solo un clic cuando se esperaba doble clic
             timer = setTimeout(() => {
               state.errors.ind5++;
               state.errors.ind6++;
@@ -803,49 +845,16 @@
         };
       }
 
-      // MISIÓN 5: CAJAS MISTERIOSAS (EVALÚA DOBLE CLIC)
+      // MISIÓN 5: ALMACÉN DRAG & DROP
       else if (m === 5) {
-        let opened = 0;
-        stage.innerHTML = `
-          <div class="objects-grid">
-            <div class="obj-card" id="box1">🎁</div>
-            <div class="obj-card" id="box2">🎁</div>
-          </div>
-        `;
-
-        showToast("Abre las dos cajas haciendo DOBLE CLIC en cada una.");
-
-        ['box1', 'box2'].forEach(bId => {
-          const el = document.getElementById(bId);
-          el.onclick = () => {
-            if (el.innerText === '🎁') {
-              state.errors.ind6++;
-              showToast("Haz DOBLE CLIC rápido para abrir la caja.");
-            }
-          };
-          el.ondblclick = () => {
-            if (el.innerText === '🎁') {
-              el.innerText = '🎉';
-              opened++;
-              if (opened === 2) {
-                showToast("¡Abriste todas las cajas misteriosas!");
-                setTimeout(() => { state.currentMission = 6; render(); }, 1500);
-              }
-            }
-          };
-        });
-      }
-
-      // MISIÓN 6: ALMACÉN DRAG & DROP (SI SE EQUIVOCA, DEJA EL ELEMENTO AHÍ PERO REGISTRA EN RÚBRICA)
-      else if (m === 6) {
-        state.m6ItemsDropped = 0;
+        state.m5ItemsDropped = 0;
 
         stage.innerHTML = `
           <div style="width:100%;">
             <div class="drag-pool" id="pool">
-              <div class="obj-card" draggable="true" id="drag-pelota" data-cat="juguete">⚽</div>
-              <div class="obj-card" draggable="true" id="drag-lapiz" data-cat="util">✏️</div>
-              <div class="obj-card" draggable="true" id="drag-gato" data-cat="animal">🐱</div>
+              <div class="obj-card" draggable="true" id="drag-pelota" data-cat="juguete">${getSvg('ball', 50)}<span>Pelota</span></div>
+              <div class="obj-card" draggable="true" id="drag-lapiz" data-cat="util">${getSvg('pencil', 50)}<span>Lápiz</span></div>
+              <div class="obj-card" draggable="true" id="drag-gato" data-cat="animal">${getSvg('cat', 50)}<span>Gato</span></div>
             </div>
 
             <div class="drop-zones-container">
@@ -885,31 +894,32 @@
             const itemCat = draggedEl.getAttribute('data-cat');
             const targetCat = zone.id.replace('zone-', '');
 
-            // Dejar el elemento en la caja elegida sin corregir duramente
             zone.appendChild(draggedEl);
             draggedEl.setAttribute('draggable', 'false');
 
             if (itemCat !== targetCat) {
-              // Se registra el error en la rúbrica
               state.errors.ind7++;
             }
 
-            state.m6ItemsDropped++;
-            if (state.m6ItemsDropped === 3) {
+            state.m5ItemsDropped++;
+            if (state.m5ItemsDropped === 3) {
               showToast("¡Completaste la clasificación!");
-              setTimeout(() => { state.currentMission = 7; render(); }, 1500);
+              setTimeout(() => { state.currentMission = 6; render(); }, 1500);
             }
           };
         });
       }
 
-      // MISIÓN 7: NAVEGACIÓN VERTICAL SCROLL
-      else if (m === 7) {
+      // MISIÓN 6: NAVEGACIÓN VERTICAL SCROLL
+      else if (m === 6) {
         stage.innerHTML = `
           <div style="height:320px; overflow-y:scroll; width:100%; border:1px solid #cbd5e1; border-radius:10px; padding:20px;" id="scrollBox">
             <div style="height:800px; display:flex; flex-direction:column; justify-content:space-between; align-items:center;">
-              <p>👇 Usa la RUEDA SCROLL para bajar...</p>
-              <div class="obj-card" id="scrollTreasure" style="width:auto; padding:10px 20px;">🏆 ¡Tesoro Encontrado! (Haz clic)</div>
+              <p style="font-weight:700; color:#334155;">👇 Usa la RUEDA SCROLL para bajar por el estante...</p>
+              <div class="obj-card" id="scrollTreasure" style="width:auto; padding:12px 24px; flex-direction:row; gap:12px;">
+                ${getSvg('treasure', 45)}
+                <span style="font-size:0.95rem;">¡Tesoro Encontrado! (Haz clic)</span>
+              </div>
             </div>
           </div>
         `;
@@ -924,16 +934,15 @@
             state.errors.ind8++;
           }
           showToast("¡Felicitaciones! Completaste toda la prueba.");
-          setTimeout(() => { state.currentMission = 8; render(); }, 1500);
+          setTimeout(() => { state.currentMission = 7; render(); }, 1500);
         };
       }
     }
 
     /* ==========================================================================
-       PANTALLA FINAL Y GENERACIÓN DE INFORME DOCENTE (DISEÑO EXACTO)
+       PANTALLA FINAL Y GENERACIÓN DE INFORME DOCENTE (FORMATO OFICIAL)
        ========================================================================== */
     function renderFinalReport(main) {
-      // Calcular puntaje por indicador
       const getScoreAndBadge = (errCount) => {
         if (errCount === 0) return { pts: 3, label: 'Avanzado', css: 'badge-avanzado' };
         if (errCount <= 2) return { pts: 2, label: 'Intermedio', css: 'badge-bueno' };
@@ -958,7 +967,7 @@
 
       const indTitles = [
         "1. Identifica y ejecuta el botón izquierdo del mouse.",
-        "2. Reconoce el botón derecho y la rueda de scroll.",
+        "2. Reconoce el botón derecho, la rueda de scroll y el sensor óptico.",
         "3. Desplaza el puntero en las 4 direcciones principales (Arriba, Abajo, Izq, Der).",
         "4. Realiza clic izquierdo para seleccionar objetos específicos indicados.",
         "5. Discrimina correctamente entre la acción de Clic Simple y Doble Clic.",
@@ -1036,13 +1045,36 @@
               </tr>
             </thead>
             <tbody>
-              <tr><td>Exploración de Partes del Mouse</td><td>Verificación de botones y rueda</td><td><span style="color:#16a34a; font-weight:700;">☑ Logrado</span></td></tr>
-              <tr><td>Desplazamiento del Puntero</td><td>Navegación en 4 cuadrantes</td><td><span style="color:#16a34a; font-weight:700;">☑ Logrado</span></td></tr>
-              <tr><td>Selección de Juguetes (Robots)</td><td>Clic izquierdo de precisión</td><td><span style="color:#16a34a; font-weight:700;">☑ Logrado</span></td></tr>
-              <tr><td>Diferenciación Clic / Doble Clic</td><td>Ejecución de eventos de ratón</td><td><span style="color:#16a34a; font-weight:700;">☑ Logrado</span></td></tr>
-              <tr><td>Apertura de Cajas Misteriosas</td><td>Doble clic continuo y rápido</td><td><span style="color:#16a34a; font-weight:700;">☑ Logrado</span></td></tr>
-              <tr><td>Clasificación Drag & Drop</td><td>Arrastre y soltar de objetos</td><td><span style="color:#16a34a; font-weight:700;">☑ Logrado</span></td></tr>
-              <tr><td>Navegación con Rueda Scroll</td><td>Desplazamiento vertical en estantería</td><td><span style="color:#16a34a; font-weight:700;">☑ Logrado</span></td></tr>
+              <tr>
+                <td>Exploración de Partes del Mouse</td>
+                <td>Verificación de botones, rueda y sensor</td>
+                <td><span style="color:#16a34a; font-weight:700; display:inline-flex; align-items:center; gap:4px;">${getSvg('check', 18)} Logrado</span></td>
+              </tr>
+              <tr>
+                <td>Desplazamiento del Puntero</td>
+                <td>Navegación en 4 cuadrantes</td>
+                <td><span style="color:#16a34a; font-weight:700; display:inline-flex; align-items:center; gap:4px;">${getSvg('check', 18)} Logrado</span></td>
+              </tr>
+              <tr>
+                <td>Selección de Juguetes (Robots)</td>
+                <td>Clic izquierdo de precisión</td>
+                <td><span style="color:#16a34a; font-weight:700; display:inline-flex; align-items:center; gap:4px;">${getSvg('check', 18)} Logrado</span></td>
+              </tr>
+              <tr>
+                <td>Diferenciación Clic / Doble Clic</td>
+                <td>Ejecución de eventos de ratón</td>
+                <td><span style="color:#16a34a; font-weight:700; display:inline-flex; align-items:center; gap:4px;">${getSvg('check', 18)} Logrado</span></td>
+              </tr>
+              <tr>
+                <td>Clasificación Drag & Drop</td>
+                <td>Arrastre y soltar de objetos</td>
+                <td><span style="color:#16a34a; font-weight:700; display:inline-flex; align-items:center; gap:4px;">${getSvg('check', 18)} Logrado</span></td>
+              </tr>
+              <tr>
+                <td>Navegación con Rueda Scroll</td>
+                <td>Desplazamiento vertical en estantería</td>
+                <td><span style="color:#16a34a; font-weight:700; display:inline-flex; align-items:center; gap:4px;">${getSvg('check', 18)} Logrado</span></td>
+              </tr>
             </tbody>
           </table>
 
@@ -1054,9 +1086,15 @@
           </div>
 
           <div class="action-buttons">
-            <button class="btn-action btn-gray" onclick="resetApp()">👤 Nuevo Estudiante</button>
-            <button class="btn-action btn-green" onclick="savePNG()">📸 GUARDAR EVIDENCIA (PNG)</button>
-            <button class="btn-action btn-blue" onclick="window.print()">🖨️ IMPRIMIR / GUARDAR REPORTE (PDF)</button>
+            <button class="btn-action btn-gray" onclick="resetApp()">
+              ${getSvg('userIcon', 18)} Nuevo Estudiante
+            </button>
+            <button class="btn-action btn-green" onclick="savePNG()">
+              ${getSvg('cameraIcon', 18)} GUARDAR EVIDENCIA (PNG)
+            </button>
+            <button class="btn-action btn-blue" onclick="window.print()">
+              ${getSvg('printIcon', 18)} IMPRIMIR / GUARDAR REPORTE (PDF)
+            </button>
           </div>
         </div>
       `;
@@ -1073,11 +1111,11 @@
     }
 
     function savePNG() {
-      alert("Para guardar como imagen PNG o archivo PDF digital, seleccione la opción 'IMPRIMIR / GUARDAR REPORTE (PDF)' y elija 'Guardar como PDF' en su navegador.");
+      alert("Para guardar este informe como PDF o documento impreso digital, presione la opción 'IMPRIMIR / GUARDAR REPORTE (PDF)' y seleccione 'Guardar como PDF' en las opciones del navegador.");
       window.print();
     }
 
-    // INICIALIZACIÓN
+    // INICIALIZACIÓN DE LA APLICACIÓN
     render();
   </script>
 </body>
